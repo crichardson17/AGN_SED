@@ -1,0 +1,112 @@
+#
+#   VizieR Astronomical Server vizier.cfa.harvard.edu
+#    Date: 2016-02-26T17:10:27 [V1.99+ (14-Oct-2013)]
+#   In case of problem, please report to:	cds-question@unistra.fr
+#
+#
+#Coosys	J2000:	eq_FK5 J2000
+#INFO	votable-version=1.99+ (14-Oct-2013)	
+#INFO	-ref=VIZ56d086ca100a	
+#INFO	-out.max=50	
+#INFO	queryParameters=22	
+#-oc.form=dec
+#-out.max=50
+#-nav=cat:J/ApJS/187/64&tab:{J/ApJS/187/64/table5}&key:source=J/ApJS/187/64/table5&HTTPPRM:&&-ref=VIZ56d086ca100a&-file=.&-oc.form=dec&-order=I&-out.form=verb&-out=Seq&-out=Name&-out=alphaX&-out=e_alphaX&-out=alphaUV&-out=e_alphaUV&-out=alphaOX&-out=alphaUVc&-out=e_alphaUVc&-out=alphaOXc&-out=logLbbb&-out=L/LEdd&-out=logLbbb2&-out=log5100&-out=logLbbbc&-out=L/LEddc&-out=log5100c&-meta.ucd=2&-meta=1&-meta.foot=1&-usenav=1&-bmark=POST&-out.max=50&-out.form=Tab-Separated-Values&
+#-source=J/ApJS/187/64/table5
+#-order=I
+#-out=Seq
+#-out=Name
+#-out=alphaX
+#-out=e_alphaX
+#-out=alphaUV
+#-out=e_alphaUV
+#-out=alphaOX
+#-out=alphaUVc
+#-out=e_alphaUVc
+#-out=alphaOXc
+#-out=logLbbb
+#-out=L/LEdd
+#-out=logLbbb2
+#-out=log5100
+#-out=logLbbbc
+#-out=L/LEddc
+#-out=log5100c
+#
+
+#RESOURCE=yCat_21870064
+#Name: J/ApJS/187/64
+#Title: The simultaneous optical-to-X-ray SED of AGNs (Grupe+, 2010)
+#Table	J_ApJS_187_64_table5:
+#Name: J/ApJS/187/64/table5
+#Title: Properties of the Spectral Energy Distribution
+#Column	Seq	(I2)	Running number	[ucd=meta.id;meta.main]
+#Column	Name	(a15)	Object identification	[ucd=meta.id]
+#Column	alphaX	(F5.2)	X-ray slope in the 0.2-2.0keV energy range	[ucd=spect.index]
+#Column	e_alphaX	(F5.2)	Uncertainty on AlphaX	[ucd=stat.error]
+#Column	alphaUV	(F5.2)	Optical/UV slope corrected for Galactic reddening	[ucd=spect.index]
+#Column	e_alphaUV	(F5.2)	Uncertainty on AlphaUV	[ucd=stat.error]
+#Column	alphaOX	(F5.2)	UV-to-X-ray spectra slope {alpha}_ox_, as defined by Tananbaum et al. (1979ApJ...234L...9T)	[ucd=spect.index]
+#Column	alphaUVc	(F5.2)	? Optical/UV slope corrected for Galactic and intrinsic reddening	[ucd=spect.index]
+#Column	e_alphaUVc	(F5.2)	? Uncertainty on AlphaUVc	[ucd=stat.error]
+#Column	alphaOXc	(F5.2)	? UV-to-X-ray spectra slope {alpha}_ox_, corrected for Galactic & intrinsic reddening	[ucd=spect.index]
+#Column	logLbbb	(F5.2)	Luminosity in the BBB (big-blue-bump) emission (1)	[ucd=phys.luminosity;em.opt.B]
+#Column	L/LEdd	(F6.3)	L/L_Edd_ ratio	[ucd=phys.luminosity;arith.ratio]
+#Column	logLbbb2	(F5.2)	Luminosity using the broken power-law model as shown in Figure 1	[ucd=phys.luminosity;em.opt.B]
+#Column	log5100	(F5.2)	Luminosity at 5100{AA}	[ucd=phys.luminosity]
+#Column	logLbbbc	(F5.2)	? logLbbb corrected for intrinsic reddening	[ucd=phys.luminosity;em.opt.B]
+#Column	L/LEddc	(F6.3)	? L/LEdd corrected for intrinsic reddening	[ucd=phys.luminosity;arith.ratio]
+#Column	log5100c	(F5.2)	? log5100 corrected for intrinsic reddening	[ucd=phys.luminosity]
+Seq	Name	alphaX	e_alphaX	alphaUV	e_alphaUV	alphaOX	alphaUVc	e_alphaUVc	alphaOXc	logLbbb	L/LEdd	logLbbb2	log5100	logLbbbc	L/LEddc	log5100c
+ 	 	 	 	 	 	 	 	 	 	[W]	 	[W]	[W]	[W]	 	[W]
+--	---------------	-----	-----	-----	-----	-----	-----	-----	-----	-----	------	-----	-----	-----	------	-----
+ 1	Mkn 335        	 1.30	 0.09	 0.58	 0.08	 1.26	 0.78	 0.12	 1.34	37.72	 0.510	37.53	36.73	38.07	 1.320	36.83
+ 2	ESO 242-G008   	 0.74	 0.18	 1.48	 0.16	 1.36	 0.12	 0.21	 1.67	36.78	 0.030	36.81	36.70	38.16	 0.600	36.90
+ 2	ESO 242-G008   	 1.17	 0.10	 0.98	 0.15	 1.29	 0.40	 0.19	 1.66	37.24	 0.070	37.22	36.73	38.59	 2.140	36.77
+ 3	Ton S 180      	 1.48	 0.08	 0.25	 0.07	 1.42	 0.25	 0.07	 1.42	38.77	 6.300	38.31	37.48	38.77	 6.300	37.48
+ 4	QSO 0056-36    	 1.13	 0.07	-0.03	 0.14	 1.43	-0.12	 0.14	 1.43	39.19	 0.290	38.58	37.72	39.19	 0.290	37.72
+ 5	RX J0100.4-5113	 1.08	 0.10	 0.69	 0.08	 1.39	     	     	     	37.85	 0.300	37.60	37.00	     	      	
+ 6	RX J0105.6-1416	 0.92	 0.20	 0.77	 0.10	 1.25	 0.77	 0.10	 1.25	37.91	 0.250	37.70	37.09	37.91	 0.250	37.09
+ 7	RX J0117.5-3826	 1.73	 0.29	 0.93	 0.09	 1.39	 0.93	 0.09	 1.39	38.25	 0.300	38.22	37.58	38.25	 0.300	37.58
+ 8	MS 0117-28     	 2.12	 0.40	-0.21	 0.07	 1.67	     	     	     	39.48	 2.750	38.91	38.11	     	      	
+ 9	RX J0128.1-1848	 0.92	 0.08	 0.89	 0.04	 1.26	 0.89	 0.04	 1.26	37.67	 0.700	37.52	37.01	37.67	 0.700	37.01
+10	RX J0134.2-4258	 1.29	 0.26	 0.08	 0.10	 1.52	     	     	     	39.29	10.000	38.75	37.91	     	      	
+11	RX J0136.9-3510	 1.87	 0.20	 0.12	 0.09	 1.36	     	     	     	38.60	 4.000	38.60	37.70	     	      	
+12	RX J0148.3-2758	 1.57	 0.16	 0.75	 0.09	 1.41	 0.75	 0.09	 1.41	38.47	 2.400	38.33	37.57	38.47	 2.400	37.57
+13	RX J0152.4-2319	 1.23	 0.04	 0.45	 0.09	 1.35	 0.45	 0.09	 1.35	38.55	 0.430	38.26	37.53	38.55	 0.430	37.53
+14	Mkn 1044       	 1.46	 0.08	 0.74	 0.05	 1.31	 0.74	 0.05	 1.31	37.15	 0.590	37.00	36.30	37.15	 0.590	36.30
+15	Mkn 1048       	 0.78	 0.05	 0.49	 0.10	 1.33	 0.27	 0.12	 1.33	38.07	 0.090	37.66	37.05	38.29	 0.140	37.07
+16	RX J0311.3-2046	 0.83	 0.05	 0.72	 0.14	 1.22	 0.38	 0.10	 1.30	37.76	 0.060	37.57	36.90	38.10	 0.130	37.00
+17	RX J0319.8-2627	 1.08	 0.07	 0.60	 0.12	 1.35	-0.12	 0.22	 1.46	37.94	 0.080	37.57	36.95	38.49	 0.630	37.09
+18	RX J0323.2-4931	 1.08	 0.23	 2.40	 0.09	 1.16	 1.72	 0.13	 1.30	36.80	 0.090	36.90	36.81	36.93	 0.120	36.97
+19	ESO 301-G13    	 1.35	 0.06	 0.70	 0.10	 1.30	 0.65	 0.11	 1.30	37.80	 0.340	37.60	36.85	37.80	 0.340	36.85
+20	VCV 0331-37    	 1.04	 0.20	 0.62	 0.09	 1.30	 0.38	 0.10	 1.34	37.55	 0.400	37.34	36.72	37.75	 0.620	36.75
+21	RX J0349.1-4711	 1.62	 0.18	 0.43	 0.12	 1.46	     	     	     	38.91	 1.510	38.51	37.69	     	      	
+22	Fairall 1116   	 1.33	 0.05	 0.42	 0.10	 1.39	     	     	     	38.20	 0.200	37.85	37.08	     	      	
+23	Fairall 1119   	 0.72	 0.10	 2.32	 0.19	 1.05	 2.14	 0.19	 1.06	36.71	 0.002	36.77	36.66	36.71	 0.002	36.66
+24	RX J0412.7-4712	 1.02	 0.05	 0.69	 0.07	 1.28	-0.64	 0.22	 1.59	38.42	 0.160	38.23	37.61	39.47	 1.600	37.95
+25	1H 0419-577    	 2.01	 0.40	 0.69	 0.09	 1.24	-0.65	 0.21	 1.50	38.69	 0.250	38.55	37.87	39.68	 7.760	38.14
+26	Fairall 303    	 2.32	 0.10	 0.75	 0.06	 1.24	 0.35	 0.08	 1.32	37.20	 0.540	37.01	36.35	37.64	 1.350	36.42
+27	RX J0437.4-4711	 1.32	 0.10	 0.84	 0.05	 1.32	 0.79	 0.05	 1.32	37.71	 0.080	37.62	36.97	37.71	 0.080	36.97
+28	RX J0439.6-5311	 2.16	 0.09	 0.16	 0.05	 1.24	 0.08	 0.07	 1.24	38.82	12.900	38.61	37.34	38.82	12.900	37.34
+29	RX J0859.0+4846	 0.91	 0.06	 0.70	 0.11	 1.31	 0.03	 0.10	 1.44	38.00	 0.210	37.82	37.17	38.56	 0.850	37.32
+30	RX J0902.7-0700	 1.24	 0.19	 0.60	 0.10	 1.36	 0.60	 0.10	 1.36	37.57	 0.530	37.34	36.60	37.57	 0.530	36.60
+31	Mkn 110        	 0.98	 0.05	 0.25	 0.11	 1.15	-0.95	 0.25	 1.44	37.96	 0.870	37.75	36.78	39.33	20.400	37.12
+32	PG 0953+414    	 1.28	 0.09	-0.12	 0.33	 1.44	-0.02	 0.60	 1.47	39.54	 1.120	39.19	38.26	39.98	 3.630	38.20
+33	RX J1005.7+4332	 1.80	 0.28	 0.12	 0.05	 1.52	 0.12	 0.05	 1.51	38.85	 0.900	38.35	37.46	38.85	 0.900	38.26
+34	RX J1007.1+2203	 1.53	 0.14	 0.78	 0.08	 1.43	 0.78	 0.08	 1.43	37.63	 0.900	37.50	36.58	37.63	 0.900	36.58
+35	CBS 126        	 2.11	 0.25	 0.55	 0.13	 1.42	 0.17	 0.11	 1.49	38.19	 0.220	37.89	37.04	38.64	 0.600	37.09
+36	Mkn 141        	 0.76	 0.08	 1.73	 0.16	 1.28	 1.73	 0.16	 1.28	36.77	 0.020	36.84	36.72	36.77	 0.020	36.72
+37	Mkn 142        	 1.72	 0.13	 0.60	 0.08	 1.34	 0.60	 0.08	 1.34	37.64	 0.760	37.52	36.60	37.64	 0.760	36.60
+38	RX J1117.1+6522	 1.93	 0.16	 1.11	 0.12	 1.47	     	     	     	38.09	 0.400	38.07	37.51	     	      	
+39	Ton 1388       	 1.26	 0.08	 0.18	 0.12	 1.56	     	     	     	39.65	 1.580	39.10	38.32	     	      	
+40	EXO 1128+63    	 1.24	 0.05	 0.91	 0.12	 1.23	 0.91	 0.12	 1.23	37.55	 0.270	37.43	36.63	37.55	 0.270	36.63
+41	B2 1128+31     	 1.05	 0.13	 0.11	 0.16	 1.45	-0.13	 0.18	 1.50	39.44	 1.230	38.86	38.06	39.72	 2.340	38.09
+42	SBS 1136+579   	 0.98	 0.16	 1.15	 0.10	 1.35	-0.05	 0.15	 1.59	37.67	 0.230	37.75	37.35	38.80	 3.000	37.55
+43	CASG 855       	 0.83	 0.33	 2.46	 0.19	 1.11	 2.36	 0.18	 1.13	36.36	 0.010	36.44	36.22	36.39	 0.010	36.25
+44	NGC 4051       	 1.59	 0.16	 1.57	 0.09	 1.10	 0.82	 0.28	 1.27	35.36	 0.180	35.45	34.75	35.82	 0.520	34.92
+45	GQ Comae       	 1.01	 0.05	 0.19	 0.11	 1.23	-0.10	 0.11	 1.29	38.77	 0.360	38.39	37.51	39.16	 0.910	37.58
+46	RX J1209.7+3217	 3.22	 0.27	 0.77	 0.07	 1.71	-0.33	 0.24	 1.90	37.98	 1.450	37.85	37.08	38.87	10.000	37.40
+47	PG 1211+143    	 2.50	 0.30	 0.41	 0.11	 1.66	 0.41	 0.11	 1.66	38.59	 0.890	38.40	37.72	38.59	 0.890	37.72
+48	Mkn 766        	 1.80	 0.34	 2.85	 0.15	 1.00	-0.31	 0.47	 1.67	36.08	 0.040	36.11	35.84	38.08	 5.000	36.76
+49	3C 273         	 0.74	 0.04	 0.34	 0.11	 1.34	     	     	     	40.02	 1.120	39.62	38.93	     	      	
+
