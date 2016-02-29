@@ -9,34 +9,33 @@ observedax=data("asu.csv",0)
 
 #our expected alphax based on the trendline (solved the function for actual alphaox values of Y)
 
-#expectedax=data("asu.csv",7)
-expectedax2=data("asu.csv",8)
+expectedax=data("asu.csv",2)
+#expectedax2=data("asu.csv",3)
 
 #our actual auv 
-observedauv=data("asu.csv",4)
+observedauv=data("asu.csv",6)
 
 #our expected auv
-expectedauv=data("asu.csv",3)
+expectedauv=data("asu.csv",8)
 
 #our expected aox
-expaox=data("asu.csv",1)
-obsaox=data("asu.csv",2)
+expaox=data("asu.csv",5)
+obsaox=data("asu.csv",4)
 
 #Our uncertainties
-axerr=data("asu.csv",5)
-#auverr=data("asu.csv",6)
+axerr=data("asu.csv",1)
+#auverr=data("asu.csv",7)
 
 #now we take the difference of the observed and expected values for each and square them
 
-diffax=np.subtract(observedax,expectedax2)
+diffax=(np.subtract(observedax,expectedax))/axerr
 diffauv=np.subtract(obsaox, expaox)
 
 #square the differences
-diffaxsq=np.power(diffax,2)
-diffauvsq=np.power(diffauv,2)
+diffaxsq=np.power(diffax,4)
+diffauvsq=np.power(diffauv,4)
 
 #square the uncertainties
-axerrsq=np.power(axerr,2)
 #auverrsq=np.power(auverr,2)
 
 #add the errors and the differences
@@ -44,6 +43,6 @@ axerrsq=np.power(axerr,2)
 sumdiff=np.add(diffaxsq,diffauvsq)
 
 #divide the two and sum up all the values in the array
-chisquare=sumdiff/axerrsq
-print(sum(chisquare)/68)
+chisquare=sumdiff
+print(sum(np.sqrt(chisquare)))
 
