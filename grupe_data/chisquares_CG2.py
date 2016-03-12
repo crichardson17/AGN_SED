@@ -60,15 +60,20 @@ quadparams = curve_fit(quadfit,observedax,obsaox)
 print(c,d,e)
 
 #use the functions to create data points
-row=[]
+row_expax=[]
 for item in observedax:
     expected_ax=np.array(m*item+b)
-    row.append(expected_ax)
+    row_expax.append(expected_ax)
     print(expected_ax)
-
-with open('filename', 'wb') as myfile:
+    
+row_expax2=[]
+for item in observedax:
+    expected_ax_quad=np.array(c*item**2+d*item+e)
+    row_expax2.append(expected_ax_quad)
+#write these data points to csv file
+with open('expected_ax.csv', 'wb') as myfile:
     wr=csv.writer(myfile, quoting=csv.QUOTE_ALL)
-    wr.writerow(row)
+    wr.writerow(row_expax)
 
 """
 1. Check other fits with excel
