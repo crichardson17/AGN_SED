@@ -1,0 +1,28 @@
+#
+# Incident Radiation Field
+# 
+AGN 6.0, -1.42, -0.60, -1.59  #Temperture at 10^6 K, ax=-1.42, auv=-0.60, aox=-1.59
+#
+# Ionization Parameter
+#
+phi(h) 11.5  #for Log U=-2.0
+hden 3.0 #hydrogen density at 10^3 cm^-3
+#
+# Abundances
+#
+abundances GASS10
+grains Orion		#set up the dust grains
+metals deplete
+element nitrogen 2.0	#Secondary nucleosynthesis (Hamann & Ferland 1999)
+metals 2.0
+element helium 1.089	#Conserve mass (Baldwin et al. 1991)
+#
+# Boundary Condition
+#
+stop temperature off
+stop efrac 0.5
+#
+# Save Output
+# 
+save continuum "basesed.con" units eV
+save linelist "list.data" 
