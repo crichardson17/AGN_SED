@@ -11,12 +11,13 @@ we may perform a Chi-Square Goodness of Fit Test.
 
 from scipy.optimize import curve_fit
 import numpy as np
+import matplotlib.pyplot as plt
+
 
 # Define constants
 
 data_file = "grupe_data.csv"
 
-fv = 1
 
 #Define a function to call our data
 
@@ -47,10 +48,17 @@ print(a)
 
 def linfit(x,m,b):
     return m*x+b
-"define our parameters" 
+#Define our parameters 
 linparams = curve_fit(linfit,observedax,observedauv)
 [m,b] = linparams[0]
+variables=[m,b]
 print(m,b)
+
+
+def linfit2(x,m1,b1):
+    return m1*x+b1
+linparams = curve_fit(linfit2,observedauv,observedax)
+[m1,b1] = linparams[0]
 
 #Define a function to create a quadratic regression
 
@@ -60,23 +68,27 @@ quadparams = curve_fit(quadfit,observedax,observedauv)
 [c,d,e]=quadparams[0]
 print(c,d,e)
 
+def quadfit2(x,f,g,h):
+    return (f*(x**2)+g*x+h)
+quadparams2 = curve_fit(quadfit2,observedauv,observedax)
+[f,g,h]=quadparams2[0]
 
-#use the functions to create data points
+#Use the functions to create data points
 
 #The expected ax values
 row_expax=[]
 for item in observedauv:
-    expected_ax=((item-b)/m)
+    expected_ax=(m1*item+b1)
     row_expax.append(expected_ax)
     
-#note: Need to create second quadratic fit so that I can calculate expected values for ax
+
 row_expax2=[]
 for item in observedauv:
-    expected_ax_quad=(c*item**2+d*item+e)
+    expected_ax_quad=(f*item**2+g*item+h)
     row_expax2.append(expected_ax_quad)
     
 row_expax3=[]
-for item in observedax:
+for item in observedauv:
     expected_ax_const=(a)
     row_expax3.append(expected_ax_const)
     
@@ -84,28 +96,33 @@ for item in observedax:
 row_expauv=[]
 row_expauv2=[]
 row_expauv3=[]
-for item in observedauv:
+for item in observedax:
     expected_auv=(m*item+b)
     row_expauv.append(expected_auv)
     
-for item in observedauv:
+for item in observedax:
     expected_auv_quad=(c*item**2+d*item+e)
     row_expauv2.append(expected_auv_quad)
     
-for item in observedauv:
+for item in observedax:
     expected_auv_const=(a)
     row_expauv3.append(expected_auv_const)
     
 ##The expected aox values
 row_expaox=[]
+
 row_expaox2=[]
+
 row_expaox3=[]
+
 for item in obsaox:
     expected_aox=np.array(m*item+b)
     row_expaox.append(expected_aox)
+    
 for item in obsaox:
     expected_aox_quad=np.array(c*item**2+d*item+e)
     row_expaox2.append(expected_aox_quad)
+    
 for item in obsaox:
    expected_aox_const=np.array(a)
    row_expaox3.append(expected_aox_const)
@@ -116,13 +133,13 @@ data_pts = len(observedax)
 
 print(row_expax,row_expauv)
 # Now we take the difference of the observed and expected values for each spectral index and divide them by the uncertainty
-diffax=np.subtract(observedax,row_expax)
-diffauv=(np.subtract(observedauv, row_expauv))
+diffax=np.subtract(observedax,row_expax2)
+diffauv=np.subtract(observedauv, row_expauv2)
 
 
 #square the differences
-diffaxquad=np.power(diffax,4)/np.power(axerr,4)
-diffauvquad=np.power(diffauv,4)/np.power(auverr,4)
+diffaxquad=np.power(diffax/axerr,4)
+diffauvquad=np.power(diffauv/auverr,4)
 
 
 #add these two 
@@ -131,12 +148,26 @@ print(sumdifferences)
 
 sumdiffroot=np.sqrt(sumdifferences)
 print(sumdiffroot)
+
 #sum this over all our data points
 chisquare=sum(float(i) for i in sumdiffroot)
 
 
 print chisquare/data_pts
 
+#Make a plot of the residuals
 
 
 
+
+
+#Make a plot with data and best fit line. 
+
+figure, axs = plt.subplots(nrows=2, ncols=1, sharex=True)
+ax=axs[0]
+ax.errorbar(observedax,row_expauv2,xerr=axerr,yerr=auverr,fmt="o")
+ax.set_title('Observed ax vs expected auv')
+ax=axs[1]
+ax.plot(observedax,diffauv,"o")
+ax.set_title('Observed ax vs Residuals')
+plt.show()
