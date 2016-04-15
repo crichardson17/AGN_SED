@@ -1,7 +1,7 @@
 #
 # Incident Radiation Field
 # 
-AGN 7.0, -1.42, -0.60, -1.59  #Temperture at 10^6 K, ax=-1.42, auv=-0.60, aox=-1.59
+AGN 4.0, -1.42, -0.60, -1.59  #Temperture at 10^6 K, ax=-1.42, auv=-0.60, aox=-1.59
 cosmic rays background
 #
 # Ionization Parameter
@@ -25,7 +25,10 @@ stop efrac 0.5
 #
 # Save Output
 #
-set save prefix "SEDT7"
+set save prefix "SEDT4"
 save continuum ".con" units eV
-save linelist ".lin" "LineList_CG_1.dat"  
-save linelist ".txt" "LineList_CG_1.dat"
+iterate
+save linelist, emergent,  ".lin" "LineList_CG_1.dat"  
+save overview ".ovr" 
+save heating ".het"
+save cooling ".col"

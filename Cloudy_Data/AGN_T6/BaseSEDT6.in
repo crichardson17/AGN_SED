@@ -1,7 +1,7 @@
 #
 # Incident Radiation Field
 # 
-AGN 5.0, -1.42, -0.60, -1.59  #Temperture at 10^6 K, ax=-1.42, auv=-0.60, aox=-1.59
+AGN 6.0, -1.42, -0.60, -1.59  #Temperture at 10^6 K, ax=-1.42, auv=-0.60, aox=-1.59
 cosmic rays background
 #
 # Ionization Parameter
@@ -22,10 +22,13 @@ element helium scale 1.046	#Conserve mass (Baldwin et al. 1991)
 #
 stop temperature off
 stop efrac 0.5
+iterate
 #
 # Save Output
 #
-set save prefix "SEDT5"
+set save prefix "SEDT6"
 save continuum ".con" units eV
-save linelist ".lin" "LineList_CG_1.dat"  
-save linelist ".txt" "LineList_CG_1.dat"
+save linelist, emergent,  ".lin" "LineList_CG_1.dat"  
+save overview ".ovr" 
+save heating ".het"
+save cooling ".col"
