@@ -133,8 +133,8 @@ data_pts = len(observedax)
 
 print(row_expax,row_expauv)
 # Now we take the difference of the observed and expected values for each spectral index and divide them by the uncertainty
-diffax=np.subtract(observedax,row_expax2)
-diffauv=np.subtract(observedauv, row_expauv2)
+diffax=np.subtract(observedax,row_expax)
+diffauv=np.subtract(observedauv, row_expauv)
 
 
 #square the differences
@@ -156,16 +156,16 @@ chisquare=sum(float(i) for i in sumdiffroot)
 print chisquare/data_pts
 
 #Make a plot of the residuals
-
+print(diffauv)
 
 #Make a plot with data and best fit line. 
 x=np.arange(0,5)
-figure, axs = plt.subplots(nrows=2, ncols=1, sharex=True)
+figure, axs = plt.subplots(nrows=2, ncols=1, sharex=False)
 ax=axs[0]
 ax.errorbar(observedax,observedauv,xerr=axerr,yerr=auverr,fmt="o")
-ax.set_title(r'Observed $\alpha_{x}$ vs Expected $\alpha_{uv}$')
+ax.set_title(r'Observed $\alpha_{x}$ vs Observed $\alpha_{uv}$')
 ax.plot(x,variables[0]*x+variables[1],'black')
 ax=axs[1]
-ax.plot(observedax,diffauv,"o")
-ax.set_title(r'Observed $\alpha_{x}$ vs Residuals of $\alpha_{uv}$')
+ax.plot(row_expauv,diffauv,"o")
+ax.set_title(r'Observed $\alpha_{uv}$ vs Residuals of $\alpha_{uv}$')
 plt.show()
