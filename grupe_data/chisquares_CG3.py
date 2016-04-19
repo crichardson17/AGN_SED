@@ -158,16 +158,14 @@ print chisquare/data_pts
 #Make a plot of the residuals
 
 
-
-
-
 #Make a plot with data and best fit line. 
-
+x=np.arange(0,5)
 figure, axs = plt.subplots(nrows=2, ncols=1, sharex=True)
 ax=axs[0]
-ax.errorbar(observedax,row_expauv2,xerr=axerr,yerr=auverr,fmt="o")
-ax.set_title('Observed ax vs expected auv')
+ax.errorbar(observedax,observedauv,xerr=axerr,yerr=auverr,fmt="o")
+ax.set_title(r'Observed $\alpha_{x}$ vs Expected $\alpha_{uv}$')
+ax.plot(x,variables[0]*x+variables[1],'black')
 ax=axs[1]
 ax.plot(observedax,diffauv,"o")
-ax.set_title('Observed ax vs Residuals')
+ax.set_title(r'Observed $\alpha_{x}$ vs Residuals of $\alpha_{uv}$')
 plt.show()
