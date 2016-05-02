@@ -57,9 +57,9 @@ print(m,b)
 
 def linfit2(x,m1,b1):
     return m1*x+b1
-linparams = curve_fit(linfit2,observedauv,observedax)
-[m1,b1] = linparams[0]
-
+linparams2 = curve_fit(linfit2,observedauv,observedax)
+[m1,b1] = linparams2[0]
+variables2= [m1,b1]
 #Define a function to create a quadratic regression
 
 def quadfit(x,c,d,e):
@@ -156,16 +156,16 @@ chisquare=sum(float(i) for i in sumdiffroot)
 print chisquare/data_pts
 
 #Make a plot of the residuals
-print(diffauv)
+print(row_expauv, diffauv)
 
 #Make a plot with data and best fit line. 
 x=np.arange(0,5)
-figure, axs = plt.subplots(nrows=2, ncols=1, sharex=False)
+figure, axs = plt.subplots(nrows=1, ncols=2, sharex=False)
 ax=axs[0]
-ax.errorbar(observedax,observedauv,xerr=axerr,yerr=auverr,fmt="o")
+ax.errorbar(observedax,observedauv,xerr=auverr,yerr=axerr,fmt="o")
 ax.set_title(r'Observed $\alpha_{x}$ vs Observed $\alpha_{uv}$')
 ax.plot(x,variables[0]*x+variables[1],'black')
 ax=axs[1]
 ax.plot(row_expauv,diffauv,"o")
-ax.set_title(r'Observed $\alpha_{uv}$ vs Residuals of $\alpha_{uv}$')
+ax.set_title(r'Expected $\alpha_{uv}$ vs Residuals of $\alpha_{uv}$')
 plt.show()

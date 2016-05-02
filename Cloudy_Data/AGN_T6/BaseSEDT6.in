@@ -28,7 +28,8 @@ iterate
 #
 set save prefix "SEDT6"
 save continuum ".con" units eV
-save linelist, emergent,  ".lin" "LineList_CG_1.dat"  
+iterate to convergence
+save linelist  ".lin" "LineList_CG_1.dat"  last no hash
 save overview ".ovr" 
-save heating ".het"
-save cooling ".col"
+save heating ".het" 
+save cooling ".col" 
