@@ -19,13 +19,13 @@ def filefind(directory):
             if file.endswith('.lin'):
                 print file
                 
-directory=r'/Users/chris_000/Documents/GitHub/AGN_SED'
+directory=r'Users/compastro/greene/AGN_SED/Cloudy_Data' 
 
 filefind(directory)
 
 #Generate a CSV file containing all the relevant data points
 
-Output_File=r'/Users/chris_000/Documents/GitHub/AGN_SED/All_Emissions.csv' #Create the output file
+Output_File=r'/Users/compastro/greene/AGN_SED/All_Emissions.csv' #Create the output file
 
 normSource=os.path.normpath(directory)
 
@@ -40,10 +40,12 @@ for root, dirs, files in os.walk(normSource, topdown=False):
         if  name.endswith('.lin'):
             print name
             #only read columns from list cols
-            dfs.append(pd.read_csv(os.path.join(root, name), sep='\t', index_col=False, usecols=['TOTL  4861A','O  3  5007A', 'O  1  6300A', 'H  1  6563A','N  2  6584A','S  2  6720A' ]))
+            dfs.append(pd.read_csv(os.path.join(root, name), delimiter='/t', usecols=['TOTL  4861A','O  3  5007A', 'O  1  6300A', 'H  1  6563A','N  2  6584A','S  2  6720A' ]))
             d = pd.concat(dfs, ignore_index=False)
             
 d['Temperature']=d2
+
+
 
 d['O III / H-Beta']=np.log10(d['O  3  5007A']/d['H  1  6563A'])
 
@@ -65,7 +67,7 @@ ax1.set_ylim(np.log10(10**(-0.5)), np.log10(10**(1.5)))
 ax1.set_xlim(np.log10(10**(-3)),np.log10(10**1))
 
 ax2.scatter(d['O I / H-Alpha'],d['O III / H-Beta'])
-ax2.set_title(r'Log$_{10}$(Log$_{10}$([O I] $\lambda 6300$ / H$\alpha$) vs [O III] $\lambda 5700$ / H$\beta$) ')
+ax2.set_title(r'Log$_{10}$([O I] $\lambda 6300$ / H$\alpha$) vs [O III] $\lambda 5700$ / H$\beta$) ')
 ax2.set_ylim(np.log10(10**(-0.5)), np.log10(10**(1.5)))
 ax2.set_xlim(np.log10(10**(-2)),np.log10(10**0))
 
