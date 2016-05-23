@@ -65,7 +65,7 @@ ax1.set_ylim(np.log10(10**(-0.5)), np.log10(10**(1.5)))
 ax1.set_xlim(np.log10(10**(-3)),np.log10(10**1))
 
 ax2.scatter(d['O I / H-Alpha'],d['O III / H-Beta'])
-ax2.set_title(r'Log$_{10}$(Log$_{10}$([O I] $\lambda 6300$ / H$\alpha$) vs [O III] $\lambda 5700$ / H$\beta$) ')
+ax2.set_title(r'(Log$_{10}$([O I] $\lambda 6300$ / H$\alpha$) vs [O III] $\lambda 5700$ / H$\beta$) ')
 ax2.set_ylim(np.log10(10**(-0.5)), np.log10(10**(1.5)))
 ax2.set_xlim(np.log10(10**(-2)),np.log10(10**0))
 
