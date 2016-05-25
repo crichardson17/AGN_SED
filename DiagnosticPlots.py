@@ -62,13 +62,13 @@ d['O II / O III'] = np.log10(d['TOTL  3727A']/d['O  3  5007A'])
 d.to_csv(Output_File, sep = ",", index=True)
 
 #Plot these data points
-SDSS_Data=np.genfromtxt('C:/Users/chris_000/Documents/GitHub/AGN_SED/sdss_data/first_try.csv', skip_header=1, delimiter = ',',dtype=float,unpack=True)
+SDSS_Data=np.genfromtxt('C:/Users/chris_000/Documents/GitHub/AGN_SED/sdss_data/flux_norm.csv', skip_header=1, delimiter = ',',dtype=float,unpack=True)
 
 f,((ax1,ax2),(ax3,ax4)) = plt.subplots(2,2,sharey=True)
 
-x1=np.arange(-1.5,0.3,0.01)
+x1=np.arange(-2,0.3,0.01)
 y1=1.19+np.divide(0.61,x1-0.47)
-x2=np.arange(-1.5,0,0.01)
+x2=np.arange(-2,0,0.01)
 y2 = 1.3+np.divide(0.61,x2-0.05)
 
 ax1.scatter(np.log10(np.divide(SDSS_Data[18],SDSS_Data[17])),np.log10(np.divide(SDSS_Data[13],SDSS_Data[11])), s=0.5, c='b')
@@ -76,7 +76,7 @@ ax1.scatter(d['N II / H-Alpha'],d['O III / H-Beta'], c= 'r')
 ax1.plot(x1,y1,'b-',x2,y2,'r--',linewidth = 2)
 ax1.set_title(r'Log$_{10}$([N II] $\lambda 6583$ / H$\alpha$) vs Log$_{10}$(O III] $\lambda 5700$ / H$\beta$) ')
 ax1.set_ylim(np.log10(10**(-1.5)), np.log10(10**(1.5)))
-ax1.set_xlim(np.log10(10**(-1.5)), np.log10(10**1.5))
+ax1.set_xlim(np.log10(10**(-2)), np.log10(10**1.5))
 ax1.set_ylabel(r'Log$_{10}$([O III] $\lambda 5700$ / H$\beta$)')
 ax1.set_xlabel(r'Log$_{10}$([N II] $\lambda 6583$ / H$\alpha$)')
 ax1.text(-1,1,'AGN')
