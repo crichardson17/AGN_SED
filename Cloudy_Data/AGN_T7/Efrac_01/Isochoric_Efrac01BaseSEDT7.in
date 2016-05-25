@@ -1,15 +1,15 @@
 #
 # Incident Radiation Field
-# 
-CMB
-AGN 4.0, -1.42, -0.60, -1.59  #Temperture at 10^6 K, ax=-1.42, auv=-0.60, aox=-1.59
+#
+CMB 
+AGN 7.0, -1.42, -0.60, -1.59  #Temperture at 10^6 K, ax=-1.42, auv=-0.60, aox=-1.59
 cosmic rays background
 #
 # Ionization Parameter
 #
 phi(h) 11.5  #for Log U=-2.0
 hden 3.0 #hydrogen density at 10^3 cm^-3
-constant pressure no abort
+#constant pressure no abort
 #
 # Abundances
 #  
@@ -27,10 +27,10 @@ stop efrac 0.01
 #
 # Save Output
 #
-set save prefix "Efrac_01_SEDT4"
+set save prefix "Isochoric_Efrac01_SEDT7"
 save continuum ".con" units eV
 iterate to convergence
-save linelist,  ".lin" "LineList_CG_1.dat" last no hash  
+save linelist  ".lin" "LineList_CG_1.dat" last no hash  
 save overview ".ovr" last no hash
 save heating ".het" last no hash
 save cooling ".col" last no hash

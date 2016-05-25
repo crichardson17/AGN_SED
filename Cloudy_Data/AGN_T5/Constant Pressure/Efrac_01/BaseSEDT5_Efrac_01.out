@@ -8,7 +8,7 @@
                        * cosmic rays background                                                          *
                        * phi(h) 11.5                                                                     *
                        * hden 3.0                                                                        *
-                       * constant pressure                                                               *
+                       * constant pressure no abort                                                      *
                        * abundances GASS10                                                               *
                        * grains orion 		                                                                 *
                        * >>>> mie_read_opc reading file -- graphite_orion_10.opc                    <<<< *
@@ -19,7 +19,7 @@
                        * element helium scale 1.046	                                                     *
                        * stop temperature off                                                            *
                        * stop efrac 0.01                                                                 *
-                       * set save prefix "SEDT5_Efrac_01"                                                *
+                       * set save prefix "Efrac_01_SEDT5"                                                *
                        * save continuum ".con" units eV                                                  *
                        * iterate to convergence                                                          *
                        * save linelist, emergent,  ".lin" "LineList_CG_1.dat" last no hash               *
@@ -186,7 +186,7 @@
                        * cosmic rays background                                                          *
                        * phi(h) 11.5                                                                     *
                        * hden 3.0                                                                        *
-                       * constant pressure                                                               *
+                       * constant pressure no abort                                                      *
                        * abundances GASS10                                                               *
                        * grains orion 		                                                                 *
                        * metals deplete                                                                  *
@@ -195,7 +195,7 @@
                        * element helium scale 1.046	                                                     *
                        * stop temperature off                                                            *
                        * stop efrac 0.01                                                                 *
-                       * set save prefix "SEDT5_Efrac_01"                                                *
+                       * set save prefix "Efrac_01_SEDT5"                                                *
                        * save continuum ".con" units eV                                                  *
                        * iterate to convergence                                                          *
                        * save linelist, emergent,  ".lin" "LineList_CG_1.dat" last no hash               *
@@ -1043,7 +1043,7 @@
    <a>:5.20E-07  erdeFe2.1E+24  Tcompt3.62E+07  Tthr2.04E+09  <Tden>: 6.27E+03  <dens>:6.93E-21  <MolWgt>1.00E+00
      Mean Jeans  l(cm)1.47E+19  M(sun)7.54E+04  smallest:     len(cm):5.63E+18  M(sun):4.25E+03  a_ox tran: -1.26
  Rion:1.000E+30  Dist:0.00E+00  Diam:0.000E+00
- Hatom level 70  HatomType: add  HInducImp  F  He tot level: 63  He2 level:   70  ExecTime   349.3
+ Hatom level 70  HatomType: add  HInducImp  F  He tot level: 63  He2 level:   70  ExecTime   354.9
  ConvrgError(%)  <eden>  0.197  MaxEden  0.987  <H-C>   0.07  Max(H-C)    0.42  <Press>   0.491  MaxPrs er  0.982
   Continuity(%)  chng Te   8.4  elec den   3.3  n(H2)    0.0  n(CO)        0.0
 
@@ -1264,7 +1264,7 @@
                        * cosmic rays background                                                          *
                        * phi(h) 11.5                                                                     *
                        * hden 3.0                                                                        *
-                       * constant pressure                                                               *
+                       * constant pressure no abort                                                      *
                        * abundances GASS10                                                               *
                        * grains orion 		                                                                 *
                        * metals deplete                                                                  *
@@ -1273,7 +1273,7 @@
                        * element helium scale 1.046	                                                     *
                        * stop temperature off                                                            *
                        * stop efrac 0.01                                                                 *
-                       * set save prefix "SEDT5_Efrac_01"                                                *
+                       * set save prefix "Efrac_01_SEDT5"                                                *
                        * save continuum ".con" units eV                                                  *
                        * iterate to convergence                                                          *
                        * save linelist, emergent,  ".lin" "LineList_CG_1.dat" last no hash               *
@@ -2128,7 +2128,7 @@
    <a>:5.10E-07  erdeFe2.1E+24  Tcompt3.63E+07  Tthr2.08E+09  <Tden>: 6.52E+03  <dens>:6.75E-21  <MolWgt>9.95E-01
      Mean Jeans  l(cm)1.45E+19  M(sun)7.76E+04  smallest:     len(cm):5.26E+18  M(sun):3.68E+03  a_ox tran: -1.28
  Rion:1.000E+30  Dist:0.00E+00  Diam:0.000E+00
- Hatom level 70  HatomType: add  HInducImp  F  He tot level: 63  He2 level:   70  ExecTime   694.0
+ Hatom level 70  HatomType: add  HInducImp  F  He tot level: 63  He2 level:   70  ExecTime   714.6
  ConvrgError(%)  <eden>  0.179  MaxEden  0.974  <H-C>   0.07  Max(H-C)    0.48  <Press>   0.499  MaxPrs er  0.987
   Continuity(%)  chng Te   8.3  elec den   3.2  n(H2)    0.0  n(CO)        0.0
 
@@ -2348,7 +2348,7 @@
                        * cosmic rays background                                                          *
                        * phi(h) 11.5                                                                     *
                        * hden 3.0                                                                        *
-                       * constant pressure                                                               *
+                       * constant pressure no abort                                                      *
                        * abundances GASS10                                                               *
                        * grains orion 		                                                                 *
                        * metals deplete                                                                  *
@@ -2357,7 +2357,7 @@
                        * element helium scale 1.046	                                                     *
                        * stop temperature off                                                            *
                        * stop efrac 0.01                                                                 *
-                       * set save prefix "SEDT5_Efrac_01"                                                *
+                       * set save prefix "Efrac_01_SEDT5"                                                *
                        * save continuum ".con" units eV                                                  *
                        * iterate to convergence                                                          *
                        * save linelist, emergent,  ".lin" "LineList_CG_1.dat" last no hash               *
@@ -3210,7 +3210,7 @@
    <a>:5.12E-07  erdeFe2.1E+24  Tcompt3.63E+07  Tthr2.07E+09  <Tden>: 6.59E+03  <dens>:6.67E-21  <MolWgt>9.91E-01
      Mean Jeans  l(cm)1.44E+19  M(sun)7.79E+04  smallest:     len(cm):5.13E+18  M(sun):3.50E+03  a_ox tran: -1.28
  Rion:1.000E+30  Dist:0.00E+00  Diam:0.000E+00
- Hatom level 70  HatomType: add  HInducImp  F  He tot level: 63  He2 level:   70  ExecTime  1045.0
+ Hatom level 70  HatomType: add  HInducImp  F  He tot level: 63  He2 level:   70  ExecTime  1071.8
  ConvrgError(%)  <eden>  0.183  MaxEden  0.966  <H-C>   0.07  Max(H-C)    0.47  <Press>   0.507  MaxPrs er  0.989
   Continuity(%)  chng Te   7.6  elec den   3.2  n(H2)    0.0  n(CO)        0.0
 
@@ -3516,5 +3516,5 @@
          1 mean step length searches/chemistry step
 ----------------------------------------------------
 
- Cloudy ends: 255 zones, 3 iterations.  ExecTime(s) 1045.02
+ Cloudy ends: 255 zones, 3 iterations.  ExecTime(s) 1071.86
  [Stop in cdMain at maincl.cpp:483, Cloudy exited OK]

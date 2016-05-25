@@ -9,7 +9,7 @@ cosmic rays background
 #
 phi(h) 11.5  #for Log U=-2.0
 hden 3.0 #hydrogen density at 10^3 cm^-3
-constant pressure
+constant pressure no abort
 #
 # Abundances
 #  
@@ -27,7 +27,7 @@ stop efrac 0.01
 #
 # Save Output
 #
-set save prefix "SEDT5_Efrac_01"
+set save prefix "Efrac_01_SEDT5"
 save continuum ".con" units eV
 iterate to convergence
 save linelist, emergent,  ".lin" "LineList_CG_1.dat" last no hash  

@@ -17,7 +17,7 @@ abundances GASS10
 grains orion 		#set up the dust grains
 metals deplete
 element nitrogen scale 2.0 #secondary nucleosynthesis (Hamann & Ferland 1999)
-metals 2.0
+metals and grains 2.0 
 element helium scale 1.046	#Conserve mass (Baldwin et al. 1991)
 #
 # Boundary Condition
@@ -27,7 +27,7 @@ stop efrac 0.01
 #
 # Save Output
 #
-set save prefix "SEDT6_Efrac_01"
+set save prefix "Efrac_01_SEDT6"
 save continuum ".con" units eV
 iterate to convergence
 save  linelist, emergent,  ".lin" "LineList_CG_1.dat" last no hash  
