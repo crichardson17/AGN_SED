@@ -1,0 +1,36 @@
+#
+# Incident Radiation Field
+#
+CMB 
+AGN 5.0, -1.42, -0.60, -1.59  #Temperture at 10^6 K, ax=-1.42, auv=-0.60, aox=-1.59
+cosmic rays background
+#
+# Ionization Parameter
+#
+phi(h) 13.5  #for Log U=-2.0
+hden 3.0 #hydrogen density at 10^3 cm^-3
+constant pressure no abort
+#
+# Abundances
+#  
+abundances GASS10
+grains orion 		#set up the dust grains
+metals deplete
+element nitrogen scale 2.0 #secondary nucleosynthesis (Hamann & Ferland 1999)
+metals 2.0
+element helium scale 1.046	#Conserve mass (Baldwin et al. 1991)
+#
+# Boundary Condition
+#
+stop temperature off
+stop efrac 0.01
+#
+# Save Output
+#
+set save prefix "Efrac_01_SEDT5"
+save continuum ".con" units eV
+iterate to convergence
+save linelist, emergent,  ".lin" "LineList_CG_1.dat" last no hash  
+save overview ".ovr" last no hash
+save heating ".het" last no hash
+save cooling ".col" last no hash
