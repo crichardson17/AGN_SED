@@ -37,7 +37,7 @@ d2=pd.DataFrame({'Temperature': ['10^4','10^5', '10^6', '10^7']},dtype=object) #
 
 for root, dirs, files in os.walk(rootdirectory, topdown=False):
     for name in files:
-        if name.startswith('PhiH144771') and name.endswith('.lin'):
+        if name.startswith('PhiH84771') and name.endswith('.lin'):
             print name
             #only read columns from list cols
             dfs.append(pd.read_csv(os.path.join(root, name), delimiter="\t", usecols=['TOTL  4861A','O  3  5007A', 'NE 5  3426A', 'NE 3  3869A',
@@ -151,11 +151,11 @@ ax6.scatter(d['O II / N II'],d['S II 6716/ S II 6731'], c='r')
 ax6.set_ylabel(r'Log$_{10}$([S II] $\lambda 6716$ / [S II] $\lambda 6731$')
 ax6.set_xlabel(r'Log$_{10}$([O II] $\lambda 3727$ / [N II] $\lambda 6583$)')
 
-ax7.scatter(np.log10(np.divide(SDSS_Data[16],SDSS_Data[17])),np.log10(np.divide(SDSS_Data[13],np.add(SDSS_Data[5],SDSS_Data[6]))),s = 0.5)
+ax7.scatter(np.log10(np.divide(SDSS_Data[15],SDSS_Data[17])),np.log10(np.divide(SDSS_Data[13],np.add(SDSS_Data[5],SDSS_Data[6]))),s = 0.5)
 ax7.scatter(d['O I / H-Alpha'],d['O III / O II'])
 ax7.set_xlabel(r'Log$_{10}$([O I] $\lambda 6300$ / H$\alpha$)')
 ax7.set_ylabel(r'Log$_{10}$([O III] $\lambda 5007$) / [O II] $\lambda 3727$)')
-plt.suptitle('AGN Diagnostic Plots: Efrac = 0.01, Phi(h) = 14.4771, n(h) = 3')
+plt.suptitle('AGN Diagnostic Plots: Efrac = 0.01, Phi(h) = 8.4771, n(h) = 3')
 plt.show()
 
 
