@@ -37,7 +37,7 @@ d2=pd.DataFrame({'Temperature': ['10^4','10^5', '10^6', '10^7']},dtype=object) #
 
 for root, dirs, files in os.walk(rootdirectory, topdown=False):
     for name in files:
-        if name.startswith('Efrac_01') and name.endswith('.lin'):
+        if name.startswith('PhiH144771') and name.endswith('.lin'):
             print name
             #only read columns from list cols
             dfs.append(pd.read_csv(os.path.join(root, name), delimiter="\t", usecols=['TOTL  4861A','O  3  5007A', 'NE 5  3426A', 'NE 3  3869A',
@@ -84,7 +84,7 @@ y2 = 1.3+np.divide(0.61,x2-0.05)
 ax1.scatter(np.log10(np.divide(SDSS_Data[18],SDSS_Data[17])),np.log10(np.divide(SDSS_Data[13],SDSS_Data[11])), s=0.5, c='b')
 ax1.scatter(d['N II / H-Alpha'],d['O III / H-Beta'], c= 'r')
 ax1.plot(x1,y1,'b-',x2,y2,'b--',linewidth = 2)
-ax1.set_title(r'Log$_{10}$([N II] $\lambda 6583$ / H$\alpha$) vs Log$_{10}$(O III] $\lambda 5700$ / H$\beta$) ')
+#ax1.set_title(r'Log$_{10}$([N II] $\lambda 6583$ / H$\alpha$) vs Log$_{10}$(O III] $\lambda 5700$ / H$\beta$) ')
 ax1.set_ylim(np.log10(10**(-1.5)), np.log10(10**(1.5)))
 ax1.set_xlim(np.log10(10**(-2)), np.log10(10**1.5))
 ax1.set_ylabel(r'Log$_{10}$([O III] $\lambda 5700$ / H$\beta$)')
@@ -100,8 +100,8 @@ y4 = 1.18*x4+1.3
 ax2.scatter(np.log10(np.divide(SDSS_Data[15],SDSS_Data[17])),np.log10(np.divide(SDSS_Data[13],SDSS_Data[11])), s=0.5, c='b')
 ax2.scatter(d['O I / H-Alpha'],d['O III / H-Beta'], c='r')
 ax2.plot(x3,y3,x4,y4,'b--',linewidth = 2)
-ax2.set_title(r'(Log$_{10}$([O I] $\lambda 6300$ / H$\alpha$) vs [O III] $\lambda 5700$ / H$\beta$) ')
-ax2.set_title(r'Log$_{10}$([O I] $\lambda 6300$ / H$\alpha$) vs [O III] $\lambda 5700$ / H$\beta$) ')
+#ax2.set_title(r'(Log$_{10}$([O I] $\lambda 6300$ / H$\alpha$) vs [O III] $\lambda 5700$ / H$\beta$) ')
+#ax2.set_title(r'Log$_{10}$([O I] $\lambda 6300$ / H$\alpha$) vs [O III] $\lambda 5700$ / H$\beta$) ')
 ax2.set_ylim(np.log10(10**(-1.5)), np.log10(10**(1.5)))
 ax2.set_xlim(np.log10(10**(-3)),np.log10(10**0))
 ax2.set_ylabel(r'Log$_{10}$([O III] $\lambda 5700$ / H$\beta$)')
@@ -118,17 +118,17 @@ y6 = 1.89 * x6 + 0.76
 ax3.scatter(np.log10(np.divide(np.add(SDSS_Data[19],SDSS_Data[20]),SDSS_Data[17])),np.log10(np.divide(SDSS_Data[13],SDSS_Data[11])), s=0.5, c='b')
 ax3.scatter(d['S II / H-Alpha'],d['O III / H-Beta'],c = 'r')
 ax3.plot(x5,y5,x6,y6, 'b--',linewidth=2)
-ax3.set_title(r'Log$_{10}$([S II] $\lambda 6720$ / H$\alpha$) vs Log$_{10}$([O III] $\lambda 5700$ / H$\beta$) ')
+#ax3.set_title(r'Log$_{10}$([S II] $\lambda 6720$ / H$\alpha$) vs Log$_{10}$([O III] $\lambda 5700$ / H$\beta$) ')
 ax3.set_xlim(np.log10(10**(-3)),np.log10(10**1))
 ax3.set_ylim(np.log10(10**(-1.5)), np.log10(10**(1.5)))
-ax3.set_ylabel(r'Log$_{10}$([O III] $\lambda 5700$ / H$\beta$)')
+ax3.set_ylabel(r'Log$1{10}$([O III] $\lambda 5700$ / H$\beta$)')
 ax3.set_xlabel(r'Log$_{10}$([S II] $\lambda 6720$ / H$\alpha$)')
 ax3.text(-1,1,'Seyfert')
 ax3.text(0.2,-0.5,'LINER')
 
 ax4.scatter(np.log10(np.divide(np.add(SDSS_Data[5],SDSS_Data[6]),SDSS_Data[13])),np.log10(np.divide(SDSS_Data[13],SDSS_Data[11])), s=0.5, c='b')
 ax4.scatter(d['O II / O III'],d['O III / H-Beta'],c='r')
-ax4.set_title(r'Log$_{10}$([O II] $\lambda 3727$ / [O III] $\lambda 5007$) vs Log$_{10}$([O III] $\lambda 5700$ / H$\beta$) ')
+#ax4.set_title(r'Log$_{10}$([O II] $\lambda 3727$ / [O III] $\lambda 5007$) vs Log$_{10}$([O III] $\lambda 5700$ / H$\beta$) ')
 ax4.set_ylabel(r'Log$_{10}$([O III] $\lambda 5700$ / H$\beta$)')
 ax4.set_xlabel(r'Log$_{10}$([O II] $\lambda 3727$ / [O III] $\lambda 5007$)')
 ax4.set_xlim(np.log10(10**(-2)),np.log10(10**1.5))
@@ -146,12 +146,16 @@ ax5.set_ylabel(r'Log$_{10}$([He II] $\lambda 4686$ / H$\beta$)')
 
 
 
-ax6.scatter(np.log10(np.divide(SDSS_Data[19],SDSS_Data[20])),np.log10(np.divide(np.add(SDSS_Data[5],SDSS_Data[6]),SDSS_Data[18])),s = 0.5)
-ax6.scatter(d['S II 6716/ S II 6731'],d['O II / N II'], c='r')
-
+ax6.scatter(np.log10(np.divide(np.add(SDSS_Data[5],SDSS_Data[6]),SDSS_Data[18])),np.log10(np.divide(SDSS_Data[19],SDSS_Data[20])),s = 0.5)
+ax6.scatter(d['O II / N II'],d['S II 6716/ S II 6731'], c='r')
+ax6.set_ylabel(r'Log$_{10}$([S II] $\lambda 6716$ / [S II] $\lambda 6731$')
+ax6.set_xlabel(r'Log$_{10}$([O II] $\lambda 3727$ / [N II] $\lambda 6583$)')
 
 ax7.scatter(np.log10(np.divide(SDSS_Data[16],SDSS_Data[17])),np.log10(np.divide(SDSS_Data[13],np.add(SDSS_Data[5],SDSS_Data[6]))),s = 0.5)
 ax7.scatter(d['O I / H-Alpha'],d['O III / O II'])
+ax7.set_xlabel(r'Log$_{10}$([O I] $\lambda 6300$ / H$\alpha$)')
+ax7.set_ylabel(r'Log$_{10}$([O III] $\lambda 5007$) / [O II] $\lambda 3727$)')
+plt.suptitle('AGN Diagnostic Plots: Efrac = 0.01, Phi(h) = 14.4771, n(h) = 3')
 plt.show()
 
 
