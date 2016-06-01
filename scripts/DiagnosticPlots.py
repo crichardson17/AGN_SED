@@ -2,13 +2,12 @@
 """
 Christopher Greene & Chris Richardson
 Elon University
-Description: A generalized code for generating plots of line ratios based on
+Description: A generalized code for generating plots of optical emission line ratios based on
 simulations from CLOUDY. These line ratios will act as a test of the validity of
 our model of the Spectral Energy Distribution of Seyfert Galaxies."""
 
 #Import required modules
 import matplotlib.pyplot as plt
-from matplotlib import cm
 import numpy as np
 import pandas as pd
 import os
@@ -37,7 +36,7 @@ d2=pd.DataFrame({'Temperature': [10**4,10**5, 10**6, 10**7]},dtype=float) #Creat
 
 for root, dirs, files in os.walk(rootdirectory, topdown=False):
     for name in files:
-        if name.startswith('Metallicity34') and name.endswith('.lin'):
+        if name.startswith('Metallicity3') and name.endswith('.lin'):
             print name
             #only read columns from list cols
             dfs.append(pd.read_csv(os.path.join(root, name), delimiter="\t", usecols=['TOTL  4861A','O  3  5007A', 'NE 5  3426A', 'NE 3  3869A',
@@ -97,8 +96,8 @@ l1 = ax1.scatter(d['N II / H-Alpha'].get_value(0),d['O III / H-Beta'].get_value(
 l2 = ax1.scatter(d['N II / H-Alpha'].get_value(1),d['O III / H-Beta'].get_value(1), marker = "s",c='cyan', s = 30, label = "10^5")
 l3 = ax1.scatter(d['N II / H-Alpha'].get_value(2),d['O III / H-Beta'].get_value(2), marker = "s",c='r', s = 30, label = "10^6")
 l4 = ax1.scatter(d['N II / H-Alpha'].get_value(3),d['O III / H-Beta'].get_value(3), marker = "s",c='magenta', s = 30, label = "10^7")
-ax1.plot(x1,y1,c = 'b',linewidth = 2)
-ax1.plot(x2,y2, c = 'b',ls = '--', lw = 2)
+ax1.plot(x1,y1,c = '0.5',linewidth = 2)
+ax1.plot(x2,y2, c = '0.5',ls = '--', lw = 2)
 #ax1.set_title(r'Log$_{10}$([N II] $\lambda 6583$ / H$\alpha$) vs Log$_{10}$(O III] $\lambda 5700$ / H$\beta$) ')
 ax1.set_ylim(np.log10(10**(-1.5)), np.log10(10**(1.5)))
 ax1.set_xlim(np.log10(10**(-2)), np.log10(10**1.5))
@@ -189,7 +188,6 @@ y7 = -1.701*x7-2.163
 x8 = np.arange(-1.1,1)
 y8 = 1.0*x8+0.7
 ax7.scatter(np.log10(np.divide(SDSS_Data[15],SDSS_Data[17])),np.log10(np.divide(SDSS_Data[13],np.add(SDSS_Data[5],SDSS_Data[6]))),s = 0.5)
-ax7.scatter(d['O I / H-Alpha'],d['O III / O II'],  marker = "s", c=z, cmap = cm.hot, s = 30)
 ax7.scatter(d['O I / H-Alpha'].get_value(0),d['O III / O II'].get_value(0), marker = "s",c='green', s = 30, label = "10^4")
 ax7.scatter(d['O I / H-Alpha'].get_value(1),d['O III / O II'].get_value(1), marker = "s",c='cyan', s = 30, label = "10^5")
 ax7.scatter(d['O I / H-Alpha'].get_value(2),d['O III / O II'].get_value(2), marker = "s",c='r', s = 30, label = "10^6")
@@ -202,6 +200,6 @@ ax7.set_ylabel(r'Log$_{10}$([O III] $\lambda 5007$) / [O II] $\lambda 3727$)')
 ax7.text(-1.5,.75,'Seyfert')
 ax7.text(0,0,'LINER')
 ax7.text(-2.1,-1.25, 'Starburst')
-plt.suptitle('AGN Diagnostic Plots: Metallicity = 3.4, Efrac = 0.01, Phi(h) = 10.4771, n(h) = 3')
+plt.suptitle('AGN Diagnostic Plots: Metallicity = 3.0, Efrac = 0.01, Phi(h) = 10.4771, n(h) = 3')
 ax1.legend()
 plt.show() 

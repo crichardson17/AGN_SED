@@ -16,7 +16,7 @@ from numpy import *
 
 # Enter the metals scale factor
 
-ki = 3.0
+ki = 1.0
 #ki = raw_input("Enter the metals scale factor: ")
 
 
