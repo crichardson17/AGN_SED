@@ -37,7 +37,7 @@ d2=pd.DataFrame({'Temperature': [10**4,10**5, 10**6, 10**7]},dtype=float) #Creat
 
 for root, dirs, files in os.walk(rootdirectory, topdown=False):
     for name in files:
-        if name.startswith('PhiH104771') and name.endswith('.lin'):
+        if name.startswith('Metallicity34') and name.endswith('.lin'):
             print name
             #only read columns from list cols
             dfs.append(pd.read_csv(os.path.join(root, name), delimiter="\t", usecols=['TOTL  4861A','O  3  5007A', 'NE 5  3426A', 'NE 3  3869A',
@@ -92,13 +92,13 @@ x2=np.arange(-2,0,0.01)
 y2 = 1.3+np.divide(0.61,x2-0.05)
 
     
-ax1.scatter(np.log10(np.divide(SDSS_Data[18],SDSS_Data[17])),np.log10(np.divide(SDSS_Data[13],SDSS_Data[11])), s=0.5)
+ax1.scatter(np.log10(np.divide(SDSS_Data[18],SDSS_Data[17])),np.log10(np.divide(SDSS_Data[13],SDSS_Data[11])), marker = 'o', c = '0.5', s = 2)
 l1 = ax1.scatter(d['N II / H-Alpha'].get_value(0),d['O III / H-Beta'].get_value(0), marker = "s",c='green', s = 30, label = "10^4")
 l2 = ax1.scatter(d['N II / H-Alpha'].get_value(1),d['O III / H-Beta'].get_value(1), marker = "s",c='cyan', s = 30, label = "10^5")
 l3 = ax1.scatter(d['N II / H-Alpha'].get_value(2),d['O III / H-Beta'].get_value(2), marker = "s",c='r', s = 30, label = "10^6")
 l4 = ax1.scatter(d['N II / H-Alpha'].get_value(3),d['O III / H-Beta'].get_value(3), marker = "s",c='magenta', s = 30, label = "10^7")
-ax1.plot(x1,y1,c = '0.5',linewidth = 2)
-ax1.plot(x2,y2, c = '0.5',ls = '-', lw = 2)
+ax1.plot(x1,y1,c = 'b',linewidth = 2)
+ax1.plot(x2,y2, c = 'b',ls = '--', lw = 2)
 #ax1.set_title(r'Log$_{10}$([N II] $\lambda 6583$ / H$\alpha$) vs Log$_{10}$(O III] $\lambda 5700$ / H$\beta$) ')
 ax1.set_ylim(np.log10(10**(-1.5)), np.log10(10**(1.5)))
 ax1.set_xlim(np.log10(10**(-2)), np.log10(10**1.5))
@@ -162,12 +162,12 @@ ax4.set_ylim(np.log10(10**(-1.5)), np.log10(10**(1.5)))
 
 x = np.arange(-3,-0.2,0.01)
 y = -1.22 + np.divide(1,8.92*x+1.32)
-ax5.scatter(Shirazi_Data[7],Shirazi_Data[6], marker = '+',s = 10)
+ax5.scatter(Shirazi_Data[7],Shirazi_Data[6], marker = '+', c = '0.5',s = 10)
 ax5.scatter(d['N II / H-Alpha'].get_value(0),d['He II / H-Beta'].get_value(0), marker = "s",c='green', s = 30, label = "10^4")
 ax5.scatter(d['N II / H-Alpha'].get_value(1),d['He II / H-Beta'].get_value(1), marker = "s",c='cyan', s = 30, label = "10^5")
 ax5.scatter(d['N II / H-Alpha'].get_value(2),d['He II / H-Beta'].get_value(2), marker = "s",c='r', s = 30, label = "10^6")
 ax5.scatter(d['N II / H-Alpha'].get_value(3),d['He II / H-Beta'].get_value(3), marker = "s",c='magenta', s = 30, label = "10^7")
-ax5.plot(x,y, c = '0.5', ls = '-', lw = 2.0)
+ax5.plot(x,y, c = 'b', ls = '-', lw = 2.0)
 ax5.set_xlim(-3,1)
 ax5.set_ylim(-3,1)
 ax5.set_xlabel(r'Log$_{10}$([N II] $\lambda 6584$ / H$\alpha$)')
@@ -202,6 +202,6 @@ ax7.set_ylabel(r'Log$_{10}$([O III] $\lambda 5007$) / [O II] $\lambda 3727$)')
 ax7.text(-1.5,.75,'Seyfert')
 ax7.text(0,0,'LINER')
 ax7.text(-2.1,-1.25, 'Starburst')
-plt.suptitle('AGN Diagnostic Plots: Efrac = 0.01, Phi(h) = 10.4771, n(h) = 3')
+plt.suptitle('AGN Diagnostic Plots: Metallicity = 3.4, Efrac = 0.01, Phi(h) = 10.4771, n(h) = 3')
 ax1.legend()
 plt.show() 
