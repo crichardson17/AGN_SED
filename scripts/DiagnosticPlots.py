@@ -36,7 +36,7 @@ d2=pd.DataFrame({'Temperature': [10**4,10**5, 10**6, 10**7]},dtype=float) #Creat
 
 for root, dirs, files in os.walk(rootdirectory, topdown=False):
     for name in files:
-        if name.startswith('Metallicity3') and name.endswith('.lin'):
+        if name.startswith('Metallicity25') and name.endswith('.lin'):
             print name
             #only read columns from list cols
             dfs.append(pd.read_csv(os.path.join(root, name), delimiter="\t", usecols=['TOTL  4861A','O  3  5007A', 'NE 5  3426A', 'NE 3  3869A',
@@ -200,6 +200,6 @@ ax7.set_ylabel(r'Log$_{10}$([O III] $\lambda 5007$) / [O II] $\lambda 3727$)')
 ax7.text(-1.5,.75,'Seyfert')
 ax7.text(0,0,'LINER')
 ax7.text(-2.1,-1.25, 'Starburst')
-plt.suptitle('AGN Diagnostic Plots: Metallicity = 3.0, Efrac = 0.01, Phi(h) = 10.4771, n(h) = 3')
+plt.suptitle('AGN Diagnostic Plots: Metallicity = 2.5, Efrac = 0.01, Phi(h) = 10.4771, n(h) = 3')
 ax1.legend()
 plt.show() 

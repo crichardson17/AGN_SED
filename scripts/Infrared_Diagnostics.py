@@ -1,7 +1,7 @@
 """
 Christopher Greene & Chris Richardson
 Elon University
-Description: A generalized code for generating plots of optical emission line ratios based on
+Description: A generalized code for generating plots of Infrared emission line ratios based on
 simulations from CLOUDY. These line ratios will act as a test of the validity of
 our model of the Spectral Energy Distribution of Seyfert Galaxies."""
 
