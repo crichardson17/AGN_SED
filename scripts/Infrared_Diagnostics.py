@@ -53,14 +53,24 @@ d['Temperature']=d2
 
 
 Dasyra2011_Data=np.genfromtxt('C:/Users/chris_000/Documents/GitHub/AGN_SED/ir_data/dasyra2011/dasyra2011_Type1.csv', skip_header=1, delimiter = ',',dtype=float,unpack=True)
-#Dasyra2011_2_Data = np.genfromtxt('C:/Users/chris_000/Documents/GitHub/AGN_SED/ir_data/dasyra2011_Type2.csv', skip_header=1, delimiter = ',',dtype=float,unpack=True)
+Dasyra2011_2_Data = np.genfromtxt('C:/Users/chris_000/Documents/GitHub/AGN_SED/ir_data/dasyra2011/dasyra2011_Type2.csv', skip_header=1, delimiter = ',',dtype=float,unpack=True)
 Weaver2010_Data = np.genfromtxt('C:/Users/chris_000/Documents/GitHub/AGN_SED/ir_data/weaver2010/weaver2010.csv', skip_header=1, delimiter = ',',dtype=float,unpack=True)
 
 fig = plt.figure()
 
-ax1 = plt.subplot()
+ax1 = plt.subplot(221)
+ax2 = plt.subplot(222)
 
-ax1.scatter(np.log10(np.divide(Weaver2010_Data[4],Weaver2010_Data[8])), np.log10(np.divide(Weaver2010_Data[6], Weaver2010_Data[8])), marker = '^')
-ax1.scatter(np.log10(np.divide(Dasyra2011_Data[2],Dasyra2011_Data[6])), np.log10 ( np.divide (Dasyra2011_Data[9], Dasyra2011_Data[6])), marker = 'x', c = 'r')
+ax1.scatter(np.log10(Weaver2010_Data[6]), np.log10( Weaver2010_Data[4]), marker = '^',label = 'Weaver 2010', edgecolor = '')
+ax1.scatter(np.log10(Dasyra2011_Data[9]), np.log10 (Dasyra2011_Data[2]), marker = 'x', c = 'r', label = 'Dasyra 2011 Type 1')
+ax1.scatter(np.log10(Dasyra2011_2_Data[8]), np.log10 (Dasyra2011_2_Data[2]), marker = '*', c = 'r', label = 'Dasyra 2011 Type 2', edgecolor = '')
+ax1.set_xlabel(r'Log$_{10}$([Ne V] $\lambda$ 14.32 $\mu$m')
+ax1.set_ylabel(r'Log$_{10}$([Ne II] $\lambda$ 12.81 $\mu$m')
+ax1.legend(loc = 'lower right')
+
+
+
+
 plt.show()
+
 

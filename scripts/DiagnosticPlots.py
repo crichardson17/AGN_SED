@@ -8,6 +8,7 @@ our model of the Spectral Energy Distribution of Seyfert Galaxies."""
 
 #Import required modules
 import matplotlib.pyplot as plt
+from matplotlib import cm
 import numpy as np
 import pandas as pd
 import os
@@ -36,7 +37,7 @@ d2=pd.DataFrame({'Temperature': [10**4,10**5, 10**6, 10**7]},dtype=float) #Creat
 
 for root, dirs, files in os.walk(rootdirectory, topdown=False):
     for name in files:
-        if name.startswith('Metallicity25') and name.endswith('.lin'):
+        if name.startswith('Metallicity15') and name.endswith('.lin'):
             print name
             #only read columns from list cols
             dfs.append(pd.read_csv(os.path.join(root, name), delimiter="\t", usecols=['TOTL  4861A','O  3  5007A', 'NE 5  3426A', 'NE 3  3869A',
@@ -90,15 +91,28 @@ y1=1.19+np.divide(0.61,x1-0.47)
 x2=np.arange(-2,0,0.01)
 y2 = 1.3+np.divide(0.61,x2-0.05)
 
-    
-ax1.scatter(np.log10(np.divide(SDSS_Data[18],SDSS_Data[17])),np.log10(np.divide(SDSS_Data[13],SDSS_Data[11])), marker = 'o', c = '0.5', s = 2)
+O3Hb = np.log10( np.divide(SDSS_Data[13],SDSS_Data[11]))
+N2Ha = np.log10(np.divide(SDSS_Data[18],SDSS_Data[17]))
+O1Ha = np.log10(np.divide(SDSS_Data[15],SDSS_Data[17]))
+S2Ha = np.log10(np.divide(np.add(SDSS_Data[19],SDSS_Data[20]),SDSS_Data[17]))
+O3O2 = np.log10(np.divide(SDSS_Data[13],np.add(SDSS_Data[5],SDSS_Data[6])))
+
+
+color1 = np.where(O3Hb > np.add(1.19, np.divide(0.61, np.subtract(N2Ha,.47))),1,0)
+color2 = np.select([O3Hb < np.add(1.3,np.multiply(1.18,O1Ha)),O3Hb >= np.add(1.33, np.divide(0.73, np.add(O1Ha,.59)))],[0,1])
+color3 = np.select([O3Hb < np.add(0.76, np.multiply(1.89,S2Ha)), O3Hb > np.add(1.30,np.divide(0.72, np.subtract(S2Ha,0.32)))],[0,1])
+color4 = np.where(O3Hb > 0.3,1,0)
+color5 = np.where(Shirazi_Data[6] > np.subtract(np.divide(1,np.add(np.multiply(8.92, Shirazi_Data[7]),1.32)),1.22),1,0)
+color7 = np.select([O3O2 < np.add(O1Ha, 0.7),O3O2 > np.subtract(np.multiply(-1.701, O1Ha), 2.163)], [0,1])
+
+ax1.scatter(np.log10(np.divide(SDSS_Data[18],SDSS_Data[17])),np.log10(np.divide(SDSS_Data[13],SDSS_Data[11])),  marker = 'o',edgecolor = '', c = color1, s = 5)
 l1 = ax1.scatter(d['N II / H-Alpha'].get_value(0),d['O III / H-Beta'].get_value(0), marker = "s",c='green', s = 30, label = "10^4")
 l2 = ax1.scatter(d['N II / H-Alpha'].get_value(1),d['O III / H-Beta'].get_value(1), marker = "s",c='cyan', s = 30, label = "10^5")
 l3 = ax1.scatter(d['N II / H-Alpha'].get_value(2),d['O III / H-Beta'].get_value(2), marker = "s",c='r', s = 30, label = "10^6")
 l4 = ax1.scatter(d['N II / H-Alpha'].get_value(3),d['O III / H-Beta'].get_value(3), marker = "s",c='magenta', s = 30, label = "10^7")
-ax1.plot(x1,y1,c = '0.5',linewidth = 2)
-ax1.plot(x2,y2, c = '0.5',ls = '--', lw = 2)
-#ax1.set_title(r'Log$_{10}$([N II] $\lambda 6583$ / H$\alpha$) vs Log$_{10}$(O III] $\lambda 5700$ / H$\beta$) ')
+ax1.plot(x1,y1,c = '0',linewidth = 2)
+ax1.plot(x2,y2, c = '0',ls = '--', lw = 2)
+
 ax1.set_ylim(np.log10(10**(-1.5)), np.log10(10**(1.5)))
 ax1.set_xlim(np.log10(10**(-2)), np.log10(10**1.5))
 ax1.set_ylabel(r'Log$_{10}$([O III] $\lambda 5007$ / H$\beta$)')
@@ -111,14 +125,14 @@ x3 = np.arange(-3,-0.7,0.01)
 y3 = 1.33 + np.divide(0.73,x3+0.59)
 x4 = np.arange(-1.1,0,0.01)
 y4 = 1.18*x4+1.3
-ax2.scatter(np.log10(np.divide(SDSS_Data[15],SDSS_Data[17])),np.log10(np.divide(SDSS_Data[13],SDSS_Data[11])), s=0.5, c='b')
+ax2.scatter(np.log10(np.divide(SDSS_Data[15],SDSS_Data[17])),np.log10(np.divide(SDSS_Data[13],SDSS_Data[11])), edgecolor = '', s=5, c=color2)
 ax2.scatter(d['O I / H-Alpha'].get_value(0),d['O III / H-Beta'].get_value(0), marker = "s",c='green', s = 30, label = "10^4")
 ax2.scatter(d['O I / H-Alpha'].get_value(1),d['O III / H-Beta'].get_value(1), marker = "s",c='cyan', s = 30, label = "10^5")
 ax2.scatter(d['O I / H-Alpha'].get_value(2),d['O III / H-Beta'].get_value(2), marker = "s",c='r', s = 30, label = "10^6")
 ax2.scatter(d['O I / H-Alpha'].get_value(3),d['O III / H-Beta'].get_value(3), marker = "s",c='magenta', s = 30, label = "10^7")
-ax2.plot(x3,y3,c = '0.5', ls = '-', linewidth = 2)
+ax2.plot(x3,y3,c = '0', ls = '-', linewidth = 2)
 
-ax2.plot(x4,y4,c = '0.5', ls = '-', linewidth = 3.0)
+ax2.plot(x4,y4,c = '0', ls = '--', linewidth = 3.0)
 
 ax2.set_ylim(np.log10(10**(-1.5)), np.log10(10**(1.5)))
 ax2.set_xlim(np.log10(10**(-3)),np.log10(10**0))
@@ -133,13 +147,13 @@ x5 = np.arange(-3,0.1,0.01)
 y5 = 1.30 + np.divide(0.72,x5-0.32)
 x6 = np.arange(-0.3,1.0,0.01)
 y6 = 1.89 * x6 + 0.76
-ax3.scatter(np.log10(np.divide(np.add(SDSS_Data[19],SDSS_Data[20]),SDSS_Data[17])),np.log10(np.divide(SDSS_Data[13],SDSS_Data[11])), s=0.5, c='b')
+ax3.scatter(np.log10(np.divide(np.add(SDSS_Data[19],SDSS_Data[20]),SDSS_Data[17])),np.log10(np.divide(SDSS_Data[13],SDSS_Data[11])), edgecolor = '', s=5.0, c=color3)
 ax3.scatter(d['S II / H-Alpha'].get_value(0),d['O III / H-Beta'].get_value(0), marker = "s",c='green', s = 30, label = "10^4")
 ax3.scatter(d['S II / H-Alpha'].get_value(1),d['O III / H-Beta'].get_value(1), marker = "s",c='cyan', s = 30, label = "10^5")
 ax3.scatter(d['S II / H-Alpha'].get_value(2),d['O III / H-Beta'].get_value(2), marker = "s",c='r', s = 30, label = "10^6")
 ax3.scatter(d['S II / H-Alpha'].get_value(3),d['O III / H-Beta'].get_value(3), marker = "s",c='magenta', s = 30, label = "10^7")
-ax3.plot(x5,y5, c='0.5',ls = '-',linewidth=2)
-ax3.plot(x6,y6, c='0.5',ls = '-',linewidth=3.0)
+ax3.plot(x5,y5, c='0',ls = '-',linewidth=2)
+ax3.plot(x6,y6, c='0',ls = '--',linewidth=3.0)
 ax3.set_xlim(np.log10(10**(-3)),np.log10(10**1))
 ax3.set_ylim(np.log10(10**(-1.5)), np.log10(10**(1.5)))
 ax3.set_ylabel(r'Log$1{10}$([O III] $\lambda 5007$ / H$\beta$)')
@@ -147,7 +161,7 @@ ax3.set_xlabel(r'Log$_{10}$([S II] $\lambda 6720$ / H$\alpha$)')
 ax3.text(-1.3,1,'Seyfert')
 ax3.text(0.2,-0.5,'LINER')
 
-ax4.scatter(np.log10(np.divide(np.add(SDSS_Data[5],SDSS_Data[6]),SDSS_Data[13])),np.log10(np.divide(SDSS_Data[13],SDSS_Data[11])), s=2, c='b')
+ax4.scatter(np.log10(np.divide(np.add(SDSS_Data[5],SDSS_Data[6]),SDSS_Data[13])),np.log10(np.divide(SDSS_Data[13],SDSS_Data[11])), edgecolor = '', s=5, c = color4)
 ax4.scatter(d['O II / O III'].get_value(0),d['O III / H-Beta'].get_value(0), marker = "s",c='green', s = 30, label = "10^4")
 ax4.scatter(d['O II / O III'].get_value(1),d['O III / H-Beta'].get_value(1), marker = "s",c='cyan', s = 30, label = "10^5")
 ax4.scatter(d['O II / O III'].get_value(2),d['O III / H-Beta'].get_value(2), marker = "s",c='r', s = 30, label = "10^6")
@@ -161,12 +175,12 @@ ax4.set_ylim(np.log10(10**(-1.5)), np.log10(10**(1.5)))
 
 x = np.arange(-3,-0.2,0.01)
 y = -1.22 + np.divide(1,8.92*x+1.32)
-ax5.scatter(Shirazi_Data[7],Shirazi_Data[6], marker = '+', c = '0.5',s = 10)
+ax5.scatter(Shirazi_Data[7],Shirazi_Data[6], marker = '^', c = color5,edgecolor = '', s = 15)
 ax5.scatter(d['N II / H-Alpha'].get_value(0),d['He II / H-Beta'].get_value(0), marker = "s",c='green', s = 30, label = "10^4")
 ax5.scatter(d['N II / H-Alpha'].get_value(1),d['He II / H-Beta'].get_value(1), marker = "s",c='cyan', s = 30, label = "10^5")
 ax5.scatter(d['N II / H-Alpha'].get_value(2),d['He II / H-Beta'].get_value(2), marker = "s",c='r', s = 30, label = "10^6")
 ax5.scatter(d['N II / H-Alpha'].get_value(3),d['He II / H-Beta'].get_value(3), marker = "s",c='magenta', s = 30, label = "10^7")
-ax5.plot(x,y, c = 'b', ls = '-', lw = 2.0)
+ax5.plot(x,y, c = '0', ls = '-', lw = 2.0)
 ax5.set_xlim(-3,1)
 ax5.set_ylim(-3,1)
 ax5.set_xlabel(r'Log$_{10}$([N II] $\lambda 6584$ / H$\alpha$)')
@@ -175,7 +189,7 @@ ax5.text(-1,-2.5, 'Starburst')
 ax5.text(-2,0,'AGN')
 
 
-ax6.scatter(np.log10(np.divide(np.add(SDSS_Data[5],SDSS_Data[6]),SDSS_Data[18])),np.log10(np.divide(SDSS_Data[19],SDSS_Data[20])),s = 0.5)
+ax6.scatter(np.log10(np.divide(np.add(SDSS_Data[5],SDSS_Data[6]),SDSS_Data[18])),np.log10(np.divide(SDSS_Data[19],SDSS_Data[20])),edgecolor = '', c = '0.5', s = 5)
 ax6.scatter(d['O II / N II'].get_value(0),d['S II 6716/ S II 6731'].get_value(0), marker = "s",c='green', s = 30, label = "10^4")
 ax6.scatter(d['O II / N II'].get_value(1),d['S II 6716/ S II 6731'].get_value(1), marker = "s",c='cyan', s = 30, label = "10^5")
 ax6.scatter(d['O II / N II'].get_value(2),d['S II 6716/ S II 6731'].get_value(2), marker = "s",c='r', s = 30, label = "10^6")
@@ -187,12 +201,12 @@ x7 = np.arange(-2.5,1.5)
 y7 = -1.701*x7-2.163
 x8 = np.arange(-1.1,1)
 y8 = 1.0*x8+0.7
-ax7.scatter(np.log10(np.divide(SDSS_Data[15],SDSS_Data[17])),np.log10(np.divide(SDSS_Data[13],np.add(SDSS_Data[5],SDSS_Data[6]))),s = 0.5)
+ax7.scatter(np.log10(np.divide(SDSS_Data[15],SDSS_Data[17])),np.log10(np.divide(SDSS_Data[13],np.add(SDSS_Data[5],SDSS_Data[6]))),edgecolor = '', c = color7, s = 5)
 ax7.scatter(d['O I / H-Alpha'].get_value(0),d['O III / O II'].get_value(0), marker = "s",c='green', s = 30, label = "10^4")
 ax7.scatter(d['O I / H-Alpha'].get_value(1),d['O III / O II'].get_value(1), marker = "s",c='cyan', s = 30, label = "10^5")
 ax7.scatter(d['O I / H-Alpha'].get_value(2),d['O III / O II'].get_value(2), marker = "s",c='r', s = 30, label = "10^6")
 ax7.scatter(d['O I / H-Alpha'].get_value(3),d['O III / O II'].get_value(3), marker = "s",c='magenta', s = 30, label = "10^7")
-ax7.plot(x7,y7, x8,y8, c = '0.5', lw = 3.0)
+ax7.plot(x7,y7, x8,y8, c = '0', lw = 3.0)
 ax7.set_xlim(-2.5,0.5)
 ax7.set_ylim(-1.5,1.0)
 ax7.set_xlabel(r'Log$_{10}$([O I] $\lambda 6300$ / H$\alpha$)')
@@ -200,6 +214,8 @@ ax7.set_ylabel(r'Log$_{10}$([O III] $\lambda 5007$) / [O II] $\lambda 3727$)')
 ax7.text(-1.5,.75,'Seyfert')
 ax7.text(0,0,'LINER')
 ax7.text(-2.1,-1.25, 'Starburst')
-plt.suptitle('AGN Diagnostic Plots: Metallicity = 2.5, Efrac = 0.01, Phi(h) = 10.4771, n(h) = 3')
+
+#add a plot of O II/ H-beta vs OIII / Hbeta 
+plt.suptitle('AGN Diagnostic Plots: Metallicity = 1.5, Efrac = 0.01, Phi(h) = 10.4771, n(h) = 3')
 ax1.legend()
 plt.show() 
