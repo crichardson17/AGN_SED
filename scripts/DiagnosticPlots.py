@@ -76,6 +76,31 @@ d.to_csv(Output_File, sep = ",", index=True)
 #Plot these data points
 SDSS_Data=np.genfromtxt('C:/Users/chris_000/Documents/GitHub/AGN_SED/sdss_data/flux_norm.csv', skip_header=1, delimiter = ',',dtype=float,unpack=True)
 Shirazi_Data=np.genfromtxt('C:/Users/chris_000/Documents/GitHub/AGN_SED/sdss_data/shirazi12.csv', skip_header=3, delimiter = ',',unpack=True)
+SDSS_Data_Ratios = np.genfromtxt('C:/Users/chris_000/Documents/GitHub/AGN_SED/flux_norm_AGN.csv', skip_header=1, delimiter = ',',dtype=float,invalid_raise = False)
+
+O3Hb = SDSS_Data_Ratios[:,10]
+N2Ha = SDSS_Data_Ratios[:,3]
+O1Ha = SDSS_Data_Ratios[:,2]
+S2Ha = (SDSS_Data_Ratios[:,4])
+O3O2 = (SDSS_Data_Ratios[:,6])
+O3N2 = (SDSS_Data_Ratios[:,7])
+O2O3 = (SDSS_Data_Ratios[:,8])
+S2S2 = (SDSS_Data_Ratios[:,9])
+O2Hb = (SDSS_Data_Ratios[:,1])
+AGN_Array = np.zeros(len(SDSS_Data_Ratios))
+condition1 = np.log10(SDSS_Data_Ratios[:,10]) > np.add(1.19, np.divide(0.61, np.subtract(np.log10(SDSS_Data_Ratios[:,3]),.47)))
+condition2a = np.log10(SDSS_Data_Ratios[:,10]) > np.add(1.3,np.multiply(1.18,np.log10(SDSS_Data_Ratios[:,2])))
+condition2b = np.log10(SDSS_Data_Ratios[:,10]) > np.add(1.33, np.divide(0.73, np.add(np.log10(SDSS_Data_Ratios[:,2]),.59)))
+condition3a = np.log10(SDSS_Data_Ratios[:,10]) > np.add(0.76, np.multiply(1.89,np.log10(SDSS_Data_Ratios[:,5])))
+condition3b = np.log10(SDSS_Data_Ratios[:,10]) > np.add(1.30,np.divide(0.72, np.subtract(np.log10(SDSS_Data_Ratios[:,5]),0.32)))
+
+mask = (condition1 & condition2a & condition2b & (condition3a & condition3b))
+
+AGN_Array= SDSS_Data_Ratios[mask,:]
+print AGN_Array
+np.savetxt(r"C:/Users/chris_000/Documents/GitHub/AGN_SED/AGN_Array.csv",AGN_Array,delimiter = ',')
+
+
 
 f = plt.figure()
 
@@ -94,24 +119,15 @@ y1=1.19+np.divide(0.61,x1-0.47)
 x2=np.arange(-2,0,0.01)
 y2 = 1.3+np.divide(0.61,x2-0.05)
 
-O3Hb = np.log10(np.divide(SDSS_Data[13], SDSS_Data[11]))
-N2Ha = np.log10(np.divide(SDSS_Data[18], SDSS_Data[17]))
-O1Ha = np.log10(np.divide(SDSS_Data[15],SDSS_Data[17]))
-S2Ha = np.log10(np.divide(np.add(SDSS_Data[19],SDSS_Data[20]),SDSS_Data[17]))
-O3O2 = np.log10(np.divide(SDSS_Data[13],np.add(SDSS_Data[5],SDSS_Data[6])))
-O2Hb = np.log10(np.divide(np.add(SDSS_Data[5],SDSS_Data[6]),SDSS_Data[11]))
 
 
-color1 = np.where(O3Hb > np.add(1.19, np.divide(0.61, np.subtract(N2Ha,.47))),0,1)
-color2a = np.where(np.logical_and(O3Hb > np.add(1.3,np.multiply(1.18,O1Ha)),O3Hb > np.add(1.33, np.divide(0.73, np.add(O1Ha,.59)))),0,1)
-color3 = np.where(np.logical_and(O3Hb > np.add(0.76, np.multiply(1.89,S2Ha)), O3Hb > np.add(1.30,np.divide(0.72, np.subtract(S2Ha,0.32)))),0,1)
+N2AGN = SDSS_Data_Ratios[condition1, :]
+OIAGN = SDSS_Data_Ratios[np.logical_and(condition2a, condition2b),:]
+S2AGN = SDSS_Data_Ratios[(condition3a & condition3b),:]
 color5 = np.where(Shirazi_Data[6] > np.subtract(np.divide(1,np.add(np.multiply(8.92, Shirazi_Data[7]),1.32)),1.22),0,1)
-color4 = np.where(np.logical_and(np.logical_and(color1,color2a),color3),0,1)
-color6 = np.where(np.logical_and(np.logical_and(color1,color2a),color3),0,1)
-color7 = np.select([O3O2 < np.add(O1Ha, 0.7),O3O2 > np.subtract(np.multiply(-1.701, O1Ha), 2.163)], [0,1])
-print(color1)
 
-ax1.scatter(np.log10(np.divide(SDSS_Data[18],SDSS_Data[17])),np.log10(np.divide(SDSS_Data[13],SDSS_Data[11])),  marker = 'o',edgecolor = '', c = color1, s = 5)
+ax1.scatter(np.log10(np.divide(SDSS_Data[18],SDSS_Data[17])),np.log10(np.divide(SDSS_Data[13],SDSS_Data[11])),  marker = 'o',edgecolor = '', s = 5)
+ax1.scatter(np.log10(N2AGN[:,3]),np.log10(N2AGN[:,10]),edgecolor = '', s = 5, c = 'r')
 l1 = ax1.scatter(d['N II / H-Alpha'].get_value(0),d['O III / H-Beta'].get_value(0), marker = "s",c='green', s = 30, label = "10^4")
 l2 = ax1.scatter(d['N II / H-Alpha'].get_value(1),d['O III / H-Beta'].get_value(1), marker = "s",c='cyan', s = 30, label = "10^5")
 l3 = ax1.scatter(d['N II / H-Alpha'].get_value(2),d['O III / H-Beta'].get_value(2), marker = "s",c='r', s = 30, label = "10^6")
@@ -131,7 +147,8 @@ x3 = np.arange(-3,-0.7,0.01)
 y3 = 1.33 + np.divide(0.73,x3+0.59)
 x4 = np.arange(-1.1,0,0.01)
 y4 = 1.18*x4+1.3
-ax2.scatter(np.log10(np.divide(SDSS_Data[15],SDSS_Data[17])),np.log10(np.divide(SDSS_Data[13],SDSS_Data[11])), edgecolor = '', s=5, c=color2a)
+ax2.scatter(np.log10(np.divide(SDSS_Data[15],SDSS_Data[17])),np.log10(np.divide(SDSS_Data[13],SDSS_Data[11])), edgecolor = '', s=5)
+ax2.scatter(np.log10(OIAGN[:,2]),np.log10(OIAGN[:,10]),edgecolor = '', s = 5, c = 'r')
 ax2.scatter(d['O I / H-Alpha'].get_value(0),d['O III / H-Beta'].get_value(0), marker = "s",c='green', s = 30, label = "10^4")
 ax2.scatter(d['O I / H-Alpha'].get_value(1),d['O III / H-Beta'].get_value(1), marker = "s",c='cyan', s = 30, label = "10^5")
 ax2.scatter(d['O I / H-Alpha'].get_value(2),d['O III / H-Beta'].get_value(2), marker = "s",c='r', s = 30, label = "10^6")
@@ -153,7 +170,8 @@ x5 = np.arange(-3,0.1,0.01)
 y5 = 1.30 + np.divide(0.72,x5-0.32)
 x6 = np.arange(-0.3,1.0,0.01)
 y6 = 1.89 * x6 + 0.76
-ax3.scatter(np.log10(np.divide(np.add(SDSS_Data[19],SDSS_Data[20]),SDSS_Data[17])),np.log10(np.divide(SDSS_Data[13],SDSS_Data[11])), edgecolor = '', s=5.0, c=color3)
+ax3.scatter(np.log10(np.divide(np.add(SDSS_Data[19],SDSS_Data[20]),SDSS_Data[17])),np.log10(np.divide(SDSS_Data[13],SDSS_Data[11])), edgecolor = '', s=5.0)
+ax3.scatter(np.log10(S2AGN[:,5]),np.log10(S2AGN[:,10]),edgecolor = '', c = 'r', s = 5)
 ax3.scatter(d['S II / H-Alpha'].get_value(0),d['O III / H-Beta'].get_value(0), marker = "s",c='green', s = 30, label = "10^4")
 ax3.scatter(d['S II / H-Alpha'].get_value(1),d['O III / H-Beta'].get_value(1), marker = "s",c='cyan', s = 30, label = "10^5")
 ax3.scatter(d['S II / H-Alpha'].get_value(2),d['O III / H-Beta'].get_value(2), marker = "s",c='r', s = 30, label = "10^6")
@@ -167,8 +185,8 @@ ax3.set_xlabel(r'Log$_{10}$([S II] $\lambda 6720$ / H$\alpha$)')
 ax3.text(-1.3,1,'Seyfert')
 ax3.text(0.2,-0.5,'LINER')
 
-ax4.scatter(np.log10(np.divide(np.add(SDSS_Data[5],SDSS_Data[6]),SDSS_Data[13])),np.log10(np.divide(SDSS_Data[13],SDSS_Data[11])), edgecolor = '', s=5, c = color4)
-#ax4.scatter(color4a,color4b, edgecolor = '', c = 'b', s = 5)
+ax4.scatter(np.log10(np.divide(np.add(SDSS_Data[5],SDSS_Data[6]),SDSS_Data[13])),np.log10(np.divide(SDSS_Data[13],SDSS_Data[11])), edgecolor = '', s=5)
+ax4.scatter(np.log10(AGN_Array[:,8]),np.log10(AGN_Array[:,10]), edgecolor = '', c = 'r', s = 5)
 ax4.scatter(d['O II / O III'].get_value(0),d['O III / H-Beta'].get_value(0), marker = "s",c='green', s = 30, label = "10^4")
 ax4.scatter(d['O II / O III'].get_value(1),d['O III / H-Beta'].get_value(1), marker = "s",c='cyan', s = 30, label = "10^5")
 ax4.scatter(d['O II / O III'].get_value(2),d['O III / H-Beta'].get_value(2), marker = "s",c='r', s = 30, label = "10^6")
@@ -196,7 +214,8 @@ ax5.text(-1,-2.5, 'Starburst')
 ax5.text(-2,0,'AGN')
 
 
-ax6.scatter(np.log10(np.divide(np.add(SDSS_Data[5],SDSS_Data[6]),SDSS_Data[18])),np.log10(np.divide(SDSS_Data[19],SDSS_Data[20])),edgecolor = '', c =color6, s = 5)
+ax6.scatter(np.log10(np.divide(np.add(SDSS_Data[5],SDSS_Data[6]),SDSS_Data[18])),np.log10(np.divide(SDSS_Data[19],SDSS_Data[20])),edgecolor = '', s = 5)
+ax6.scatter(np.log10(AGN_Array[:,7]),np.log10(AGN_Array[:,9]),edgecolor = '', s = 5, c = 'r')
 ax6.scatter(d['O II / N II'].get_value(0),d['S II 6716/ S II 6731'].get_value(0), marker = "s",c='green', s = 30, label = "10^4")
 ax6.scatter(d['O II / N II'].get_value(1),d['S II 6716/ S II 6731'].get_value(1), marker = "s",c='cyan', s = 30, label = "10^5")
 ax6.scatter(d['O II / N II'].get_value(2),d['S II 6716/ S II 6731'].get_value(2), marker = "s",c='r', s = 30, label = "10^6")
@@ -208,7 +227,7 @@ x7 = np.arange(-2.5,1.5)
 y7 = -1.701*x7-2.163
 x8 = np.arange(-1.1,1)
 y8 = 1.0*x8+0.7
-ax7.scatter(np.log10(np.divide(SDSS_Data[15],SDSS_Data[17])),np.log10(np.divide(SDSS_Data[13],np.add(SDSS_Data[5],SDSS_Data[6]))),edgecolor = '', c = color7, s = 5)
+ax7.scatter(np.log10(np.divide(SDSS_Data[15],SDSS_Data[17])),np.log10(np.divide(SDSS_Data[13],np.add(SDSS_Data[5],SDSS_Data[6]))),edgecolor = '', s = 5)
 ax7.scatter(d['O I / H-Alpha'].get_value(0),d['O III / O II'].get_value(0), marker = "s",c='green', s = 30, label = "10^4")
 ax7.scatter(d['O I / H-Alpha'].get_value(1),d['O III / O II'].get_value(1), marker = "s",c='cyan', s = 30, label = "10^5")
 ax7.scatter(d['O I / H-Alpha'].get_value(2),d['O III / O II'].get_value(2), marker = "s",c='r', s = 30, label = "10^6")
@@ -224,12 +243,12 @@ ax7.text(-2.1,-1.25, 'Starburst')
 
 x9 = np.arange(-1.5,0.9,0.01)
 y9 = (0.11/(x9-0.92)) +0.85
-ax8.scatter(O2Hb, O3Hb, edgecolor = '', c = color3, s = 5)
+ax8.scatter(np.log10(O2Hb), np.log10(O3Hb), edgecolor = '', s = 5)
 ax8.scatter(d['O II / H-Beta'].get_value(0),d['O III / H-Beta'].get_value(0), marker = "s",c='green', s = 30, label = "10^4")
 ax8.scatter(d['O II / H-Beta'].get_value(1),d['O III / H-Beta'].get_value(1), marker = "s",c='cyan', s = 30, label = "10^5")
 ax8.scatter(d['O II / H-Beta'].get_value(2),d['O III / H-Beta'].get_value(2), marker = "s",c='r', s = 30, label = "10^6")
 ax8.scatter(d['O II / H-Beta'].get_value(3),d['O III / H-Beta'].get_value(3), marker = "s",c='magenta', s = 30, label = "10^7")
-ax8.plot(x9,y9)
+ax8.plot(x9,y9, c = '0',lw = 3.0)
 
 ax8.set_xlim(-1.5,2.0)
 ax8.set_ylim(-1.5,1.5)
