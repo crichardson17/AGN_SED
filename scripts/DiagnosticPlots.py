@@ -40,7 +40,8 @@ for root, dirs, files in os.walk(rootdirectory, topdown=False):
             print name
             #only read columns from list cols
             dfs.append(pd.read_csv(os.path.join(root, name), delimiter="\t", usecols=['TOTL  4861A','O  3  5007A', 'NE 5  3426A', 'NE 3  3869A',
-            'TOTL  4363A', 'O  1  6300A', 'H  1  6563A','N  2  6584A','S  2  6720A' , 'HE 2  4686A','TOTL  3727A', 'S II  6716A', 'S II  6731A']))
+            'TOTL  4363A', 'O  1  6300A', 'H  1  6563A','N  2  6584A','S  2  6720A' , 'HE 2  4686A','TOTL  3727A', 'S II  6716A', 'S II  6731A',
+            'NE 3  3869A','AR 3  7135A','HE 1  5876A','TOTL  4363A','O  3  4959A']))
             d = pd.concat(dfs, ignore_index=True)
             
 d['Temperature']=d2
@@ -68,6 +69,15 @@ d['O II / N II'] = np.log10(np.divide(d['TOTL  3727A'],d['N  2  6584A']))
 d['O III / O II'] = np.log10(np.divide(d['O  3  5007A'],d['TOTL  3727A']))
 
 d['O II / H-Beta'] = np.log10(np.divide(d['TOTL  3727A'], d['TOTL  4861A'])) 
+
+d['Ne III / H-Alpha'] = np.log10(np.divide(d['NE 3  3869A'],d['H  1  6563A']))
+
+d['Ar III / H-Alpha'] = np.log10(np.divide(d['AR 3  7135A'],d['H  1  6563A']))
+
+d['He I / H-Beta'] = np.log10(np.divide(d['HE 1  5876A'],d['TOTL  4861A']))
+
+
+d['O III 4363 / O III 4959'] = np.log10(np.divide(d['TOTL  4363A'],d['O  3  4959A']))
 
 d.to_csv(Output_File, sep = ",", index=True)
 
@@ -98,19 +108,20 @@ condition4b = np.log10(SDSS_Data_Ratios[:,6]) > np.add(np.log10(SDSS_Data_Ratios
 mask = (condition1 & condition2a & condition2b & (condition3a & condition3b))
 
 AGN_Array= SDSS_Data_Ratios[mask,:]
+np.savetxt("C:/Users/chris_000/Documents/GitHub/AGN_SED/AGN_Array.csv",AGN_Array, delimiter = ',')
 
 
 f = plt.figure()
 
-ax1 = plt.subplot(331)
-ax2 = plt.subplot(332)
-ax3 = plt.subplot(333)
-ax4 = plt.subplot(334)
-ax5 = plt.subplot(335)
-ax6 = plt.subplot(336)
-ax7 = plt.subplot(337)
-ax8 = plt.subplot(338)
-ax9 = plt.subplot(339)
+ax1 = plt.subplot(331, aspect = 'equal', adjustable = 'box-forced', autoscale_on = False)
+ax2 = plt.subplot(332, aspect = 'equal', adjustable = 'box-forced', autoscale_on = False)
+ax3 = plt.subplot(333, aspect = 'equal', adjustable = 'box-forced', autoscale_on = False)
+ax4 = plt.subplot(334, aspect = 'equal', adjustable = 'box-forced', autoscale_on = False)
+ax5 = plt.subplot(335, aspect = 'equal', adjustable = 'box-forced', autoscale_on = False)
+ax6 = plt.subplot(336, aspect = 'equal', adjustable = 'box-forced', autoscale_on = False)
+ax7 = plt.subplot(337, aspect = 'equal', adjustable = 'box-forced', autoscale_on = False)
+ax8 = plt.subplot(338, aspect = 'equal', adjustable = 'box-forced', autoscale_on = False)
+ax9 = plt.subplot(339, aspect = 'equal', adjustable = 'box')
 #Need to find a way to make all the plots squares
 z = [10^4,10^5, 10^6, 10^7]
 x1=np.arange(-2,0.3,0.01)
@@ -178,7 +189,7 @@ ax3.scatter(d['S II / H-Alpha'].get_value(2),d['O III / H-Beta'].get_value(2), m
 ax3.scatter(d['S II / H-Alpha'].get_value(3),d['O III / H-Beta'].get_value(3), marker = "s",c='magenta', s = 30, label = "10^7")
 ax3.plot(x5,y5, c='0',ls = '-',linewidth=2)
 ax3.plot(x6,y6, c='0',ls = '--',linewidth=3.0)
-ax3.set_xlim(np.log10(10**(-3)),np.log10(10**1))
+ax3.set_xlim(np.log10(10**(-2)),np.log10(10**1))
 ax3.set_ylim(np.log10(10**(-1.5)), np.log10(10**(1.5)))
 ax3.set_ylabel(r'Log$1{10}$([O III] $\lambda 5007$ / H$\beta$)')
 ax3.set_xlabel(r'Log$_{10}$([S II] $\lambda 6720$ / H$\alpha$)')
@@ -194,7 +205,7 @@ ax4.scatter(d['O II / O III'].get_value(3),d['O III / H-Beta'].get_value(3), mar
 
 ax4.set_ylabel(r'Log$_{10}$([O III] $\lambda 5007$ / H$\beta$)')
 ax4.set_xlabel(r'Log$_{10}$([O II] $\lambda 3727$ / [O III] $\lambda 5007$)')
-ax4.set_xlim(np.log10(10**(-2)),np.log10(10**1.5))
+ax4.set_xlim(np.log10(10**(-1.5)),np.log10(10**2))
 ax4.set_ylim(np.log10(10**(-1.5)), np.log10(10**(1.5)))
 
 
@@ -206,8 +217,10 @@ ax5.scatter(d['N II / H-Alpha'].get_value(1),d['He II / H-Beta'].get_value(1), m
 ax5.scatter(d['N II / H-Alpha'].get_value(2),d['He II / H-Beta'].get_value(2), marker = "s",c='r', s = 30, label = "10^6")
 ax5.scatter(d['N II / H-Alpha'].get_value(3),d['He II / H-Beta'].get_value(3), marker = "s",c='magenta', s = 30, label = "10^7")
 ax5.plot(x,y, c = '0', ls = '-', lw = 2.0)
-ax5.set_xlim(-3,1)
-ax5.set_ylim(-3,1)
+ax5.set_xlim(-3,2)
+ax5.set_ylim(-3,2)
+ax5.set_xticks((-3,-2,-1,0,1,2))
+ax5.set_yticks((-3,-2,-1,0,1,2))
 ax5.set_xlabel(r'Log$_{10}$([N II] $\lambda 6584$ / H$\alpha$)')
 ax5.set_ylabel(r'Log$_{10}$([He II] $\lambda 4686$ / H$\beta$)')
 ax5.text(-1,-2.5, 'Starburst')
@@ -222,6 +235,8 @@ ax6.scatter(d['O II / N II'].get_value(2),d['S II 6716/ S II 6731'].get_value(2)
 ax6.scatter(d['O II / N II'].get_value(3),d['S II 6716/ S II 6731'].get_value(3), marker = "s",c='magenta', s = 30, label = "10^7")
 ax6.set_ylabel(r'Log$_{10}$([S II] $\lambda 6716$ / [S II] $\lambda 6731$')
 ax6.set_xlabel(r'Log$_{10}$([O II] $\lambda 3727$ / [N II] $\lambda 6584$)')
+ax6.set_xlim(-1,2)
+ax6.set_ylim(-1,1.5)
 
 x7 = np.arange(-2.5,1.5)
 y7 = -1.701*x7-2.163
@@ -235,12 +250,12 @@ ax7.scatter(d['O I / H-Alpha'].get_value(2),d['O III / O II'].get_value(2), mark
 ax7.scatter(d['O I / H-Alpha'].get_value(3),d['O III / O II'].get_value(3), marker = "s",c='magenta', s = 30, label = "10^7")
 ax7.plot(x7,y7, x8,y8, c = '0', lw = 3.0)
 ax7.set_xlim(-2.5,0.5)
-ax7.set_ylim(-1.5,1.0)
+ax7.set_ylim(-1.5,1.5)
 ax7.set_xlabel(r'Log$_{10}$([O I] $\lambda 6300$ / H$\alpha$)')
 ax7.set_ylabel(r'Log$_{10}$([O III] $\lambda 5007$) / [O II] $\lambda 3727$)')
-ax7.text(-1.5,.75,'Seyfert')
-ax7.text(0,0,'LINER')
-ax7.text(-2.1,-1.25, 'Starburst')
+ax7.text(-1.5,1,'Seyfert')
+ax7.text(-0.1,0,'LINER')
+ax7.text(-2.2,-1.3, 'Starburst')
 
 x9 = np.arange(-1.5,0.9,0.01)
 y9 = (0.11/(x9-0.92)) +0.85
@@ -261,15 +276,18 @@ ax8.set_ylim(-1.5,1.5)
 ax8.set_xlabel(r'Log$_{10}$([O II] $\lambda 3727$ / H$\beta)$')
 ax8.set_ylabel(r'Log$_{10}$([O III] $\lambda 5007$ / H$\beta$)')
 
-ax9.scatter(np.log10(SDSS_Data_Ratios[:,1]), np.log10(SDSS_Data_Ratios[:,6]),edgecolor = '', s = 5, c = '#000080')
-ax9.scatter(np.log10(AGN_Array[:,1]), np.log10(AGN_Array[:,6]),edgecolor = '', s = 5, c = '#800000')
-ax9.scatter(d['O II / H-Beta'].get_value(0), d['O III / O II'].get_value(0),marker = "s",c='green', s = 30, label = "10^4")
-ax9.scatter(d['O II / H-Beta'].get_value(1),d['O III / O II'].get_value(1), marker = "s",c='cyan', s = 30, label = "10^5")
-ax9.scatter(d['O II / H-Beta'].get_value(2),d['O III / O II'].get_value(2), marker = "s",c='r', s = 30, label = "10^6")
-ax9.scatter(d['O II / H-Beta'].get_value(3),d['O III / O II'].get_value(3), marker = "s",c='magenta', s = 30, label = "10^7")
+ax9.scatter(np.log10(SDSS_Data_Ratios[:,16]), np.log10(SDSS_Data_Ratios[:,9]),edgecolor = '', s = 5, c = '#000080')
+ax9.scatter(np.log10(AGN_Array[:,16]), np.log10(AGN_Array[:,9]),edgecolor = '', s = 5, c = '#800000')
+ax9.scatter(d['O III 4363 / O III 4959'].get_value(0),d['S II 6716/ S II 6731'].get_value(0),marker = "s",c='green', s = 30, label = "10^4")
+ax9.scatter(d['O III 4363 / O III 4959'].get_value(1),d['S II 6716/ S II 6731'].get_value(1), marker = "s",c='cyan', s = 30, label = "10^5")
+ax9.scatter(d['O III 4363 / O III 4959'].get_value(2),d['S II 6716/ S II 6731'].get_value(2), marker = "s",c='r', s = 30, label = "10^6")
+ax9.scatter(d['O III 4363 / O III 4959'].get_value(3),d['S II 6716/ S II 6731'].get_value(3), marker = "s",c='magenta', s = 30, label = "10^7")
 
-ax9.set_xlabel(r'Log$_{10}$([O II] $\lambda 3727$ / H$\beta)$')
-ax9.set_ylabel(r'Log$_{10}$([O III] $\lambda 5007$) / [O II] $\lambda 3727$)')
+ax9.set_xlabel(r'Log$_{10}$([O III] $\lambda 4363$ / [O III] $\lambda 4959$)')
+ax9.set_ylabel(r'Log$_{10}$([S II] $\lambda 6716$ / [S II] $\lambda 6731$')
+ax9.set_xlim(-5,1)
+ax9.set_ylim(-1,1)
 plt.suptitle('AGN Diagnostic Plots: Metallicity = 1.5, Efrac = 0.01, Phi(h) = 10.4771, n(h) = 2.5')
-ax1.legend()
+ax1.legend(loc = 'upper left', bbox_to_anchor=(1,1))
+
 plt.show() 
