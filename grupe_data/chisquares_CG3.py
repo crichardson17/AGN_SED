@@ -16,7 +16,7 @@ import matplotlib.pyplot as plt
 
 # Define constants
 
-data_file = "grupe_data.csv"
+data_file = "/users/compastro/greene/AGN_SED/grupe_data/grupe_data.csv"
 
 
 #Define a function to call our data
