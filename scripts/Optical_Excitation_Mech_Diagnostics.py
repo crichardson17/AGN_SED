@@ -10,7 +10,7 @@ def filelist(directory):
             if file.endswith('.lin'):
                 print (file)
                 
-rootdirectory='/users/compastro/greene/AGN_SED/Cloudy_Data' 
+rootdirectory=r'C:/Users/chris_000/Documents/GitHub/AGN_SED/Cloudy_Data'
 
 filelist(rootdirectory)
 
@@ -49,10 +49,14 @@ d['O II / O III'] = np.log10(np.divide(d['TOTL  3727A'],d['O  3  5007A']))
 
 d['O II / H-Beta'] = np.log10(np.divide(d['TOTL  3727A'], d['TOTL  4861A'])) 
 
+d['O III / O II'] = np.log10(np.divide(d['O  3  5007A'],d['TOTL  3727A']))
+
+d['He II / H-Beta'] = np.log10(np.divide(d['HE 2  4686A'],d['TOTL  4861A']))
+
 #Plot these data points
-SDSS_File = '/users/compastro/greene/AGN_SED/sdss_data/flux_norm.csv'
-Shirazi_File = '/users/compastro/greene/AGN_SED/sdss_data/shirazi12.csv'
-SDSS_Ratios_File = '/users/compastro/greene/AGN_SED/flux_norm_AGN.csv'
+SDSS_File = r'C:/Users/chris_000/Documents/GitHub/AGN_SED/sdss_data/flux_norm.csv'
+Shirazi_File = r'C:/Users/chris_000/Documents/GitHub/AGN_SED/sdss_data/shirazi12.csv'
+SDSS_Ratios_File = r'C:/Users/chris_000/Documents/GitHub/AGN_SED/flux_norm_AGN.csv'
 SDSS_Data=np.genfromtxt(SDSS_File, skip_header=1, delimiter = ',',dtype=float,unpack=True)
 Shirazi_Data=np.genfromtxt(Shirazi_File, skip_header=3, delimiter = ',',unpack=True)
 SDSS_Data_Ratios = np.genfromtxt(SDSS_Ratios_File, skip_header=1, delimiter = ',',dtype=float,invalid_raise = False)
@@ -72,11 +76,12 @@ mask = (condition1 & condition2a & condition2b & (condition3a & condition3b))
 
 AGN_Array= SDSS_Data_Ratios[mask,:]
 
-ax1 = plt.subplot(221, aspect = 'equal', adjustable = 'box-forced', autoscale_on = False)
-ax2 = plt.subplot(222, aspect = 'equal', adjustable = 'box-forced', autoscale_on = False)
-ax3 = plt.subplot(223, aspect = 'equal', adjustable = 'box-forced', autoscale_on = False)
-ax4 = plt.subplot(224, aspect = 'equal', adjustable = 'box-forced', autoscale_on = False)
-
+ax1 = plt.subplot(231, aspect = 'equal', adjustable = 'box-forced', autoscale_on = False)
+ax2 = plt.subplot(232, aspect = 'equal', adjustable = 'box-forced', autoscale_on = False)
+ax3 = plt.subplot(233, aspect = 'equal', adjustable = 'box-forced', autoscale_on = False)
+ax4 = plt.subplot(234, aspect = 'equal', adjustable = 'box-forced', autoscale_on = False)
+ax5 = plt.subplot(235,aspect = 'equal', adjustable = 'box-forced', autoscale_on = False)
+ax6 = plt.subplot(236,aspect = 'equal', adjustable = 'box-forced', autoscale_on = False)
 z = [10^4,10^5, 10^6, 10^7]
 x1=np.arange(-2,0.3,0.01)
 y1=1.19+np.divide(0.61,x1-0.47)
@@ -161,8 +166,43 @@ ax4.set_xlabel(r'Log$_{10}$([O II] $\lambda 3727$ / [O III] $\lambda 5007$)')
 ax4.set_xlim(np.log10(10**(-1.5)),np.log10(10**2))
 ax4.set_ylim(np.log10(10**(-1.5)), np.log10(10**(1.5)))
 
+x = np.arange(-3,-0.2,0.01)
+y = -1.22 + np.divide(1,8.92*x+1.32)
+ax5.scatter(Shirazi_Data[7],Shirazi_Data[6], marker = '^', c = color5,edgecolor = '', s = 15)
+ax5.scatter(d['N II / H-Alpha'].get_value(0),d['He II / H-Beta'].get_value(0), marker = "s",c='green', s = 30, label = "10^4")
+ax5.scatter(d['N II / H-Alpha'].get_value(1),d['He II / H-Beta'].get_value(1), marker = "s",c='cyan', s = 30, label = "10^5")
+ax5.scatter(d['N II / H-Alpha'].get_value(2),d['He II / H-Beta'].get_value(2), marker = "s",c='r', s = 30, label = "10^6")
+ax5.scatter(d['N II / H-Alpha'].get_value(3),d['He II / H-Beta'].get_value(3), marker = "s",c='magenta', s = 30, label = "10^7")
+ax5.plot(x,y, c = '0', ls = '-', lw = 2.0)
+ax5.set_xlim(-3,2)
+ax5.set_ylim(-3,2)
+ax5.set_xticks((-3,-2,-1,0,1,2))
+ax5.set_yticks((-3,-2,-1,0,1,2))
+ax5.set_xlabel(r'Log$_{10}$([N II] $\lambda 6584$ / H$\alpha$)')
+ax5.set_ylabel(r'Log$_{10}$([He II] $\lambda 4686$ / H$\beta$)')
+ax5.text(-1,-2.5, 'Starburst')
+ax5.text(-2,0,'AGN')
+
+x7 = np.arange(-2.5,1.5)
+y7 = -1.701*x7-2.163
+x8 = np.arange(-1.1,1)
+y8 = 1.0*x8+0.7
+ax6.scatter(np.log10(np.divide(SDSS_Data[15],SDSS_Data[17])),np.log10(np.divide(SDSS_Data[13],np.add(SDSS_Data[5],SDSS_Data[6]))),edgecolor = '', s = 5,c = '#000080', )
+ax6.scatter(np.log10(O3O2AGN[:,2]), np.log10(O3O2AGN[:,6]), edgecolor = '', s = 5, c = '#800000')
+ax6.scatter(d['O I / H-Alpha'].get_value(0),d['O III / O II'].get_value(0), marker = "s",c='green', s = 30, label = "10^4")
+ax6.scatter(d['O I / H-Alpha'].get_value(1),d['O III / O II'].get_value(1), marker = "s",c='cyan', s = 30, label = "10^5")
+ax6.scatter(d['O I / H-Alpha'].get_value(2),d['O III / O II'].get_value(2), marker = "s",c='r', s = 30, label = "10^6")
+ax6.scatter(d['O I / H-Alpha'].get_value(3),d['O III / O II'].get_value(3), marker = "s",c='magenta', s = 30, label = "10^7")
+ax6.plot(x7,y7, x8,y8, c = '0', lw = 3.0)
+ax6.set_xlim(-2.5,0.5)
+ax6.set_ylim(-1.5,1.5)
+ax6.set_xlabel(r'Log$_{10}$([O I] $\lambda 6300$ / H$\alpha$)')
+ax6.set_ylabel(r'Log$_{10}$([O III] $\lambda 5007$) / [O II] $\lambda 3727$)')
+ax6.text(-1.5,1,'Seyfert')
+ax6.text(-0.1,0,'LINER')
+ax6.text(-2.2,-1.3, 'Starburst')
 plt.suptitle('AGN Excitation Mechanism Diagnostic Plots: Metallicity = 1.5, Efrac = 0.01, Phi(h) = 10.4771, n(h) = 2.5')
-ax1.legend(loc = 'upper left', bbox_to_anchor=(1,1))
+ax1.legend(loc = 'best')
 
 #Display the figure full screen
 figManager = plt.get_current_fig_manager()
