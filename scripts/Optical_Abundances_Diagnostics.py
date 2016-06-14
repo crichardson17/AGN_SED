@@ -49,6 +49,12 @@ d['N II / H-Alpha']=np.log10(np.divide(d['N  2  6584A'],d['H  1  6563A']))
 
 d['O III / O II'] = np.log10(np.divide(d['O  3  5007A'],d['TOTL  3727A']))
 
+d['O III / Ar III'] = np.log10(np.divide(d['O  3  5007A'],d['AR 3  7135A']))
+
+d['O III / Ne III'] = np.log10(np.divide(d['O  3  5007A'],d['NE 3  3869A']))
+
+d['Ar III / H-Alpha'] = np.log10(np.divide(d['AR 3  7135A'], d['H  1  6563A']))
+
 d['He I / H-Beta'] = np.log10(np.divide(d['HE 1  5876A'],d['TOTL  4861A']))
  
 d['O II + O III / H-Beta'] = np.log10(np.divide(np.add(d['O  3  4959A'],np.add(d['TOTL  4363A'],d['O  3  5007A'])),d['TOTL  4861A']))
@@ -80,11 +86,11 @@ mask = (condition1 & condition2a & condition2b & (condition3a & condition3b))
 
 AGN_Array= SDSS_Data_Ratios[mask,:]
 
-ax1 = plt.subplot(221, aspect = 'equal', adjustable = 'box-forced', autoscale_on = False)
-ax2 = plt.subplot(222, aspect = 'equal', adjustable = 'box-forced', autoscale_on = False)
-ax3 = plt.subplot(223, aspect = 'equal', adjustable = 'box-forced', autoscale_on = False)
-ax4 = plt.subplot(224, aspect = 'equal', adjustable = 'box-forced', autoscale_on = False)
-
+ax1 = plt.subplot(231, aspect = 'equal', adjustable = 'box-forced', autoscale_on = False)
+ax2 = plt.subplot(232, aspect = 'equal', adjustable = 'box-forced', autoscale_on = False)
+ax3 = plt.subplot(233, aspect = 'equal', adjustable = 'box-forced', autoscale_on = False)
+ax4 = plt.subplot(234, aspect = 'equal', adjustable = 'box-forced', autoscale_on = False)
+ax5 = plt.subplot(235)
 z = [10^4,10^5, 10^6, 10^7]
 x1=np.arange(-2,0.3,0.01)
 y1=1.19+np.divide(0.61,x1-0.47)
@@ -99,16 +105,16 @@ S2AGN = SDSS_Data_Ratios[(condition3a & condition3b),:]
 O3O2AGN = SDSS_Data_Ratios[(condition4a & condition4b),:]
 color5 = np.where(Shirazi_Data[6] >= np.subtract(np.divide(1,np.add(np.multiply(8.92, Shirazi_Data[7]),1.32)),1.22),1,0)
 
-ax1.scatter(np.log10(SDSS_Data_Ratios[:,11]),np.log10(SDSS_Data_Ratios[:,10]) , c = '#000080', edgecolor = '', s = 5)
-ax1.scatter(np.log10(AGN_Array[:,11]),np.log10(AGN_Array[:,10]) , c = '#800000',edgecolor = '', s = 5)
-ax1.scatter(d['He I / H-Beta'].get_value(0),d['O III / H-Beta'].get_value(0), marker = "s",c='green', s = 30, label = "10^4")
-ax1.scatter(d['He I / H-Beta'].get_value(1),d['O III / H-Beta'].get_value(1), marker = "s",c='cyan', s = 30, label = "10^5")
-ax1.scatter(d['He I / H-Beta'].get_value(2),d['O III / H-Beta'].get_value(2), marker = "s",c='r', s = 30, label = "10^6")
-ax1.scatter(d['He I / H-Beta'].get_value(3),d['O III / H-Beta'].get_value(3), marker = "s",c='magenta', s = 30, label = "10^7")
-ax1.set_xlim(-3,1.0)
-ax1.set_ylim(-1.5,1.5)
-ax1.set_xlabel(r'Log$_{10}$([He I] $\lambda 5876$ / H$\beta$)')
-ax1.set_ylabel(r'Log$_{10}$([O III] $\lambda 5007$ / H$\beta$)')
+ax1.scatter(np.log10(SDSS_Data_Ratios[:,24]),np.log10(SDSS_Data_Ratios[:,15]) , c = '#000080', edgecolor = '', s = 5)
+ax1.scatter(np.log10(AGN_Array[:,24]),np.log10(AGN_Array[:,15]) , c = '#800000',edgecolor = '', s = 5)
+ax1.scatter(d['O III / Ar III'].get_value(0),d['Ne III / H-Alpha'].get_value(0), marker = "s",c='green', s = 30, label = "10^4")
+ax1.scatter(d['O III / Ar III'].get_value(1),d['Ne III / H-Alpha'].get_value(1), marker = "s",c='cyan', s = 30, label = "10^5")
+ax1.scatter(d['O III / Ar III'].get_value(2),d['Ne III / H-Alpha'].get_value(2), marker = "s",c='r', s = 30, label = "10^6")
+ax1.scatter(d['O III / Ar III'].get_value(3),d['Ne III / H-Alpha'].get_value(3), marker = "s",c='magenta', s = 30, label = "10^7")
+ax1.set_xlim(-1.5,4)
+ax1.set_ylim(-4,1)
+ax1.set_xlabel(r'Log$_{10}$([O III] $\lambda 5007$ / [Ar III] $\lambda 7135$)')
+ax1.set_ylabel(r'Log$_{10}$([Ne III] $\lambda 3869$ / H$\alpha$)')
 
 
 ax2.scatter(np.log10(np.divide(np.add(SDSS_Data[5],SDSS_Data[6]),SDSS_Data[18])),np.log10(np.divide(SDSS_Data[19],SDSS_Data[20])),edgecolor = '', c = '#000080',s = 5)
@@ -144,8 +150,20 @@ ax4.set_ylabel(r'Log$_{10}$([O III] $\lambda 5007$ / H$\beta$')
 ax4.set_xlabel(r'Log$_{10}$([O II] $\lambda 3727$ / [N II] $\lambda 6584$)')
 ax4.set_xlim(-1,2)
 ax4.set_ylim(-1,1.5)
+
+ax5.scatter(np.log10(SDSS_Data_Ratios[:,26]),np.log10(SDSS_Data_Ratios[:,23]),edgecolor = '', c = '#000080',s = 5)
+ax5.scatter(np.log10(AGN_Array[:,26]),np.log10(AGN_Array[:,23]),edgecolor = '', s = 5, c = '#800000')
+ax5.scatter(d['O III / Ne III'].get_value(0),d['Ar III / H-Alpha'].get_value(0), marker = "s",c='green', s = 30, label = "10^4")
+ax5.scatter(d['O III / Ne III'].get_value(1),d['Ar III / H-Alpha'].get_value(1), marker = "s",c='cyan', s = 30, label = "10^5")
+ax5.scatter(d['O III / Ne III'].get_value(2),d['Ar III / H-Alpha'].get_value(2), marker = "s",c='r', s = 30, label = "10^6")
+ax5.scatter(d['O III / Ne III'].get_value(3),d['Ar III / H-Alpha'].get_value(3), marker = "s",c='magenta', s = 30, label = "10^7")
+ax5.set_xlabel(r'Log$_{10}$([O III] $\lambda 5007$ / [Ne III] $\lambda 3869$')
+ax5.set_ylabel(r'Log$_{10}$([Ar III] $\lambda 7135$ / H$\alpha$)')
+ax5.set_xlim(-1,3)
+ax5.set_ylim(-4,1.5)
+
 plt.suptitle('AGN Metallicity Diagnostic Plots: Metallicity = 1.5, Efrac = 0.01, Phi(h) = 10.4771, n(h) = 2.5')
-ax1.legend(loc = 'upper left', bbox_to_anchor=(1,1))
+ax1.legend(loc = 'upper left')
 
 #Display the figure full screen
 figManager = plt.get_current_fig_manager()

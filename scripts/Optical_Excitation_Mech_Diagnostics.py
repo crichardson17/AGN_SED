@@ -55,10 +55,10 @@ d['He II / H-Beta'] = np.log10(np.divide(d['HE 2  4686A'],d['TOTL  4861A']))
 
 #Plot these data points
 SDSS_File = r'C:/Users/chris_000/Documents/GitHub/AGN_SED/sdss_data/flux_norm.csv'
-Shirazi_File = r'C:/Users/chris_000/Documents/GitHub/AGN_SED/sdss_data/shirazi12.csv'
+Shirazi_File = r'C:/Users/chris_000/Documents/GitHub/AGN_SED/sdss_data/Shirazi12_Only_Data.csv'
 SDSS_Ratios_File = r'C:/Users/chris_000/Documents/GitHub/AGN_SED/flux_norm_AGN.csv'
 SDSS_Data=np.genfromtxt(SDSS_File, skip_header=1, delimiter = ',',dtype=float,unpack=True)
-Shirazi_Data=np.genfromtxt(Shirazi_File, skip_header=3, delimiter = ',',unpack=True)
+Shirazi_Data=np.genfromtxt(Shirazi_File, skip_header=3, delimiter = ',',dtype = float)
 SDSS_Data_Ratios = np.genfromtxt(SDSS_Ratios_File, skip_header=1, delimiter = ',',dtype=float,invalid_raise = False)
 #Set up an array for data that is just AGN
 AGN_Array = np.zeros(len(SDSS_Data_Ratios))
@@ -71,6 +71,8 @@ condition3a = np.log10(SDSS_Data_Ratios[:,10]) > np.add(0.76, np.multiply(1.89,n
 condition3b = np.log10(SDSS_Data_Ratios[:,10]) > np.add(1.30,np.divide(0.72, np.subtract(np.log10(SDSS_Data_Ratios[:,5]),0.32))) 
 condition4a = np.log10(SDSS_Data_Ratios[:,6]) > np.subtract(np.multiply(-1.701,np.log10(SDSS_Data_Ratios[:,2])),2.163)
 condition4b = np.log10(SDSS_Data_Ratios[:,6]) > np.add(np.log10(SDSS_Data_Ratios[:,2]),0.7)
+condition5a = Shirazi_Data[:,0] >= np.add(-1.22, np.divide(1,np.add(np.multiply(8.92,Shirazi_Data[:,1]),1.32)))
+condition5b = Shirazi_Data[:,1] >= -0.2
 
 mask = (condition1 & condition2a & condition2b & (condition3a & condition3b))
 
@@ -94,8 +96,11 @@ N2AGN = SDSS_Data_Ratios[condition1, :]
 OIAGN = SDSS_Data_Ratios[np.logical_and(condition2a, condition2b),:]
 S2AGN = SDSS_Data_Ratios[(condition3a & condition3b),:]
 O3O2AGN = SDSS_Data_Ratios[(condition4a & condition4b),:]
-color5 = np.where(Shirazi_Data[6] >= np.subtract(np.divide(1,np.add(np.multiply(8.92, Shirazi_Data[7]),1.32)),1.22),1,0)
+ShiraziAGN = Shirazi_Data[(condition5a | condition5b),:]
 
+np.savetxt("C:/Users/chris_000/Documents/GitHub/AGN_SED/ShiraziAGN.csv",ShiraziAGN, delimiter = ',')
+print Shirazi_Data
+print ShiraziAGN
 ax1.scatter(np.log10(np.divide(SDSS_Data[18],SDSS_Data[17])),np.log10(np.divide(SDSS_Data[13],SDSS_Data[11])),  marker = 'o',edgecolor = '', c = '#000080',s = 5)
 ax1.scatter(np.log10(AGN_Array[:,3]),np.log10(AGN_Array[:,10]),edgecolor = '', s = 5, c = '#800000')
 l1 = ax1.scatter(d['N II / H-Alpha'].get_value(0),d['O III / H-Beta'].get_value(0), marker = "s",c='green', s = 30, label = "10^4")
@@ -155,20 +160,32 @@ ax3.set_xlabel(r'Log$_{10}$([S II] $\lambda 6720$ / H$\alpha$)')
 ax3.text(-1.3,1,'Seyfert')
 ax3.text(0.2,-0.5,'LINER')
 
-ax4.scatter(np.log10(np.divide(np.add(SDSS_Data[5],SDSS_Data[6]),SDSS_Data[13])),np.log10(np.divide(SDSS_Data[13],SDSS_Data[11])), edgecolor = '', c = '#000080',s=5)
-ax4.scatter(np.log10(AGN_Array[:,8]),np.log10(AGN_Array[:,10]), edgecolor = '', c = '#800000', s = 5)
-ax4.scatter(d['O II / O III'].get_value(0),d['O III / H-Beta'].get_value(0), marker = "s",c='green', s = 30, label = "10^4")
-ax4.scatter(d['O II / O III'].get_value(1),d['O III / H-Beta'].get_value(1), marker = "s",c='cyan', s = 30, label = "10^5")
-ax4.scatter(d['O II / O III'].get_value(2),d['O III / H-Beta'].get_value(2), marker = "s",c='r', s = 30, label = "10^6")
-ax4.scatter(d['O II / O III'].get_value(3),d['O III / H-Beta'].get_value(3), marker = "s",c='magenta', s = 30, label = "10^7")
+x9 = np.arange(-2,0.9,0.01)
+y9 = np.divide(.11,x9-0.92)+0.85
+x10 = np.arange(0.7,3,0.01)
+y10 = np.multiply(0.95,x10)-0.4
+
+ax4.scatter(np.log10(SDSS_Data_Ratios[:,1]),np.log10(SDSS_Data_Ratios[:,10]),edgecolor = '', c = '#000080',s=5)
+ax4.scatter(np.log10(AGN_Array[:,1]),np.log10(AGN_Array[:,10]),edgecolor = '', c = '#800000',s=5)
+ax4.scatter(d['O II / H-Beta'].get_value(0),d['O III / H-Beta'].get_value(0), marker = "s",c='green', s = 30, label = "10^4")
+ax4.scatter(d['O II / H-Beta'].get_value(1),d['O III / H-Beta'].get_value(1), marker = "s",c='cyan', s = 30, label = "10^5")
+ax4.scatter(d['O II / H-Beta'].get_value(2),d['O III / H-Beta'].get_value(2), marker = "s",c='r', s = 30, label = "10^6")
+ax4.scatter(d['O II / H-Beta'].get_value(3),d['O III / H-Beta'].get_value(3), marker = "s",c='magenta', s = 30, label = "10^7")
+ax4.plot(x9,y9,x10,y10,c = '0', lw = 2)
+ax4.axhline(y = 0.3,xmin = -2, xmax = 0.65, c = '0', lw =3)
 ax4.set_ylabel(r'Log$_{10}$([O III] $\lambda 5007$ / H$\beta$)')
-ax4.set_xlabel(r'Log$_{10}$([O II] $\lambda 3727$ / [O III] $\lambda 5007$)')
+ax4.set_xlabel(r'Log$_{10}$([O II] $\lambda 3727$ / H$\beta$')
 ax4.set_xlim(np.log10(10**(-1.5)),np.log10(10**2))
 ax4.set_ylim(np.log10(10**(-1.5)), np.log10(10**(1.5)))
+ax4.text(-1,0.5,'SF/Sy2')
+ax4.text(-1,1,'Seyfert 2')
+ax4.text(-1,-0.5,'Star-forming')
+ax4.text(1,-1,'LINER')
 
 x = np.arange(-3,-0.2,0.01)
 y = -1.22 + np.divide(1,8.92*x+1.32)
-ax5.scatter(Shirazi_Data[7],Shirazi_Data[6], marker = '^', c = color5,edgecolor = '', s = 15)
+ax5.scatter(Shirazi_Data[:,1],Shirazi_Data[:,0], marker = '^', c ='#000080' ,edgecolor = '', s = 15)
+ax5.scatter(ShiraziAGN[:,1],ShiraziAGN[:,0], marker = '^', c = '#800000',edgecolor = '', s = 15)
 ax5.scatter(d['N II / H-Alpha'].get_value(0),d['He II / H-Beta'].get_value(0), marker = "s",c='green', s = 30, label = "10^4")
 ax5.scatter(d['N II / H-Alpha'].get_value(1),d['He II / H-Beta'].get_value(1), marker = "s",c='cyan', s = 30, label = "10^5")
 ax5.scatter(d['N II / H-Alpha'].get_value(2),d['He II / H-Beta'].get_value(2), marker = "s",c='r', s = 30, label = "10^6")
