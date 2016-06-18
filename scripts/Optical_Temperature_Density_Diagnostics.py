@@ -16,7 +16,7 @@ filelist(rootdirectory)
 
 #Generate a CSV file containing all the relevant data points
 
-#Output_File=r'C:/Users/chris_000/Documents/GitHub/AGN_SED/All_Emissions.csv' #Create the output file
+Output_File=r'C:/Users/chris_000/Documents/GitHub/AGN_SED/All_Emissions.csv' #Create the output file
 
 normSource=os.path.normpath(rootdirectory)
 
@@ -26,15 +26,23 @@ d=pd.DataFrame()
 d=d.reset_index()
 d2=pd.DataFrame({'Temperature': [10**4,10**5, 10**6, 10**7]},dtype=float) #Create a Dataframe of labels for each file used
 
+
 for root, dirs, files in os.walk(rootdirectory, topdown=False):
     for name in files:
-        if name.startswith('Hden25') and name.endswith('.lin'):
+        if name.startswith('Linear_Fit') and name.endswith('.lin'):
             print name
             #only read columns from list cols
             dfs.append(pd.read_csv(os.path.join(root, name), delimiter="\t", usecols=['TOTL  4861A','O  3  5007A', 'NE 5  3426A', 'NE 3  3869A',
             'TOTL  4363A', 'O  1  6300A', 'H  1  6563A','N  2  6584A','S  2  6720A' , 'HE 2  4686A','TOTL  3727A', 'S II  6716A', 'S II  6731A',
-            'NE 3  3869A','AR 3  7135A','HE 1  5876A','TOTL  4363A','O  3  4959A', 'O II  3726A', 'O II  3729A']))
+            'NE 3  3869A','AR 3  7135A','HE 1  5876A','TOTL  4363A','O  3  4959A','O II  3726A', 'O II  3729A']))
             d = pd.concat(dfs, ignore_index=True)
+        if name.startswith('Hden25') and name.endswith('.lin'):
+             print name
+            #only read columns from list cols
+             dfs.append(pd.read_csv(os.path.join(root, name), delimiter="\t", usecols=['TOTL  4861A','O  3  5007A', 'NE 5  3426A', 'NE 3  3869A',
+            'TOTL  4363A', 'O  1  6300A', 'H  1  6563A','N  2  6584A','S  2  6720A' , 'HE 2  4686A','TOTL  3727A', 'S II  6716A', 'S II  6731A',
+            'NE 3  3869A','AR 3  7135A','HE 1  5876A','TOTL  4363A','O  3  4959A','O II  3726A', 'O II  3729A']))
+             d = pd.concat(dfs, ignore_index=True)
             
 d['Temperature']=d2
 
@@ -57,7 +65,7 @@ d['S II 6716/ S II 6731'] = np.log10(np.divide(d['S II  6716A'],d['S II  6731A']
 
 d['O II 3726 / O II 3729'] = np.log10(np.divide(d['O II  3726A'],d['O II  3729A']))
 
-
+d.to_csv(Output_File, sep = ",", index=True)
 #Plot these data points
 SDSS_File = r'C:/Users/chris_000/Documents/GitHub/AGN_SED/sdss_data/flux_norm.csv'
 Shirazi_File =  r'C:/Users/chris_000/Documents/GitHub/AGN_SED/sdss_data/shirazi12.csv'
@@ -99,40 +107,66 @@ S2AGN = SDSS_Data_Ratios[(condition3a & condition3b),:]
 O3O2AGN = SDSS_Data_Ratios[(condition4a & condition4b),:]
 color5 = np.where(Shirazi_Data[6] >= np.subtract(np.divide(1,np.add(np.multiply(8.92, Shirazi_Data[7]),1.32)),1.22),1,0)
 
+basexvalO3 = (d['O III 4363 / O III 5007'].get_value(0),d['O III 4363 / O III 5007'].get_value(2),d['O III 4363 / O III 5007'].get_value(4),d['O III 4363 / O III 5007'].get_value(6))
+baseyvalS2 = (d['S II 6716/ S II 6731'].get_value(0),d['S II 6716/ S II 6731'].get_value(2),d['S II 6716/ S II 6731'].get_value(4),d['S II 6716/ S II 6731'].get_value(6))
+linxval03 = (d['O III 4363 / O III 5007'].get_value(1),d['O III 4363 / O III 5007'].get_value(3),d['O III 4363 / O III 5007'].get_value(5),d['O III 4363 / O III 5007'].get_value(7))
+linyvalS2 = (d['S II 6716/ S II 6731'].get_value(1),d['S II 6716/ S II 6731'].get_value(3),d['S II 6716/ S II 6731'].get_value(5),d['S II 6716/ S II 6731'].get_value(7))
 ax1.scatter(np.log10(SDSS_Data_Ratios[:,19]),np.log10(SDSS_Data_Ratios[:,9]),edgecolor = '', c = '#000080',s = 5)
 ax1.scatter(np.log10(AGN_Array[:,19]),np.log10(AGN_Array[:,9]),edgecolor = '', s = 5, c = '#800000')
-ax1.scatter(d['O III 4363 / O III 5007'].get_value(1),d['S II 6716/ S II 6731'].get_value(1), marker = "s",c='cyan', s = 30, label = "10^4")
-ax1.scatter(d['O III 4363 / O III 5007'].get_value(0),d['S II 6716/ S II 6731'].get_value(0), marker = "s",c='green', s = 30, label = "10^5")
-
-ax1.scatter(d['O III 4363 / O III 5007'].get_value(2),d['S II 6716/ S II 6731'].get_value(2), marker = "s",c='r', s = 30, label = "10^6")
-ax1.scatter(d['O III 4363 / O III 5007'].get_value(3),d['S II 6716/ S II 6731'].get_value(3), marker = "s",c='magenta', s = 30, label = "10^7")
+ax1.scatter(d['O III 4363 / O III 5007'].get_value(0),d['S II 6716/ S II 6731'].get_value(0), marker = "s",c='cyan', s = 35, label = "10^4")
+ax1.scatter(d['O III 4363 / O III 5007'].get_value(2),d['S II 6716/ S II 6731'].get_value(2), marker = "s",c='green', s = 35, label = "10^5")
+ax1.scatter(d['O III 4363 / O III 5007'].get_value(4),d['S II 6716/ S II 6731'].get_value(4), marker = "s",c='yellow', s = 35, label = "10^6")
+ax1.scatter(d['O III 4363 / O III 5007'].get_value(6),d['S II 6716/ S II 6731'].get_value(6), marker = "s",c='magenta', s = 35, label = "10^7")
+ax1.scatter(d['O III 4363 / O III 5007'].get_value(1),d['S II 6716/ S II 6731'].get_value(1), marker = "s",c='#F06E07', s = 35, label = "10^4 Fit")
+ax1.scatter(d['O III 4363 / O III 5007'].get_value(3),d['S II 6716/ S II 6731'].get_value(3), marker = "s",c='#111DD9', s = 35, label = "10^5 Fit")
+ax1.scatter(d['O III 4363 / O III 5007'].get_value(5),d['S II 6716/ S II 6731'].get_value(5), marker = "s",c='#ABF036', s = 35, label = "10^6 Fit")
+ax1.scatter(d['O III 4363 / O III 5007'].get_value(7),d['S II 6716/ S II 6731'].get_value(7), marker = "s",c='#D91C82', s = 35, label = "10^7 Fit")
+ax1.plot(basexvalO3, baseyvalS2, c = '0')
+ax1.plot(linxval03,linyvalS2, c = '0')
 ax1.set_xlabel(r'Log$_{10}$( [O III] $\lambda 4363$/ [O III] $\lambda 5007$)')
 ax1.set_ylabel(r'Log$_{10}$([S II] $\lambda 6716$ / [S II] $\lambda 6731$)')
 ax1.set_xlim(-6.0,0.0)
 ax1.set_ylim(-1.5,1.5)
 
+basexvalO3Ha = (d['O III 4363 / H-Alpha'].get_value(0),d['O III 4363 / H-Alpha'].get_value(2),d['O III 4363 / H-Alpha'].get_value(4),d['O III 4363 / H-Alpha'].get_value(6))
+baseyvalO3Hb = (d['O III / H-Beta'].get_value(0),d['O III / H-Beta'].get_value(2),d['O III / H-Beta'].get_value(4),d['O III / H-Beta'].get_value(6))
+linxvalO3Ha = (d['O III 4363 / H-Alpha'].get_value(1),d['O III 4363 / H-Alpha'].get_value(3),d['O III 4363 / H-Alpha'].get_value(5),d['O III 4363 / H-Alpha'].get_value(7))
+linyvalO3Hb = (d['O III / H-Beta'].get_value(1),d['O III / H-Beta'].get_value(3),d['O III / H-Beta'].get_value(5),d['O III / H-Beta'].get_value(7))
 ax2.scatter(np.log10(SDSS_Data_Ratios[:,18]),np.log10(SDSS_Data_Ratios[:,10]),edgecolor = '', c = '#000080',s = 5)
 ax2.scatter(np.log10(AGN_Array[:,18]),np.log10(AGN_Array[:,10]),edgecolor = '', s = 5, c = '#800000')
-ax2.scatter(d['O III 4363 / H-Alpha'].get_value(1),d['O III / H-Beta'].get_value(1), marker = "s",c='cyan', s = 30, label = "10^4")
-ax2.scatter(d['O III 4363 / H-Alpha'].get_value(0),d['O III / H-Beta'].get_value(0), marker = "s",c='green', s = 30, label = "10^5")
-ax2.scatter(d['O III 4363 / H-Alpha'].get_value(2),d['O III / H-Beta'].get_value(2), marker = "s",c='r', s = 30, label = "10^6")
-ax2.scatter(d['O III 4363 / H-Alpha'].get_value(3),d['O III / H-Beta'].get_value(3), marker = "s",c='magenta', s = 30, label = "10^7")
+ax2.scatter(d['O III 4363 / H-Alpha'].get_value(0),d['O III / H-Beta'].get_value(0), marker = "s",c='cyan', s = 30, label = "10^4")
+ax2.scatter(d['O III 4363 / H-Alpha'].get_value(2),d['O III / H-Beta'].get_value(2), marker = "s",c='green', s = 30, label = "10^5")
+ax2.scatter(d['O III 4363 / H-Alpha'].get_value(4),d['O III / H-Beta'].get_value(4), marker = "s",c='y', s = 30, label = "10^6")
+ax2.scatter(d['O III 4363 / H-Alpha'].get_value(6),d['O III / H-Beta'].get_value(6), marker = "s",c='magenta', s = 30, label = "10^7")
+ax2.scatter(d['O III 4363 / H-Alpha'].get_value(1),d['O III / H-Beta'].get_value(1), marker = "s",c='#F06E07', s = 30, label = "10^4")
+ax2.scatter(d['O III 4363 / H-Alpha'].get_value(3),d['O III / H-Beta'].get_value(3), marker = "s",c='#111DD9', s = 30, label = "10^5")
+ax2.scatter(d['O III 4363 / H-Alpha'].get_value(5),d['O III / H-Beta'].get_value(5), marker = "s",c='#ABF036', s = 30, label = "10^6")
+ax2.scatter(d['O III 4363 / H-Alpha'].get_value(7),d['O III / H-Beta'].get_value(7), marker = "s",c='#D91C82', s = 30, label = "10^7")
+ax2.plot(basexvalO3Ha,baseyvalO3Hb,c = '0')
+ax2.plot(linxvalO3Ha,linyvalO3Hb, c = '0')
 ax2.set_xlabel(r'Log$_{10}$( [O III] $\lambda 4363$/ H$\alpha$)')
 ax2.set_ylabel(r'Log$_{10}$([O III] $\lambda 5007$ / H$\beta$)')
 ax2.set_xlim(-6.0,0.0)
 ax2.set_ylim(-1.5,1.5)
 
+basexvalO2 = (d['O II 3726 / O II 3729'].get_value(0),d['O II 3726 / O II 3729'].get_value(2),d['O II 3726 / O II 3729'].get_value(4),d['O II 3726 / O II 3729'].get_value(6))
+linxvalO2 = (d['O II 3726 / O II 3729'].get_value(1),d['O II 3726 / O II 3729'].get_value(3),d['O II 3726 / O II 3729'].get_value(5),d['O II 3726 / O II 3729'].get_value(7))
 ax3.scatter(np.log10(SDSS_Data_Ratios[:,21]),np.log10(SDSS_Data_Ratios[:,9]),edgecolor = '', c = '#000080',s = 5)
 ax3.scatter(np.log10(AGN_Array[:,21]),np.log10(AGN_Array[:,9]),edgecolor = '', s = 5, c = '#800000')
-ax3.scatter(d['O II 3726 / O II 3729'].get_value(1),d['S II 6716/ S II 6731'].get_value(1), marker = "s",c='cyan', s = 30, label = "10^4")
-ax3.scatter(d['O II 3726 / O II 3729'].get_value(0),d['S II 6716/ S II 6731'].get_value(0), marker = "s",c='green', s = 30, label = "10^5")
-
-ax3.scatter(d['O II 3726 / O II 3729'].get_value(2),d['S II 6716/ S II 6731'].get_value(2), marker = "s",c='r', s = 30, label = "10^6")
-ax3.scatter(d['O II 3726 / O II 3729'].get_value(3),d['S II 6716/ S II 6731'].get_value(3), marker = "s",c='magenta', s = 30, label = "10^7")
-ax3.set_xlabel(r'Log$_{10}$( [O II] $\lambda 3726$/ [O II] $\lambda 3729$)')
+ax3.scatter(d['O II 3726 / O II 3729'].get_value(0),d['S II 6716/ S II 6731'].get_value(0), marker = "s",c='cyan', s = 30, label = "10^4")
+ax3.scatter(d['O II 3726 / O II 3729'].get_value(2),d['S II 6716/ S II 6731'].get_value(2), marker = "s",c='green', s = 30, label = "10^5")
+ax3.scatter(d['O II 3726 / O II 3729'].get_value(4),d['S II 6716/ S II 6731'].get_value(4), marker = "s",c='y', s = 30, label = "10^6")
+ax3.scatter(d['O II 3726 / O II 3729'].get_value(6),d['S II 6716/ S II 6731'].get_value(6), marker = "s",c='magenta', s = 30, label = "10^7")
+ax3.scatter(d['O II 3726 / O II 3729'].get_value(1),d['S II 6716/ S II 6731'].get_value(1), marker = "s",c='#F06E07', s = 30, label = "10^4")
+ax3.scatter(d['O II 3726 / O II 3729'].get_value(3),d['S II 6716/ S II 6731'].get_value(3), marker = "s",c='#111DD9', s = 30, label = "10^5")
+ax3.scatter(d['O II 3726 / O II 3729'].get_value(5),d['S II 6716/ S II 6731'].get_value(5), marker = "s",c='#ABF036', s = 30, label = "10^6")
+ax3.scatter(d['O II 3726 / O II 3729'].get_value(7),d['S II 6716/ S II 6731'].get_value(7), marker = "s",c='#D91C82', s = 30, label = "10^7")
+ax3.plot(basexvalO2,baseyvalS2, c = '0')
+ax3.plot(linxvalO2,linyvalS2, c = '0')
 ax3.set_ylabel(r'Log$_{10}$([S II] $\lambda 6716$ / [S II] $\lambda 6731$)')
-ax3.set_xlim(-1.5,1.5)
-ax3.set_ylim(-1.5,1.5)
+ax3.set_xlabel(r'Log$_{10}$( [O II] $\lambda 3726$/ [O II] $\lambda 3729$)')
+#ax3.set_xlim(-1.5,1.5)
+#ax3.set_ylim(-1.5,1.5)
 
 #Display the figure full screen
 figManager = plt.get_current_fig_manager()
