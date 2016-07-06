@@ -1,0 +1,80 @@
+                                                          Cloudy 13.03
+                                                         www.nublado.org
+
+                       **************************************13Feb20**************************************
+                       *                                                                                 *
+                       * CMB                                                                             *
+                       * AGN 7.0, -1.2, -0.72, -1.59                                                     *
+                       * cosmic rays background                                                          *
+                       * phi(h) 10.4771                                                                  *
+                       * hden 2.0                                                                        *
+                       * constant pressure no abort                                                      *
+                       * abundances GASS10                                                               *
+                       * metals deplete                                                                  *
+                       * grains orion 		                                                                 *
+                       * >>>> mie_read_opc reading file -- graphite_orion_10.opc                    <<<< *
+                       * >>>> mie_read_opc reading file -- silicate_orion_10.opc                    <<<< *
+                       * element nitrogen scale 1.5                                                      *
+                       * metals and grains 1.5                                                           *
+                       * element helium scale 1.024	                                                     *
+                       * stop temperature off                                                            *
+                       * stop efrac 0.01                                                                 *
+                       * set save prefix "Linear_Fit_ax12_SEDT7"                                         *
+                       * save continuum ".con" units eV                                                  *
+                       * iterate to convergence                                                          *
+                       * save linelist  ".lin" "LineList_CG_1.dat" last no hash                          *
+                       * save overview ".ovr" last no hash                                               *
+                       * save heating ".het" last no hash                                                *
+                       * save cooling ".col" last no hash                                                *
+                       *                                                                                 *
+                       ***********************************************************************************
+
+
+
+           5277CellPeak1.00E+00   Lo 1.00e-08=910.79cm   Hi-Con:7.13E+06 Ryd   E(hi):7.35E+06Ryd     E(hi):     100.01 MeV
+           I(nu>1ryd):   0.4563   Average nu:4.373E+00   I( X-ray):  -0.0573   I(BalC):  -0.2540     Phi(BalmrC):  10.6866
+           phi(1.0-1.8):10.1270   phi(1.8-4.0):  9.988   phi(4.0-20):  9.778   phi(20--):  8.948     Ion pht flx:3.000E+10
+           I(gam ray):  -2.2880   phi(gam r):   4.1882   I(Infred):  -0.5051   Alf(ox):  -1.1136     Total inten:   0.5716
+           U(1.0----):1.001E-02   U(4.0----):2.295E-03   T(En-Den):1.132E+01   T(Comp):1.545E+06     nuJnu(912A):6.118E-01
+           Occ(FarIR):1.719E+03   Occ(H n=6):4.754E-12   Occ(1Ryd):2.807E-17   Occ(4R):1.228E-19     Occ (Nu-hi):0.000E+00
+           Tbr(FarIR):2.724E+00   Tbr(H n=6):2.083E-08   Tbr(1Ryd):4.437E-12   Tbr(4R):7.762E-14     Tbr (Nu-hi):0.000E+00
+  
+                                                  Gas Phase Chemical Composition
+        H :  0.0000  He: -1.0598  Li:-11.5706  Be:-10.6655  B :-10.0101  C : -3.7921  N : -3.8179  O : -3.3556  F : -7.7869
+        Ne: -3.8940  Na: -6.2823  Mg: -4.9230  Al: -7.3737  Si: -5.8362  P : -7.0160  S : -4.7033  Cl: -6.7222  Ar: -5.4242
+        K : -7.3174  Ca: -9.4835  Sc:-10.9757  Ti: -8.9709  V :-10.1158  Cr: -8.4053  Mn: -7.6952  Fe: -6.3242  Co: -8.8340
+                                               Ni: -7.6038  Cu: -8.6336  Zn: -7.8661
+ 
+                                                    Grain Chemical Composition
+                                  C : -3.4498  O : -3.7766  Mg: -4.3786  Si: -4.3786  Fe: -4.3786
+ 
+              Number of grains per hydrogen (scale=1)                         Mass of grains per hydrogen (scale=1)
+        Carbonaceous: -11.534  Silicate: -11.471  PAH: -30.000         Carbonaceous: -2.370  Silicate: -2.142  PAH: -30.000
+
+ ####  1  Te:1.761E+04 Hden:1.000E+02 Ne:1.173E+02 R:1.000E+30 R-R0:9.900E+14 dR:1.980E+15 NTR: 20 Htot:9.431E-20 T912: 9.37e-04###
+ Hydrogen      6.33e-04 9.99e-01 H+o/Hden 1.00e+00 2.42e-11 H-    H2 3.10e-15 1.27e-12 H2+ HeH+ 9.49e-13 Ho+ ColD 1.25e+14 1.98e+17
+ Helium        3.88e-05 5.05e-02 9.49e-01 HeI 2s3S 5.65e-09 Comp H,C 3.01e-25 3.44e-27 Fill Fac 1.00e+00 Gam1/tot 9.98e-01
+ He singlet n  3.88e-05 1.24e-15 6.86e-22 5.80e-22 4.86e-22 7.03e-22 He tripl 5.65e-09 7.98e-20 1.66e-21 1.11e-20 2.04e-21
+ Pressure      NgasTgas 3.98e+06 P(total) 5.50e-10 P( gas ) 5.50e-10 P(Radtn) 3.84e-15 Rad accl 1.20e-07 ForceMul 2.82e+03
+ Texc(La)      3.29e+03 T(I con) 1.13e+01 T(D con) 1.37e+00 T(U tot) 1.13e+01 nT (c+d) 3.07e+06 Prad/Gas 6.98e-06 Pmag/Gas 0.00e+00
+ gra-orion01*  DustTemp 5.17e+01 Pot Volt 9.74e-01 Chrg (e) 2.14e+01 drf cm/s 3.65e+04 Heating: 4.26e-22 Frac tot 4.51e-03
+ gra-orion02*  DustTemp 5.02e+01 Pot Volt 7.75e-01 Chrg (e) 2.10e+01 drf cm/s 5.37e+04 Heating: 3.62e-22 Frac tot 3.84e-03
+ gra-orion03*  DustTemp 4.88e+01 Pot Volt 5.92e-01 Chrg (e) 1.98e+01 drf cm/s 7.89e+04 Heating: 3.08e-22 Frac tot 3.27e-03
+ gra-orion04*  DustTemp 4.73e+01 Pot Volt 4.30e-01 Chrg (e) 1.77e+01 drf cm/s 1.13e+05 Heating: 2.62e-22 Frac tot 2.78e-03
+ gra-orion05*  DustTemp 4.58e+01 Pot Volt 2.88e-01 Chrg (e) 1.45e+01 drf cm/s 1.53e+05 Heating: 2.24e-22 Frac tot 2.37e-03
+ gra-orion06*  DustTemp 4.44e+01 Pot Volt 1.67e-01 Chrg (e) 1.01e+01 drf cm/s 1.90e+05 Heating: 1.91e-22 Frac tot 2.03e-03
+ gra-orion07*  DustTemp 4.29e+01 Pot Volt 6.53e-02 Chrg (e) 4.36e+00 drf cm/s 2.15e+05 Heating: 1.64e-22 Frac tot 1.74e-03
+ gra-orion08*  DustTemp 4.15e+01 Pot Volt 7.36e-03 Chrg (e)-2.54e-01 drf cm/s 2.23e+05 Heating: 1.40e-22 Frac tot 1.49e-03
+ gra-orion09*  DustTemp 4.01e+01 Pot Volt-5.13e-02 Chrg (e)-7.44e+00 drf cm/s 2.27e+05 Heating: 1.21e-22 Frac tot 1.28e-03
+ gra-orion10*  DustTemp 3.86e+01 Pot Volt-1.14e-01 Chrg (e)-1.86e+01 drf cm/s 2.31e+05 Heating: 1.05e-22 Frac tot 1.11e-03
+ sil-orion01*  DustTemp 5.18e+01 Pot Volt 3.46e-01 Chrg (e) 6.97e+00 drf cm/s 1.23e+05 Heating: 3.86e-22 Frac tot 4.09e-03
+ sil-orion02*  DustTemp 5.04e+01 Pot Volt 2.20e-01 Chrg (e) 5.24e+00 drf cm/s 1.63e+05 Heating: 3.28e-22 Frac tot 3.48e-03
+ sil-orion03*  DustTemp 4.90e+01 Pot Volt 8.96e-02 Chrg (e) 2.15e+00 drf cm/s 2.00e+05 Heating: 2.79e-22 Frac tot 2.96e-03
+ sil-orion04*  DustTemp 4.76e+01 Pot Volt 7.12e-03 Chrg (e)-6.91e-01 drf cm/s 2.15e+05 Heating: 2.36e-22 Frac tot 2.50e-03
+ sil-orion05*  DustTemp 4.62e+01 Pot Volt-1.21e-01 Chrg (e)-7.51e+00 drf cm/s 2.21e+05 Heating: 2.01e-22 Frac tot 2.13e-03
+ sil-orion06*  DustTemp 4.49e+01 Pot Volt-2.38e-01 Chrg (e)-1.68e+01 drf cm/s 2.26e+05 Heating: 1.71e-22 Frac tot 1.81e-03
+ sil-orion07*  DustTemp 4.35e+01 Pot Volt-3.38e-01 Chrg (e)-2.87e+01 drf cm/s 2.31e+05 Heating: 1.46e-22 Frac tot 1.55e-03
+ sil-orion08*  DustTemp 4.22e+01 Pot Volt-4.23e-01 Chrg (e)-4.39e+01 drf cm/s 2.35e+05 Heating: 1.25e-22 Frac tot 1.33e-03
+ sil-orion09*  DustTemp 4.09e+01 Pot Volt-4.95e-01 Chrg (e)-6.31e+01 drf cm/s 2.38e+05 Heating: 1.08e-22 Frac tot 1.14e-03
+ sil-orion10*  DustTemp 3.97e+01 Pot Volt-5.56e-01 Chrg (e)-8.71e+01 drf cm/s 2.42e+05 Heating: 9.29e-23 Frac tot 9.85e-04
+ Molecules     CH/Ctot: 5.66e-18 CH+/Ctot 6.22e-16 CO/Ctot: 3.86e-24 CO+/Ctot 2.77e-23 H2O/Otot 6.91e-31 O
