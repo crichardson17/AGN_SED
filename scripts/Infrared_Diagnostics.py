@@ -36,7 +36,7 @@ d2=pd.DataFrame({'Temperature': [10**4,10**5, 10**6, 10**7]},dtype=float) #Creat
 
 for root, dirs, files in os.walk(rootdirectory, topdown=False):
     for name in files:
-        if name.startswith('Linear_Fit') and name.endswith('.lin'):
+        if name.startswith('Linear_Fit_vary_auv') and name.endswith('.lin'):
             print name
             #only read columns from list cols
             dfs.append(pd.read_csv(os.path.join(root, name), delimiter="\t", usecols=['NE 5 24.31m','NE 3 15.55m','TOTL  4861A','O  3  5007A', 'NE 5  3426A', 'NE 3  3869A',

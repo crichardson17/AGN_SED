@@ -47,9 +47,9 @@ for root, dirs, files in os.walk(rootdirectory, topdown=False):
             
 d['Temperature']=d2
 
-d['O IV / Ne II'] = np.log10(np.divide(d['O  4 25.88m'], d['NE 2 12.81m']))
-d['Ne V / Ne II'] = np.log10(np.divide(d['NE 5 14.32m'], d['NE 2 12.81m']))
-d['Ne V / Ne III'] = np.log10(np.divide(d['NE 5 14.32m'], d['NE 3 15.55m']))
+d['O IV / Ne II'] = np.log10(d['O  4 25.88m'] / d['NE 2 12.81m'])
+d['Ne V / Ne II'] = np.log10(d['NE 5 14.32m'] / d['NE 2 12.81m'])
+d['Ne V / Ne III'] = np.log10(d['NE 5 14.32m'] / d['NE 3 15.55m'])
 
 
 

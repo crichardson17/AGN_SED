@@ -16,7 +16,7 @@ print res.summary(), res.predict(X)
 
 X2 = Grupe_Data.alphaX
 X2 = sm.add_constant(X)
-model2 = sm.RLM(Y,X2)
+model2 = sm.OLS(Y,X2)
 res2 = model2.fit()
 
 print res2.summary()
