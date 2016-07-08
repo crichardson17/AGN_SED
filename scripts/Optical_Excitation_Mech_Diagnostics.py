@@ -28,20 +28,20 @@ Output_File=r'C:/Users/chris_000/Documents/GitHub/AGN_SED/All_Emissions.csv' #Cr
 
 for root, dirs, files in os.walk(rootdirectory, topdown=False):
     for name in files:
-        if name.startswith('Linear_Fit_vary_auv') and name.endswith('.lin'):
+        if name.startswith('Linear_Fit_ax219') and name.endswith('.lin'):
             print name
             #only read columns from list cols
             dfs.append(pd.read_csv(os.path.join(root, name), delimiter="\t", usecols=['TOTL  4861A','O  3  5007A', 'NE 5  3426A', 'NE 3  3869A',
             'TOTL  4363A', 'O  1  6300A', 'H  1  6563A','N  2  6584A','S  2  6720A' , 'HE 2  4686A','TOTL  3727A', 'S II  6716A', 'S II  6731A',
             'NE 3  3869A','AR 3  7135A','HE 1  5876A','TOTL  4363A','O  3  4959A','O II  3726A', 'O II  3729A']))
             d = pd.concat(dfs, ignore_index=True)
-        elif name.startswith('Linear_Fit_ax12_') and name.endswith('.lin'):
+        if name.startswith('Linear_Fit_ax117') and name.endswith('.lin'):
             print name
             #only read columns from list cols
             dfs.append(pd.read_csv(os.path.join(root, name), delimiter="\t", usecols=['TOTL  4861A','O  3  5007A', 'NE 5  3426A', 'NE 3  3869A',
             'TOTL  4363A', 'O  1  6300A', 'H  1  6563A','N  2  6584A','S  2  6720A' , 'HE 2  4686A','TOTL  3727A', 'S II  6716A', 'S II  6731A',
             'NE 3  3869A','AR 3  7135A','HE 1  5876A','TOTL  4363A','O  3  4959A','O II  3726A', 'O II  3729A']))
-        if name.startswith('Hden2_') and name.endswith('.lin'):
+        if name.startswith('Hden25') and name.endswith('.lin'):
              print name
             #only read columns from list cols
              dfs.append(pd.read_csv(os.path.join(root, name), delimiter="\t", usecols=['TOTL  4861A','O  3  5007A', 'NE 5  3426A', 'NE 3  3869A',
@@ -66,7 +66,6 @@ d['O III / O II'] = np.log10(np.divide(d['O  3  5007A'],d['TOTL  3727A']))
 
 d['He II / H-Beta'] = np.log10(np.divide(d['HE 2  4686A'],d['TOTL  4861A']))
 
-d.to_csv(Output_File, sep = ",", index=True)
 
 #Plot these data points
 SDSS_File = r'C:/Users/chris_000/Documents/GitHub/AGN_SED/sdss_data/flux_norm.csv'
@@ -127,14 +126,14 @@ l1 = ax1.scatter(d['N II / H-Alpha'].get_value(0),d['O III / H-Beta'].get_value(
 l2 = ax1.scatter(d['N II / H-Alpha'].get_value(3),d['O III / H-Beta'].get_value(3), marker = "s",c='green', s = 30, label = "10^5")
 l3 = ax1.scatter(d['N II / H-Alpha'].get_value(6),d['O III / H-Beta'].get_value(6), marker = "s",c='yellow', s = 30, label = "10^6")
 l4 = ax1.scatter(d['N II / H-Alpha'].get_value(9),d['O III / H-Beta'].get_value(9), marker = "s",c='magenta', s = 30, label = "10^7")
-l5 = ax1.scatter(d['N II / H-Alpha'].get_value(1),d['O III / H-Beta'].get_value(1), marker = "s",c='#F06E07', s = 30, label = "10^4 ax=1.2")
-l6 = ax1.scatter(d['N II / H-Alpha'].get_value(4),d['O III / H-Beta'].get_value(4), marker = "s",c='#111DD9', s = 30, label = "10^5 ax=1.2")
-l7 = ax1.scatter(d['N II / H-Alpha'].get_value(7),d['O III / H-Beta'].get_value(7), marker = "s",c='#ABF036', s = 30, label = "10^6 ax=1.2")
-l8 = ax1.scatter(d['N II / H-Alpha'].get_value(10),d['O III / H-Beta'].get_value(10), marker = "s",c='#D91C82', s = 30, label = "10^7 ax=1.2")
-l9 = ax1.scatter(d['N II / H-Alpha'].get_value(2),d['O III / H-Beta'].get_value(2), marker = "s",c='#2C3E50', s = 30, label = "10^4 ax=1.6")
-l10 = ax1.scatter(d['N II / H-Alpha'].get_value(5),d['O III / H-Beta'].get_value(5), marker = "s",c='#E74C3C', s = 30, label = "10^5 ax=1.6")
-l11 = ax1.scatter(d['N II / H-Alpha'].get_value(8),d['O III / H-Beta'].get_value(8), marker = "s",c='#ECF0F1', s = 30, label = "10^6 ax=1.6")
-l12 = ax1.scatter(d['N II / H-Alpha'].get_value(11),d['O III / H-Beta'].get_value(11), marker = "s",c='#3498DB', s = 30, label = "10^7 ax=1.6")
+l5 = ax1.scatter(d['N II / H-Alpha'].get_value(1),d['O III / H-Beta'].get_value(1), marker = "s",c='#F06E07', s = 30, label = "10^4 ax=1.17")
+l6 = ax1.scatter(d['N II / H-Alpha'].get_value(4),d['O III / H-Beta'].get_value(4), marker = "s",c='#111DD9', s = 30, label = "10^5 ax=1.17")
+l7 = ax1.scatter(d['N II / H-Alpha'].get_value(7),d['O III / H-Beta'].get_value(7), marker = "s",c='#ABF036', s = 30, label = "10^6 ax=1.17")
+l8 = ax1.scatter(d['N II / H-Alpha'].get_value(10),d['O III / H-Beta'].get_value(10), marker = "s",c='#D91C82', s = 30, label = "10^7 ax=1.17")
+l9 = ax1.scatter(d['N II / H-Alpha'].get_value(2),d['O III / H-Beta'].get_value(2), marker = "s",c='#2C3E50', s = 30, label = "10^4 ax=2.19")
+l10 = ax1.scatter(d['N II / H-Alpha'].get_value(5),d['O III / H-Beta'].get_value(5), marker = "s",c='#E74C3C', s = 30, label = "10^5 ax=2.19")
+l11 = ax1.scatter(d['N II / H-Alpha'].get_value(8),d['O III / H-Beta'].get_value(8), marker = "s",c='#ECF0F1', s = 30, label = "10^6 ax=2.19")
+l12 = ax1.scatter(d['N II / H-Alpha'].get_value(11),d['O III / H-Beta'].get_value(11), marker = "s",c='#3498DB', s = 30, label = "10^7 ax=2.19")
 ax1.plot(x1,y1,c = '0',linewidth = 2)
 ax1.plot(x2,y2, c = '0',ls = '--', lw = 2)
 ax1.plot(linear16xvalues,linear16yvalues, c='0')
@@ -153,7 +152,7 @@ y3 = 1.33 + np.divide(0.73,x3+0.59)
 x4 = np.arange(-1.1,0,0.01)
 y4 = 1.18*x4+1.3
 basexvalues2 = (d['O I / H-Alpha'].get_value(0),d['O I / H-Alpha'].get_value(3),d['O I / H-Alpha'].get_value(6),d['O I / H-Alpha'].get_value(9))
-baseyvalues2 = (d['O III / H-Beta'].get_value(0),d['O III / H-Beta'].get_value(2),d['O III / H-Beta'].get_value(4),d['O III / H-Beta'].get_value(6))
+baseyvalues2 = (d['O III / H-Beta'].get_value(0),d['O III / H-Beta'].get_value(3),d['O III / H-Beta'].get_value(6),d['O III / H-Beta'].get_value(9))
 
 linxvalues2 = (d['O I / H-Alpha'].get_value(1),d['O I / H-Alpha'].get_value(4),d['O I / H-Alpha'].get_value(7),d['O I / H-Alpha'].get_value(10))
 

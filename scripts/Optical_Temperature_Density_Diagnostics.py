@@ -29,20 +29,20 @@ d2=pd.DataFrame({'Temperature': [10**4,10**5, 10**6, 10**7]},dtype=float) #Creat
 
 for root, dirs, files in os.walk(rootdirectory, topdown=False):
     for name in files:
-        if name.startswith('Linear_Fit_vary_auv') and name.endswith('.lin'):
+        if name.startswith('Linear_Fit_ax219') and name.endswith('.lin'):
             print name
             #only read columns from list cols
             dfs.append(pd.read_csv(os.path.join(root, name), delimiter="\t", usecols=['TOTL  4861A','O  3  5007A', 'NE 5  3426A', 'NE 3  3869A',
             'TOTL  4363A', 'O  1  6300A', 'H  1  6563A','N  2  6584A','S  2  6720A' , 'HE 2  4686A','TOTL  3727A', 'S II  6716A', 'S II  6731A',
             'NE 3  3869A','AR 3  7135A','HE 1  5876A','TOTL  4363A','O  3  4959A','O II  3726A', 'O II  3729A']))
             d = pd.concat(dfs, ignore_index=True)
-        elif name.startswith('Linear_Fit_ax12_') and name.endswith('.lin'):
+        if name.startswith('Linear_Fit_ax117') and name.endswith('.lin'):
             print name
             #only read columns from list cols
             dfs.append(pd.read_csv(os.path.join(root, name), delimiter="\t", usecols=['TOTL  4861A','O  3  5007A', 'NE 5  3426A', 'NE 3  3869A',
             'TOTL  4363A', 'O  1  6300A', 'H  1  6563A','N  2  6584A','S  2  6720A' , 'HE 2  4686A','TOTL  3727A', 'S II  6716A', 'S II  6731A',
             'NE 3  3869A','AR 3  7135A','HE 1  5876A','TOTL  4363A','O  3  4959A','O II  3726A', 'O II  3729A']))
-        if name.startswith('Hden2_') and name.endswith('.lin'):
+        if name.startswith('Hden25') and name.endswith('.lin'):
              print name
             #only read columns from list cols
              dfs.append(pd.read_csv(os.path.join(root, name), delimiter="\t", usecols=['TOTL  4861A','O  3  5007A', 'NE 5  3426A', 'NE 3  3869A',
@@ -126,14 +126,14 @@ ax1.scatter(d['O III 4363 / O III 5007'].get_value(0),d['S II 6716/ S II 6731'].
 ax1.scatter(d['O III 4363 / O III 5007'].get_value(3),d['S II 6716/ S II 6731'].get_value(3), marker = "s",c='green', s = 35, label = "10^5")
 ax1.scatter(d['O III 4363 / O III 5007'].get_value(6),d['S II 6716/ S II 6731'].get_value(6), marker = "s",c='yellow', s = 35, label = "10^6")
 ax1.scatter(d['O III 4363 / O III 5007'].get_value(9),d['S II 6716/ S II 6731'].get_value(9), marker = "s",c='magenta', s = 35, label = "10^7")
-ax1.scatter(d['O III 4363 / O III 5007'].get_value(1),d['S II 6716/ S II 6731'].get_value(1), marker = "s",c='#F06E07', s = 35, label = "10^4 ax=1.2")
-ax1.scatter(d['O III 4363 / O III 5007'].get_value(4),d['S II 6716/ S II 6731'].get_value(4), marker = "s",c='#111DD9', s = 35, label = "10^5 ax=1.2")
-ax1.scatter(d['O III 4363 / O III 5007'].get_value(7),d['S II 6716/ S II 6731'].get_value(7), marker = "s",c='#ABF036', s = 35, label = "10^6 ax=1.2")
-ax1.scatter(d['O III 4363 / O III 5007'].get_value(10),d['S II 6716/ S II 6731'].get_value(10), marker = "s",c='#D91C82', s = 35, label = "10^7 ax=1.2")
-ax1.scatter(d['O III 4363 / O III 5007'].get_value(2),d['S II 6716/ S II 6731'].get_value(2), marker = "s",c='#2C3E50', s = 35, label = "10^4 ax=1.6")
-ax1.scatter(d['O III 4363 / O III 5007'].get_value(5),d['S II 6716/ S II 6731'].get_value(5), marker = "s",c='#E74C3C', s = 35, label = "10^5 ax=1.6")
-ax1.scatter(d['O III 4363 / O III 5007'].get_value(8),d['S II 6716/ S II 6731'].get_value(8), marker = "s",c='#ECF0F1', s = 35, label = "10^6 ax=1.6")
-ax1.scatter(d['O III 4363 / O III 5007'].get_value(11),d['S II 6716/ S II 6731'].get_value(11), marker = "s",c='#3498DB', s = 35, label = "10^7 ax=1.6")
+ax1.scatter(d['O III 4363 / O III 5007'].get_value(1),d['S II 6716/ S II 6731'].get_value(1), marker = "s",c='#F06E07', s = 35, label = "10^4 ax=1.17")
+ax1.scatter(d['O III 4363 / O III 5007'].get_value(4),d['S II 6716/ S II 6731'].get_value(4), marker = "s",c='#111DD9', s = 35, label = "10^5 ax=1.17")
+ax1.scatter(d['O III 4363 / O III 5007'].get_value(7),d['S II 6716/ S II 6731'].get_value(7), marker = "s",c='#ABF036', s = 35, label = "10^6 ax=1.17")
+ax1.scatter(d['O III 4363 / O III 5007'].get_value(10),d['S II 6716/ S II 6731'].get_value(10), marker = "s",c='#D91C82', s = 35, label = "10^7 ax=1.17")
+ax1.scatter(d['O III 4363 / O III 5007'].get_value(2),d['S II 6716/ S II 6731'].get_value(2), marker = "s",c='#2C3E50', s = 35, label = "10^4 ax=2.19")
+ax1.scatter(d['O III 4363 / O III 5007'].get_value(5),d['S II 6716/ S II 6731'].get_value(5), marker = "s",c='#E74C3C', s = 35, label = "10^5 ax=2.19")
+ax1.scatter(d['O III 4363 / O III 5007'].get_value(8),d['S II 6716/ S II 6731'].get_value(8), marker = "s",c='#ECF0F1', s = 35, label = "10^6 ax=2.19")
+ax1.scatter(d['O III 4363 / O III 5007'].get_value(11),d['S II 6716/ S II 6731'].get_value(11), marker = "s",c='#3498DB', s = 35, label = "10^7 ax=2.19")
 ax1.plot(basexvalO3, baseyvalS2, c = '0')
 ax1.plot(linxval03,linyvalS2, c = '0')
 ax1.plot(lin12xval03,lin12yvalS2, c = '0')
