@@ -5,8 +5,8 @@ import pandas as pd
 
 Grupe_Data = pd.read_csv('C:/Users/chris_000/Documents/GitHub/AGN_SED/grupe_data/Grupe_Data.csv', sep = ',', header = 0)
 
-Y = Grupe_Data.alphaUVc
-X = Grupe_Data.alphaX
+Y = Grupe_Data.alphaOXc
+X = Grupe_Data.alphaUVc
 
 
 print X, Y, Grupe_Data
