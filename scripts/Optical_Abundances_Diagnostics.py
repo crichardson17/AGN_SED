@@ -275,7 +275,9 @@ ax5.set_ylabel(r'Log$_{10}$([Ar III] $\lambda 7135$ / H$\alpha$)')
 ax5.set_xlim(-1,3)
 ax5.set_ylim(-4,1.5)
 
-
+baseHe1 = (d['He I / H-Beta'].get_value(0),d['He I / H-Beta'].get_value(3),d['He I / H-Beta'].get_value(6),d['He I / H-Beta'].get_value(9))
+linHe1 = (d['He I / H-Beta'].get_value(1),d['He I / H-Beta'].get_value(4),d['He I / H-Beta'].get_value(7),d['He I / H-Beta'].get_value(10))
+lin21He1 = (d['He I / H-Beta'].get_value(2),d['He I / H-Beta'].get_value(5),d['He I / H-Beta'].get_value(8),d['He I / H-Beta'].get_value(11))
 ax6.scatter(np.log10(np.divide(SDSS_Data_HeII[:,23],SDSS_Data_HeII[:,18])),np.log10(np.divide(SDSS_Data_HeII[:,20], SDSS_Data_HeII[:,18])),edgecolor = '', c = '#000080', s = 5)
 ax6.scatter(np.log10(np.divide(AGN_Array2[:,23],AGN_Array2[:,18])),np.log10(np.divide(AGN_Array2[:,20], AGN_Array2[:,18])),edgecolor = '', c = '#800000', s = 5)
 ax6.scatter(d['He I / H-Beta'].get_value(0),d['O III / H-Beta'].get_value(0), marker = "s",c='#FF5D5D', s = 30, label = "10^4")
@@ -292,7 +294,10 @@ ax6.scatter(d['He I / H-Beta'].get_value(2),d['O III / H-Beta'].get_value(2), ma
 ax6.scatter(d['He I / H-Beta'].get_value(5),d['O III / H-Beta'].get_value(5), marker = "s",c='#00CC00', s = 30, label = "10^5")
 ax6.scatter(d['He I / H-Beta'].get_value(8),d['O III / H-Beta'].get_value(8), marker = "s",c='#009D00', s = 30, label = "10^6")
 ax6.scatter(d['He I / H-Beta'].get_value(11),d['O III / H-Beta'].get_value(11), marker = "s",c='#007A00', s = 30, label = "10^7")
-
+ax6.plot(baseHe1,baseyvalO3, c ='0')
+ax6.plot(linHe1, lin16yvalO3, ls = '--', c = '0')
+ax6.plot(lin21He1, lin16yvalO3, ls = ':', lw = 3, c = '0')
+ax6.set_xlim(-2,1)
 ax6.set_xlabel(r'Log$_{10}$([He I] $\lambda 5876$ / H$\beta$)')
 ax6.set_ylabel(r'Log$_{10}$([O III] $\lambda 5007$ / H$\beta$)')
 
@@ -305,3 +310,4 @@ figManager = plt.get_current_fig_manager()
 figManager.window.showMaximized()
 
 plt.show() 
+plt.savefig('C:\Users\chris_000\Documents\GitHub\AGN_SED\Diagnostic_Plots\Optical\Separated_By_Diagnostic\With_Linear_Fit\Linear_Variations_Fixed\With_Weak_Lines\Abundances.png',dpi = 600)
