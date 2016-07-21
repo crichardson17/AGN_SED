@@ -1,0 +1,55 @@
+#
+# Incident Radiation Field
+#
+CMB 
+AGN 6.0, -1.42, -0.60, -1.59  #Temperture at 10^6 K, ax=-1.42, auv=-0.60, aox=-1.59
+cosmic rays background
+#
+# Ionization Parameter
+#
+phi(h) 10.4771  #for Log U=-3.0
+hden 2.5 #hydrogen density at 10^2 cm^-3
+constant pressure no abort
+#
+# Abundances
+#  
+abundances GASS10
+metals deplete
+grains orion 		#set up the dust grains
+element nitrogen scale 1.5  #secondary nucleosynthesis (Hamann & Ferland 1999)
+metals and grains 1.5
+element helium scale 1.024	#Conserve mass (Baldwin et al. 1991)
+#
+# Boundary Condition
+#
+stop temperature off
+stop efrac 0.01
+#
+# Save Output
+#
+set save prefix "Hden25_SEDT6"
+save continuum ".con" units eV
+iterate to convergence
+save  linelist, emergent,  ".lin" "LineList_CG_1.dat" last no hash  
+save lines, emissivity, "lines.str"
+totl 4861
+o  3 5007
+totl 3727
+o  1 6300
+n  2 6584
+he 1 5876
+h  1 6563
+he 2 4686
+n  1 5200
+s  2 6720
+ne 3 3869
+totl  4363
+ar 3 7135
+s II  6716
+s II   6731
+end of lines
+save element sulphur, "_Sulfur.txt"
+save element nitrogen, "_Nitrogen.txt"
+save overview ".ovr" 
+save heating ".het"
+save cooling ".col"
