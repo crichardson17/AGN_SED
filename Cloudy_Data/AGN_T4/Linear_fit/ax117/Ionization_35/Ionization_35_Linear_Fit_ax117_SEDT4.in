@@ -2,13 +2,13 @@
 # Incident Radiation Field
 # 
 CMB
-AGN 7.0, -1.42, -0.38, -2.19  #Temperture at 10^4 K, ax=-1.42, auv=-0.68, aox=-1.59
+AGN 4.0, -1.42, -0.73, -1.117  #Temperture at 10^4 K, ax=-1.42, auv=-0.68, aox=-1.59
 cosmic rays background
 #
 # Ionization Parameter
 #
-phi(h) 10.9771  #for Log U=-3.0
-hden 2.50 #hydrogen density at 10^2 cm^-3
+phi(h) 9.4771  #for Log U=-3.0
+hden 2.5 #hydrogen density at 10^2 cm^-3
 constant pressure no abort
 #
 # Abundances
@@ -27,10 +27,10 @@ stop efrac 0.01
 #
 # Save Output
 #
-set save prefix "Ionization_3_Linear_Fit_ax219_SEDT7"
+set save prefix "Ionization_35_Linear_Fit_ax117_SEDT4"
 save continuum ".con" units eV
 iterate to convergence
-save linelist,  ".lin" "LineList_CG_1.dat" last no hash
+save linelist,  ".lin" "LineList_CG_1.dat" last no hash  
 save lines, emissivity "_lines.str"
 o  3 5007
 totl 3727

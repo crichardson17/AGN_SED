@@ -11,7 +11,7 @@ def filelist(directory):
             if file.endswith('.lin'):
                 print (file)
                 
-rootdirectory=r'C:/Users/chris_000/Documents/GitHub/AGN_SED/Cloudy_Data'
+rootdirectory='C:/Users/compastro/greene/AGN_SED/Cloudy_Data'
 
 filelist(rootdirectory)
 
@@ -25,7 +25,7 @@ dfs=[] #Create an empty array for our Data
 d=pd.DataFrame() 
 d=d.reset_index()
 d2=pd.DataFrame({'Temperature': [10**4,10**5, 10**6, 10**7]},dtype=float) #Create a Dataframe of labels for each file used
-Output_File=r'C:/Users/chris_000/Documents/GitHub/AGN_SED/All_Emissions.csv' #Create the output file
+Output_File=r'C:/Users/compastro/gre/AGN_SED/All_Emissions.csv' #Create the output file
 
 for root, dirs, files in os.walk(rootdirectory, topdown=False):
     for name in files:
@@ -51,23 +51,7 @@ for root, dirs, files in os.walk(rootdirectory, topdown=False):
              d = pd.concat(dfs, ignore_index=True)
             
 d['Temperature']=d2
-d['O III / H-Beta']= np.log10(d['O  3  5007A'] / d['TOTL  4861A'])
-
-d['O I / H-Alpha']=np.log10(np.divide(d['O  1  6300A'],d['H  1  6563A']))
-
-d['N II / H-Alpha']=np.log10(d['N  2  6584A'] / d['H  1  6563A'])
-
-d['S II / H-Alpha']=np.log10(np.divide(d['S  2  6720A'],d['H  1  6563A']))
-
-d['O II / O III'] = np.log10(np.divide(d['TOTL  3727A'],d['O  3  5007A']))
-
-d['O II / H-Beta'] = np.log10(np.divide(d['TOTL  3727A'], d['TOTL  4861A'])) 
-
-d['O III / O II'] = np.log10(np.divide(d['O  3  5007A'],d['TOTL  3727A']))
-
-d['He II / H-Beta'] = np.log10(np.divide(d['HE 2  4686A'],d['TOTL  4861A']))
-
-
+#
 #Plot these data points
 SDSS_File = r'C:/Users/chris_000/Documents/GitHub/AGN_SED/sdss_data/flux_norm.csv'
 Shirazi_File = r'C:/Users/chris_000/Documents/GitHub/AGN_SED/sdss_data/Shirazi12_Only_Data.csv'
