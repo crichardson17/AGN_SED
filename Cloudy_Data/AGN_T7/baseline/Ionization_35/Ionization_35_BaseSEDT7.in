@@ -1,14 +1,14 @@
 #
 # Incident Radiation Field
-# 
-CMB
-AGN 7.0, -1.42, -0.73, -1.17  #Temperture at 10^4 K, ax=-1.42, auv=-0.68, aox=-1.59
+#
+CMB 
+AGN 7.0, -1.42, -0.60, -1.59  #Temperture at 10^6 K, ax=-1.42, auv=-0.60, aox=-1.59
 cosmic rays background
 #
 # Ionization Parameter
 #
-phi(h) 9.4771  #for Log U=-3.0
-hden 2.5 #hydrogen density at 10^2 cm^-3
+phi(h) 9.47712  #for Log U=-3.0
+hden 2.5 #hydrogen density at 10^2.5 cm^-3
 constant pressure no abort
 #
 # Abundances
@@ -27,10 +27,10 @@ stop efrac 0.01
 #
 # Save Output
 #
-set save prefix "Ionization_35_Linear_Fit_ax117_SEDT7"
+set save prefix "Ionization_35_SEDT7"
 save continuum ".con" units eV
 iterate to convergence
-save linelist,  ".lin" "LineList_CG_1.dat" last no hash
+save linelist  ".lin" "LineList_CG_1.dat" last no hash
 save lines, emissivity "_lines.str"
 o  3 5007
 totl 3727
@@ -42,10 +42,10 @@ he 2 4686
 n  1 5200
 s  2 6720
 ne 3 3869
-totl 4363
+totl  4363
 ar 3 7135
-s II  6716
-s II  6731
+s II   6716
+s II   6731
 end of lines
 save element sulphur "_sulfer.txt"
 save element nitrogen "_nitrogen.txt"

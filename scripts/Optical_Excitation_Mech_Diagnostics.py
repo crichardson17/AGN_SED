@@ -11,7 +11,7 @@ def filelist(directory):
             if file.endswith('.lin'):
                 print (file)
                 
-rootdirectory='C:/Users/compastro/greene/AGN_SED/Cloudy_Data'
+rootdirectory='/Users/compastro/greene/AGN_SED/Cloudy_Data'
 
 filelist(rootdirectory)
 
@@ -29,20 +29,20 @@ Output_File=r'C:/Users/compastro/gre/AGN_SED/All_Emissions.csv' #Create the outp
 
 for root, dirs, files in os.walk(rootdirectory, topdown=False):
     for name in files:
-        if name.startswith('Linear_Fit_ax219') and name.endswith('.lin'):
+        if name.startswith('Ionization_35_Linear_Fit_ax219') and name.endswith('.lin'):
             print name
             #only read columns from list cols
             dfs.append(pd.read_csv(os.path.join(root, name), delimiter="\t", usecols=['TOTL  4861A','O  3  5007A', 'NE 5  3426A', 'NE 3  3869A',
             'TOTL  4363A', 'O  1  6300A', 'H  1  6563A','N  2  6584A','S  2  6720A' , 'HE 2  4686A','TOTL  3727A', 'S II  6716A', 'S II  6731A',
             'NE 3  3869A','AR 3  7135A','HE 1  5876A','TOTL  4363A','O  3  4959A','O II  3726A', 'O II  3729A']))
             d = pd.concat(dfs, ignore_index=True)
-        if name.startswith('Linear_Fit_ax117') and name.endswith('.lin'):
+        if name.startswith('Ionization_35_Linear_Fit_ax117') and name.endswith('.lin'):
             print name
             #only read columns from list cols
             dfs.append(pd.read_csv(os.path.join(root, name), delimiter="\t", usecols=['TOTL  4861A','O  3  5007A', 'NE 5  3426A', 'NE 3  3869A',
             'TOTL  4363A', 'O  1  6300A', 'H  1  6563A','N  2  6584A','S  2  6720A' , 'HE 2  4686A','TOTL  3727A', 'S II  6716A', 'S II  6731A',
             'NE 3  3869A','AR 3  7135A','HE 1  5876A','TOTL  4363A','O  3  4959A','O II  3726A', 'O II  3729A']))
-        if name.startswith('Hden25') and name.endswith('.lin'):
+        if name.startswith('Ionization_35_SED') and name.endswith('.lin'):
              print name
             #only read columns from list cols
              dfs.append(pd.read_csv(os.path.join(root, name), delimiter="\t", usecols=['TOTL  4861A','O  3  5007A', 'NE 5  3426A', 'NE 3  3869A',
@@ -51,42 +51,98 @@ for root, dirs, files in os.walk(rootdirectory, topdown=False):
              d = pd.concat(dfs, ignore_index=True)
             
 d['Temperature']=d2
-#
+d['O III / H-Beta']= np.log10(d['O  3  5007A'] / d['TOTL  4861A'])
+
+d['O I / H-Alpha']=np.log10(np.divide(d['O  1  6300A'],d['H  1  6563A']))
+
+d['N II / H-Alpha']=np.log10(d['N  2  6584A'] / d['H  1  6563A'])
+
+d['S II / H-Alpha']=np.log10(np.divide(d['S  2  6720A'],d['H  1  6563A']))
+
+d['O II / O III'] = np.log10(np.divide(d['TOTL  3727A'],d['O  3  5007A']))
+
+d['O II / H-Beta'] = np.log10(np.divide(d['TOTL  3727A'], d['TOTL  4861A'])) 
+
+d['O III / O II'] = np.log10(np.divide(d['O  3  5007A'],d['TOTL  3727A']))
+
+d['He II / H-Beta'] = np.log10(np.divide(d['HE 2  4686A'],d['TOTL  4861A']))
+
+
 #Plot these data points
-SDSS_File = r'C:/Users/chris_000/Documents/GitHub/AGN_SED/sdss_data/flux_norm.csv'
-Shirazi_File = r'C:/Users/chris_000/Documents/GitHub/AGN_SED/sdss_data/Shirazi12_Only_Data.csv'
-SDSS_Ratios_File = r'C:/Users/chris_000/Documents/GitHub/AGN_SED/flux_norm_AGN.csv'
-SDSS_HeII_File = r'C:/Users/chris_000/Documents/GitHub/AGN_SED/sdss_data/HeII_sample.csv'
+SDSS_File = r'/Users/compastro/greene/AGN_SED/sdss_data/flux_norm.csv'
+
+SDSS_Ratios_File = r'/Users/compastro/greene/AGN_SED/flux_norm_AGN.csv'
+
+SDSS_HeII_File = r'/Users/compastro/greene/AGN_SED/sdss_data/HeII_sample.csv'
+
 SDSS_Data=np.genfromtxt(SDSS_File, skip_header=1, delimiter = ',',dtype=float,unpack=True)
-Shirazi_Data=np.genfromtxt(Shirazi_File, skip_header=3, delimiter = ',',dtype = float)
+
 SDSS_Data_Ratios = np.genfromtxt(SDSS_Ratios_File, skip_header=1, delimiter = ',',dtype=float,invalid_raise = False)
+
 SDSS_Data_HeII = np.genfromtxt(SDSS_HeII_File,skip_header = 1, delimiter = ',',dtype = float)
+
 #Set up an array for data that is just AGN
 AGN_Array = np.zeros(len(SDSS_Data_Ratios))
 
 #Conditions for what constitutes AGN
 condition1 = np.log10(SDSS_Data_Ratios[:,8]) > np.add(1.19, np.divide(0.61, np.subtract(np.log10(SDSS_Data_Ratios[:,7]),.47))) #From Kewley et al. 2001
+
 condition2a = np.log10(SDSS_Data_Ratios[:,8]) > np.add(1.3,np.multiply(1.18,np.log10(SDSS_Data_Ratios[:,5])))  #From Kewley et al. 2006
+
 condition2b = np.log10(SDSS_Data_Ratios[:,8]) > np.add(1.33, np.divide(0.73, np.add(np.log10(SDSS_Data_Ratios[:,5]),.59)))
+
 condition3a = np.log10(SDSS_Data_Ratios[:,8]) > np.add(0.76, np.multiply(1.89,np.log10(SDSS_Data_Ratios[:,18])))
+
 condition3b = np.log10(SDSS_Data_Ratios[:,8]) > np.add(1.30,np.divide(0.72, np.subtract(np.log10(SDSS_Data_Ratios[:,18]),0.32))) 
+
 condition4a = np.log10(SDSS_Data_Ratios[:,2]) > np.add(np.multiply(-1.701,np.log10(SDSS_Data_Ratios[:,5])),-2.163)
+
 condition4b = np.log10(SDSS_Data_Ratios[:,2]) > np.add(np.log10(SDSS_Data_Ratios[:,5]),0.7)
-condition5a = Shirazi_Data[:,0] >= np.add(-1.22, np.divide(1,np.add(np.multiply(8.92,Shirazi_Data[:,1]),1.32)))
-condition5b = Shirazi_Data[:,1] >= -0.2
+
 
 Hecondition1 = np.log10(np.divide(SDSS_Data_HeII[:,20],SDSS_Data_HeII[:,18])) > np.add(1.19, np.divide(0.61, np.subtract(np.log10(np.divide(SDSS_Data_HeII[:,28],SDSS_Data_HeII[:,27])),.47)))
-Hecondition2a = np.log10(np.divide(SDSS_Data_HeII[:,20],SDSS_Data_HeII[:,18])) > np.add(1.3,np.multiply(1.18,np.log10(np.divide(SDSS_Data_HeII[:,24],SDSS_Data_HeII[:,27]))))  #From Kewley et al. 2006
-Hecondition2b = np.log10(np.divide(SDSS_Data_HeII[:,20],SDSS_Data_HeII[:,18])) > np.add(1.33, np.divide(0.73, np.add(np.log10(np.divide(SDSS_Data_HeII[:,24],SDSS_Data_HeII[:,27])),.59)))
-Hecondition3a = np.log10(np.divide(SDSS_Data_HeII[:,20],SDSS_Data_HeII[:,18])) > np.add(0.76, np.multiply(1.89,np.log10(np.divide(np.add(SDSS_Data_HeII[:,29],SDSS_Data_HeII[:,30]),SDSS_Data_HeII[:,27]))))
-Hecondition3b = np.log10(np.divide(SDSS_Data_HeII[:,20],SDSS_Data_HeII[:,18])) > np.add(1.30,np.divide(0.72, np.subtract(np.log10(np.divide(np.add(SDSS_Data_HeII[:,29],SDSS_Data_HeII[:,30]),SDSS_Data_HeII[:,27])),0.32)))
-mask = (condition1 & (condition2a & condition2b) & (condition3a & condition3b))
 
-AGN_Array= SDSS_Data_Ratios[mask,:]
+Hecondition2a = np.log10(np.divide(SDSS_Data_HeII[:,20],SDSS_Data_HeII[:,18])) > np.add(1.3,np.multiply(1.18,np.log10(np.divide(SDSS_Data_HeII[:,24],SDSS_Data_HeII[:,27]))))  #From Kewley et al. 2006
+
+Hecondition2b = np.log10(np.divide(SDSS_Data_HeII[:,20],SDSS_Data_HeII[:,18])) > np.add(1.33, np.divide(0.73, np.add(np.log10(np.divide(SDSS_Data_HeII[:,24],SDSS_Data_HeII[:,27])),.59)))
+
+Hecondition3a = np.log10(np.divide(SDSS_Data_HeII[:,20],SDSS_Data_HeII[:,18])) > np.add(0.76, np.multiply(1.89,np.log10(np.divide(np.add(SDSS_Data_HeII[:,29],SDSS_Data_HeII[:,30]),SDSS_Data_HeII[:,27]))))
+
+Hecondition3b = np.log10(np.divide(SDSS_Data_HeII[:,20],SDSS_Data_HeII[:,18])) > np.add(1.30,np.divide(0.72, np.subtract(np.log10(np.divide(np.add(SDSS_Data_HeII[:,29],SDSS_Data_HeII[:,30]),SDSS_Data_HeII[:,27])),0.32)))
+
+SFcondition1 = np.log10(SDSS_Data_Ratios[:,8]) < np.add(1.3, np.divide(0.61, np.subtract(np.log10(SDSS_Data_Ratios[:,7]),.05))) #From Kewley et al. 2001  
+
+SFcondition2 = np.log10(SDSS_Data_Ratios[:,8]) < np.add(1.33, np.divide(0.73, np.add(np.log10(SDSS_Data_Ratios[:,5]),.59)))#From Kewley et al. 2006
+
+SFcondition3 = np.log10(SDSS_Data_Ratios[:,8]) < np.add(1.30,np.divide(0.72, np.subtract(np.log10(SDSS_Data_Ratios[:,18]),0.32))) 
+
+Compcondition1 = np.log10(SDSS_Data_Ratios[:,8]) > np.add(1.3, np.divide(0.61, np.subtract(np.log10(SDSS_Data_Ratios[:,7]),.05)))
+
+Compcondition2 = np.log10(SDSS_Data_Ratios[:,8]) < np.add(1.19, np.divide(0.61, np.subtract(np.log10(SDSS_Data_Ratios[:,7]),.47)))
+
+Linercondition1 = np.add(1.19, np.divide(0.61, np.subtract(np.log10(SDSS_Data_Ratios[:,7]),.47))) < np.log10(SDSS_Data_Ratios[:,8]) 
+
+Linercondition2 =np.add(1.30,np.divide(0.72, np.subtract(np.log10(SDSS_Data_Ratios[:,18]),0.32))) > np.log10(SDSS_Data_Ratios[:,8])   
+
+Linercondition4 = np.log10(SDSS_Data_Ratios[:,8]) < np.add(0.76, np.multiply(1.89,np.log10(SDSS_Data_Ratios[:,18])))
+
+Linercondition3 = np.log10(SDSS_Data_Ratios[:,8]) > np.add(1.33, np.divide(0.73, np.add(np.log10(SDSS_Data_Ratios[:,5]),.59)))
+
+Linercondition5 = np.log10(SDSS_Data_Ratios[:,8]) < np.add(1.3,np.multiply(1.18,np.log10(SDSS_Data_Ratios[:,5]))) 
+
+mask = (condition1 & (condition2a & condition2b) & (condition3a & condition3b))
+SFmask = (SFcondition1 & SFcondition2 & SFcondition3)
+compmask = (Compcondition1 & Compcondition2)
+linermask = (Linercondition1 & Linercondition2 & Linercondition3 & Linercondition4 & Linercondition5)
 mask2 = (Hecondition1 & Hecondition2a & Hecondition2b & (Hecondition3a & Hecondition3b))
 
+AGN_Array= SDSS_Data_Ratios[mask,:]
+SF_Array = SDSS_Data_Ratios[SFmask,:] 
+Comp_Array = SDSS_Data_Ratios[compmask,:]
+Liner_Array = SDSS_Data_Ratios[linermask,:]
 AGN_Array2 = SDSS_Data_HeII[mask2,:]
 
+O3O2AGN = SDSS_Data_Ratios[(condition4a & condition4b),:]
 
 ax1 = plt.subplot(231, adjustable = 'box-forced', autoscale_on = False)
 ax2 = plt.subplot(232, adjustable = 'box-forced', autoscale_on = False)
@@ -100,18 +156,11 @@ y1=1.19+np.divide(0.61,x1-0.47)
 x2=np.arange(-2,0,0.01)
 y2 = 1.3+np.divide(0.61,x2-0.05)
 
-
-#Make arrays for that have just the data from AGN
-N2AGN = SDSS_Data_Ratios[condition1, :]
-OIAGN = SDSS_Data_Ratios[np.logical_and(condition2a, condition2b),:]
-S2AGN = SDSS_Data_Ratios[(condition3a & condition3b),:]
-O3O2AGN = SDSS_Data_Ratios[(condition4a & condition4b),:]
-ShiraziAGN = Shirazi_Data[(condition5a | condition5b),:]
-
-np.savetxt("C:/Users/chris_000/Documents/GitHub/AGN_SED/ShiraziAGN.csv",ShiraziAGN, delimiter = ',')
-
 ax1.scatter(np.log10(SDSS_Data_Ratios[:,7]),np.log10(SDSS_Data_Ratios[:,8]),  marker = 'o',edgecolor = '', c = '#000080',s = 5)
 ax1.scatter(np.log10(AGN_Array[:,7]),np.log10(AGN_Array[:,8]),edgecolor = '', s = 5, c = '#800000')
+ax1.scatter(np.log10(SF_Array[:,7]),np.log10(SF_Array[:,8]),edgecolor = '', s = 5, c = '#453785')
+ax1.scatter(np.log10(Comp_Array[:,7]),np.log10(Comp_Array[:,8]),edgecolor = '', s = 5)
+ax1.scatter(np.log10(Liner_Array[:,7]),np.log10(Liner_Array[:,8]),edgecolor = '', s = 20, c = '#000000')
 basexvalues = (d['N II / H-Alpha'].get_value(0),d['N II / H-Alpha'].get_value(3),d['N II / H-Alpha'].get_value(6),d['N II / H-Alpha'].get_value(9))
 baseyvalues = (d['O III / H-Beta'].get_value(0),d['O III / H-Beta'].get_value(3),d['O III / H-Beta'].get_value(6),d['O III / H-Beta'].get_value(9))
 linearxvalues = (d['N II / H-Alpha'].get_value(1),d['N II / H-Alpha'].get_value(4),d['N II / H-Alpha'].get_value(7),d['N II / H-Alpha'].get_value(10))
@@ -157,6 +206,9 @@ linxvalues2 = (d['O I / H-Alpha'].get_value(1),d['O I / H-Alpha'].get_value(4),d
 lin16xvalues2 = (d['O I / H-Alpha'].get_value(2),d['O I / H-Alpha'].get_value(5),d['O I / H-Alpha'].get_value(8),d['O I / H-Alpha'].get_value(11))
 ax2.scatter(np.log10(SDSS_Data_Ratios[:,5]),np.log10(SDSS_Data_Ratios[:,8]), edgecolor = '', c = '#000080', s=5)
 ax2.scatter(np.log10(AGN_Array[:,5]),np.log10(AGN_Array[:,8]),edgecolor = '', s = 5, c = '#800000')
+ax2.scatter(np.log10(SF_Array[:,5]),np.log10(SF_Array[:,8]),edgecolor = '', s = 5, c = '#453785')
+ax2.scatter(np.log10(Comp_Array[:,5]),np.log10(Comp_Array[:,8]),edgecolor = '', s = 5)
+ax2.scatter(np.log10(Liner_Array[:,5]),np.log10(Liner_Array[:,8]),edgecolor = '', s = 20, c = '#000000')
 ax2.scatter(d['O I / H-Alpha'].get_value(0),d['O III / H-Beta'].get_value(0), marker = "s",c='#FF5D5D', s = 50, label = "10^4")
 ax2.scatter(d['O I / H-Alpha'].get_value(3),d['O III / H-Beta'].get_value(3), marker = "s",c='#FF0000', s = 50, label = "10^5")
 ax2.scatter(d['O I / H-Alpha'].get_value(6),d['O III / H-Beta'].get_value(6), marker = "s",c='#C60000', s = 50, label = "10^6")
@@ -198,6 +250,9 @@ lin16xvalues3 = (d['S II / H-Alpha'].get_value(2),d['S II / H-Alpha'].get_value(
 
 ax3.scatter(np.log10(SDSS_Data_Ratios[:,18]),np.log10(SDSS_Data_Ratios[:,8]), edgecolor = '', c = '#000080',s=5.0)
 ax3.scatter(np.log10(AGN_Array[:,18]),np.log10(AGN_Array[:,8]),edgecolor = '', c = '#800000', s = 5)
+ax3.scatter(np.log10(SF_Array[:,18]),np.log10(SF_Array[:,8]),edgecolor = '', s = 5, c = '#453785')
+ax3.scatter(np.log10(Comp_Array[:,18]),np.log10(Comp_Array[:,8]),edgecolor = '', s = 5)
+ax3.scatter(np.log10(Liner_Array[:,18]),np.log10(Liner_Array[:,8]),edgecolor = '', s = 20, c = '#000000')
 ax3.scatter(d['S II / H-Alpha'].get_value(0),d['O III / H-Beta'].get_value(0), marker = "s",c='#FF5D5D', s = 50, label = "10^4")
 ax3.scatter(d['S II / H-Alpha'].get_value(3),d['O III / H-Beta'].get_value(3), marker = "s",c='#FF0000', s = 50, label = "10^5")
 ax3.scatter(d['S II / H-Alpha'].get_value(6),d['O III / H-Beta'].get_value(6), marker = "s",c='#C60000', s = 50, label = "10^6")
