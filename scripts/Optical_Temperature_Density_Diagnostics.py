@@ -10,15 +10,15 @@ def filelist(directory):
             if file.endswith('.lin'):
                 print (file)
                 
-rootdirectory= r'C:/Users/chris_000/Documents/GitHub/AGN_SED/Cloudy_Data' 
+rootdirectory= r'/Users/compastro/greene/AGN_SED/Cloudy_Data' 
 
 filelist(rootdirectory)
 
 #Generate a CSV file containing all the relevant data points
 
-Output_File=r'C:/Users/chris_000/Documents/GitHub/AGN_SED/All_Emissions.csv' #Create the output file
+#Output_File=r'C:/Users/chris_000/Documents/GitHub/AGN_SED/All_Emissions.csv' #Create the output file
 
-normSource=os.path.normpath(rootdirectory)
+
 
 dfs=[] #Create an empty array for our Data
 
@@ -26,23 +26,22 @@ d=pd.DataFrame()
 d=d.reset_index()
 d2=pd.DataFrame({'Temperature': [10**4,10**5, 10**6, 10**7]},dtype=float) #Create a Dataframe of labels for each file used
 
-
 for root, dirs, files in os.walk(rootdirectory, topdown=False):
     for name in files:
-        if name.startswith('Linear_Fit_ax219') and name.endswith('.lin'):
+        if name.startswith('Ionization_35_Linear_Fit_ax219') and name.endswith('.lin'):
             print name
             #only read columns from list cols
             dfs.append(pd.read_csv(os.path.join(root, name), delimiter="\t", usecols=['TOTL  4861A','O  3  5007A', 'NE 5  3426A', 'NE 3  3869A',
             'TOTL  4363A', 'O  1  6300A', 'H  1  6563A','N  2  6584A','S  2  6720A' , 'HE 2  4686A','TOTL  3727A', 'S II  6716A', 'S II  6731A',
             'NE 3  3869A','AR 3  7135A','HE 1  5876A','TOTL  4363A','O  3  4959A','O II  3726A', 'O II  3729A']))
             d = pd.concat(dfs, ignore_index=True)
-        if name.startswith('Linear_Fit_ax117') and name.endswith('.lin'):
+        if name.startswith('Ionization_35_Linear_Fit_ax117') and name.endswith('.lin'):
             print name
             #only read columns from list cols
             dfs.append(pd.read_csv(os.path.join(root, name), delimiter="\t", usecols=['TOTL  4861A','O  3  5007A', 'NE 5  3426A', 'NE 3  3869A',
             'TOTL  4363A', 'O  1  6300A', 'H  1  6563A','N  2  6584A','S  2  6720A' , 'HE 2  4686A','TOTL  3727A', 'S II  6716A', 'S II  6731A',
             'NE 3  3869A','AR 3  7135A','HE 1  5876A','TOTL  4363A','O  3  4959A','O II  3726A', 'O II  3729A']))
-        if name.startswith('Hden25') and name.endswith('.lin'):
+        if name.startswith('Ionization_35_SED') and name.endswith('.lin'):
              print name
             #only read columns from list cols
              dfs.append(pd.read_csv(os.path.join(root, name), delimiter="\t", usecols=['TOTL  4861A','O  3  5007A', 'NE 5  3426A', 'NE 3  3869A',
@@ -71,14 +70,12 @@ d['S II 6716/ S II 6731'] = np.log10(np.divide(d['S II  6716A'],d['S II  6731A']
 
 d['O II 3726 / O II 3729'] = np.log10(np.divide(d['O II  3726A'],d['O II  3729A']))
 
-d.to_csv(Output_File, sep = ",", index=True)
+#d.to_csv(Output_File, sep = ",", index=True)
 #Plot these data points
-SDSS_File = r'C:/Users/chris_000/Documents/GitHub/AGN_SED/sdss_data/flux_norm.csv'
-Shirazi_File =  r'C:/Users/chris_000/Documents/GitHub/AGN_SED/sdss_data/shirazi12.csv'
-SDSS_Ratios_File =  r'C:/Users/chris_000/Documents/GitHub/AGN_SED/flux_norm_AGN.csv'
-SDSS_HeII_File = r'C:/Users/chris_000/Documents/GitHub/AGN_SED/sdss_data/HeII_sample.csv'
+SDSS_File = '/Users/compastro/greene/AGN_SED/sdss_data/flux_norm.csv'
+SDSS_Ratios_File =  '/Users/compastro/greene/AGN_SED/flux_norm_AGN.csv'
+SDSS_HeII_File = '/Users/compastro/greene/AGN_SED/sdss_data/HeII_sample.csv'
 SDSS_Data=np.genfromtxt(SDSS_File, skip_header=1, delimiter = ',',dtype=float,unpack=True)
-Shirazi_Data=np.genfromtxt(Shirazi_File, skip_header=3, delimiter = ',',unpack=True)
 SDSS_Data_Ratios = np.genfromtxt(SDSS_Ratios_File, skip_header=1, delimiter = ',',dtype=float,invalid_raise = False)
 SDSS_Data_HeII = np.genfromtxt(SDSS_HeII_File,skip_header = 1, delimiter = ',',dtype = float)
 #Set up an array for data that is just AGN
@@ -122,7 +119,7 @@ N2AGN = SDSS_Data_Ratios[condition1, :]
 OIAGN = SDSS_Data_Ratios[np.logical_and(condition2a, condition2b),:]
 S2AGN = SDSS_Data_Ratios[(condition3a & condition3b),:]
 O3O2AGN = SDSS_Data_Ratios[(condition4a & condition4b),:]
-color5 = np.where(Shirazi_Data[6] >= np.subtract(np.divide(1,np.add(np.multiply(8.92, Shirazi_Data[7]),1.32)),1.22),1,0)
+
 
 basexvalO3 = (d['O III 4363 / O III 5007'].get_value(0),d['O III 4363 / O III 5007'].get_value(3),d['O III 4363 / O III 5007'].get_value(6),d['O III 4363 / O III 5007'].get_value(9))
 baseyvalS2 = (d['S II 6716/ S II 6731'].get_value(0),d['S II 6716/ S II 6731'].get_value(3),d['S II 6716/ S II 6731'].get_value(6),d['S II 6716/ S II 6731'].get_value(9))
