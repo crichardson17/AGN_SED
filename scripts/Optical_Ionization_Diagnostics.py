@@ -10,7 +10,7 @@ def filelist(directory):
             if file.endswith('.lin'):
                 print (file)
                 
-rootdirectory=r'/Users/compastro/greene/AGN_SED/Cloudy_Data' 
+rootdirectory='/Users/compastro/greene/AGN_SED/Cloudy_Data' 
 
 filelist(rootdirectory)
 
