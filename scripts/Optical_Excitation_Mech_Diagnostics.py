@@ -99,6 +99,9 @@ condition4a = np.log10(SDSS_Data_Ratios[:,2]) > np.add(np.multiply(-1.701,np.log
 
 condition4b = np.log10(SDSS_Data_Ratios[:,2]) > np.add(np.log10(SDSS_Data_Ratios[:,5]),0.7)
 
+condition5a = np.log10(SDSS_Data_Ratios[:,2]) > np.add(np.multiply(-1.701, np.log10(SDSS_Data_Ratios[:,5])),-2.163)
+
+condition5b = np.log10(SDSS_Data_Ratios[:,2]) > np.add(np.multiply(1.0, np.log10(SDSS_Data_Ratios[:,5])),0.7)
 
 Hecondition1 = np.log10(np.divide(SDSS_Data_HeII[:,20],SDSS_Data_HeII[:,18])) > np.add(1.19, np.divide(0.61, np.subtract(np.log10(np.divide(SDSS_Data_HeII[:,28],SDSS_Data_HeII[:,27])),.47)))
 
@@ -110,11 +113,15 @@ Hecondition3a = np.log10(np.divide(SDSS_Data_HeII[:,20],SDSS_Data_HeII[:,18])) >
 
 Hecondition3b = np.log10(np.divide(SDSS_Data_HeII[:,20],SDSS_Data_HeII[:,18])) > np.add(1.30,np.divide(0.72, np.subtract(np.log10(np.divide(np.add(SDSS_Data_HeII[:,29],SDSS_Data_HeII[:,30]),SDSS_Data_HeII[:,27])),0.32)))
 
+
 SFcondition1 = np.log10(SDSS_Data_Ratios[:,8]) < np.add(1.3, np.divide(0.61, np.subtract(np.log10(SDSS_Data_Ratios[:,7]),.05))) #From Kewley et al. 2001  
 
 SFcondition2 = np.log10(SDSS_Data_Ratios[:,8]) < np.add(1.33, np.divide(0.73, np.add(np.log10(SDSS_Data_Ratios[:,5]),.59)))#From Kewley et al. 2006
 
 SFcondition3 = np.log10(SDSS_Data_Ratios[:,8]) < np.add(1.30,np.divide(0.72, np.subtract(np.log10(SDSS_Data_Ratios[:,18]),0.32))) 
+
+SFcondition4 = np.log10(SDSS_Data_Ratios[:,2]) < np.subtract(np.multiply(-1.701, np.log10(SDSS_Data_Ratios[:,5])),2.163)
+
 
 Compcondition1 = np.log10(SDSS_Data_Ratios[:,8]) > np.add(1.3, np.divide(0.61, np.subtract(np.log10(SDSS_Data_Ratios[:,7]),.05)))
 
@@ -132,6 +139,9 @@ Linercondition5 = np.log10(SDSS_Data_Ratios[:,8]) < np.add(1.3,np.multiply(1.18,
 
 Linercondition6 = np.add(1.30,np.divide(0.72, np.subtract(np.log10(SDSS_Data_Ratios[:,18]),0.32))) < np.log10(SDSS_Data_Ratios[:,8])
 
+Linercondition7 = np.log10(SDSS_Data_Ratios[:,2]) > np.subtract(np.multiply(-1.701, np.log10(SDSS_Data_Ratios[:,5])),2.163)
+
+Linercondition8 = np.log10(SDSS_Data_Ratios[:,2]) < np.add(np.multiply(1.0, np.log10(SDSS_Data_Ratios[:,5])),0.7)
 mask = (condition1 & (condition2a & condition2b) & (condition3a & condition3b))
 SFmask = (SFcondition1 & SFcondition2 & SFcondition3)
 compmask = (Compcondition1 & Compcondition2)
@@ -292,7 +302,7 @@ lin16xvalues4 = (d['O II / H-Beta'].get_value(2),d['O II / H-Beta'].get_value(5)
 ax4.scatter(np.log10(AGN_Array[:,0]),np.log10(AGN_Array[:,8]),edgecolor = '', c = '#800000',s=5)
 ax4.scatter(np.log10(SF_Array[:,0]),np.log10(SF_Array[:,8]),edgecolor = '', s = 5, c = '#453785')
 ax4.scatter(np.log10(Comp_Array[:,0]),np.log10(Comp_Array[:,8]),edgecolor = '', s = 5)
-ax4.scatter(np.log10(Liner_Array[:,0]),np.log10(Liner_Array[:,8]),edgecolor = '', s = 5, c = 'g')
+ax4.scatter(np.log10(SDSS_Data_Ratios[Linercondition1 & Linercondition3 & Linercondition5,0]),np.log10(SDSS_Data_Ratios[Linercondition1 & Linercondition3 & Linercondition5,8]),edgecolor = '', s = 5, c = 'g')
 ax4.scatter(d['O II / H-Beta'].get_value(0),d['O III / H-Beta'].get_value(0), marker = "s",c='#FF5D5D', s = 50, label = "10^4")
 ax4.scatter(d['O II / H-Beta'].get_value(3),d['O III / H-Beta'].get_value(3), marker = "s",c='#FF0000', s = 50, label = "10^5")
 ax4.scatter(d['O II / H-Beta'].get_value(6),d['O III / H-Beta'].get_value(6), marker = "s",c='#C60000', s = 50, label = "10^6")
@@ -357,11 +367,11 @@ y8 = 1.0*x8+0.7
 baseyvalues6 = (d['O III / O II'].get_value(0),d['O III / O II'].get_value(3),d['O III / O II'].get_value(6),d['O III / O II'].get_value(9))
 linyvalues6 = (d['O III / O II'].get_value(1),d['O III / O II'].get_value(4),d['O III / O II'].get_value(7),d['O III / O II'].get_value(10))
 lin16yvalues6 = (d['O III / O II'].get_value(2),d['O III / O II'].get_value(5),d['O III / O II'].get_value(8),d['O III / O II'].get_value(11))
-ax6.scatter(np.log10(SDSS_Data_Ratios[:,5]),np.log10(SDSS_Data_Ratios[:,2]),edgecolor = '', s = 5,c = '#000080', )
+#ax6.scatter(np.log10(SDSS_Data_Ratios[:,5]),np.log10(SDSS_Data_Ratios[:,2]),edgecolor = '', s = 5,c = '#000080', )
 ax6.scatter(np.log10(O3O2AGN[:,5]), np.log10(O3O2AGN[:,2]), edgecolor = '', s = 5, c = '#800000')
 ax6.scatter(np.log10(SF_Array[:,5]),np.log10(SF_Array[:,2]),edgecolor = '', s = 5, c = '#453785')
 ax6.scatter(np.log10(Comp_Array[:,5]),np.log10(Comp_Array[:,2]),edgecolor = '', s = 5)
-ax6.scatter(np.log10(Liner_Array[:,5]),np.log10(Liner_Array[:,2]),edgecolor = '', s = 5, c = 'g')
+ax6.scatter(np.log10(SDSS_Data_Ratios[Linercondition7 & Linercondition8,5]),np.log10(SDSS_Data_Ratios[Linercondition7 & Linercondition8,2]),edgecolor = '', s = 5, c = 'g')
 ax6.scatter(d['O I / H-Alpha'].get_value(0),d['O III / O II'].get_value(0), marker = "s",c='#FF5D5D', s = 50, label = "10^4")
 ax6.scatter(d['O I / H-Alpha'].get_value(3),d['O III / O II'].get_value(3), marker = "s",c='#FF0000', s = 50, label = "10^5")
 ax6.scatter(d['O I / H-Alpha'].get_value(6),d['O III / O II'].get_value(6), marker = "s",c='#C60000', s = 50, label = "10^6")

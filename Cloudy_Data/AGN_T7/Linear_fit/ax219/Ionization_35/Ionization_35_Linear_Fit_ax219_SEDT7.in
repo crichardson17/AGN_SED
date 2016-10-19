@@ -31,7 +31,7 @@ set save prefix "Ionization_35_Linear_Fit_ax219_SEDT7"
 save continuum ".con" units eV
 iterate to convergence
 save linelist,  ".lin" "LineList_CG_1.dat" last no hash
-save lines, emissivity "_lines.str"
+save lines, emissivity "_lines.str" last no hash
 o  3 5007
 totl 3727
 o  1 6300
@@ -47,8 +47,9 @@ ar 3 7135
 s II  6716
 s II  6731
 end of lines
-save element sulphur "_sulfer.txt"
-save element nitrogen "_nitrogen.txt"
+save element oxygen "_oxygen.txt" last no hash
+save element sulphur "_sulfer.txt" last no hash
+save element nitrogen "_nitrogen.txt" last no hash
 save overview ".ovr" last no hash
 save heating ".het" last no hash
 save cooling ".col" last no hash

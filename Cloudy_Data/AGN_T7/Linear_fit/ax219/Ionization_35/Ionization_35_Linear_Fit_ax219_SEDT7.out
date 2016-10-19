@@ -23,9 +23,10 @@
                        * save continuum ".con" units eV                                                  *
                        * iterate to convergence                                                          *
                        * save linelist,  ".lin" "LineList_CG_1.dat" last no hash                         *
-                       * save lines, emissivity "_lines.str"                                             *
-                       * save element sulphur "_sulfer.txt"                                              *
-                       * save element nitrogen "_nitrogen.txt"                                           *
+                       * save lines, emissivity "_lines.str" last no hash                                *
+                       * save element oxygen "_oxygen.txt" last no hash                                  *
+                       * save element sulphur "_sulfer.txt" last no hash                                 *
+                       * save element nitrogen "_nitrogen.txt" last no hash                              *
                        * save overview ".ovr" last no hash                                               *
                        * save heating ".het" last no hash                                                *
                        * save cooling ".col" last no hash                                                *
@@ -230,7 +231,7 @@ PROBLEM CoolNet derivative oscillating in initial solution Te=7.603e+03 dCoolNet
                        * save continuum ".con" units eV                                                  *
                        * iterate to convergence                                                          *
                        * save linelist,  ".lin" "LineList_CG_1.dat" last no hash                         *
-                       * save lines, emissivity "_lines.str"                                             *
+                       * save lines, emissivity "_lines.str" last no hash                                *
                        * o  3 5007                                                                       *
                        * totl 3727                                                                       *
                        * o  1 6300                                                                       *
@@ -246,8 +247,9 @@ PROBLEM CoolNet derivative oscillating in initial solution Te=7.603e+03 dCoolNet
                        * s II  6716                                                                      *
                        * s II  6731                                                                      *
                        * end of lines                                                                    *
-                       * save element sulphur "_sulfer.txt"                                              *
-                       * save element nitrogen "_nitrogen.txt"                                           *
+                       * save element oxygen "_oxygen.txt" last no hash                                  *
+                       * save element sulphur "_sulfer.txt" last no hash                                 *
+                       * save element nitrogen "_nitrogen.txt" last no hash                              *
                        * save overview ".ovr" last no hash                                               *
                        * save heating ".het" last no hash                                                *
                        * save cooling ".col" last no hash                                                *
@@ -891,7 +893,7 @@ PROBLEM CoolNet derivative oscillating in initial solution Te=7.603e+03 dCoolNet
    <a>:2.64E-08  erdeFe3.4E+28  Tcompt3.56E+08  Tthr1.51E+10  <Tden>: 5.14E+03  <dens>:2.09E-21  <MolWgt>1.13E+00
      Mean Jeans  l(cm)2.66E+19  M(sun)1.12E+05  smallest:     len(cm):9.07E+18  M(sun):4.47E+03  a_ox tran: -1.06
  Rion:1.000E+30  Dist:0.00E+00  Diam:0.000E+00
- Hatom level 70  HatomType: add  HInducImp  F  He tot level: 63  He2 level:   70  ExecTime   989.0
+ Hatom level 70  HatomType: add  HInducImp  F  He tot level: 63  He2 level:   70  ExecTime   928.9
  ConvrgError(%)  <eden>  0.317  MaxEden  0.989  <H-C>   0.08  Max(H-C)    0.45  <Press>   0.583  MaxPrs er  1.010
   Continuity(%)  chng Te 120.8  elec den  17.4  n(H2)  652.3  n(CO)        0.0
 
@@ -1150,7 +1152,7 @@ PROBLEM CoolNet derivative oscillating in initial solution Te=7.603e+03 dCoolNet
                        * save continuum ".con" units eV                                                  *
                        * iterate to convergence                                                          *
                        * save linelist,  ".lin" "LineList_CG_1.dat" last no hash                         *
-                       * save lines, emissivity "_lines.str"                                             *
+                       * save lines, emissivity "_lines.str" last no hash                                *
                        * o  3 5007                                                                       *
                        * totl 3727                                                                       *
                        * o  1 6300                                                                       *
@@ -1166,8 +1168,9 @@ PROBLEM CoolNet derivative oscillating in initial solution Te=7.603e+03 dCoolNet
                        * s II  6716                                                                      *
                        * s II  6731                                                                      *
                        * end of lines                                                                    *
-                       * save element sulphur "_sulfer.txt"                                              *
-                       * save element nitrogen "_nitrogen.txt"                                           *
+                       * save element oxygen "_oxygen.txt" last no hash                                  *
+                       * save element sulphur "_sulfer.txt" last no hash                                 *
+                       * save element nitrogen "_nitrogen.txt" last no hash                              *
                        * save overview ".ovr" last no hash                                               *
                        * save heating ".het" last no hash                                                *
                        * save cooling ".col" last no hash                                                *
@@ -1805,7 +1808,7 @@ PROBLEM CoolNet derivative oscillating in initial solution Te=7.603e+03 dCoolNet
    <a>:2.56E-08  erdeFe3.4E+28  Tcompt3.56E+08  Tthr1.49E+10  <Tden>: 5.15E+03  <dens>:2.10E-21  <MolWgt>1.13E+00
      Mean Jeans  l(cm)2.58E+19  M(sun)1.09E+05  smallest:     len(cm):8.57E+18  M(sun):3.98E+03  a_ox tran: -1.06
  Rion:1.000E+30  Dist:0.00E+00  Diam:0.000E+00
- Hatom level 70  HatomType: add  HInducImp  F  He tot level: 63  He2 level:   70  ExecTime  1869.0
+ Hatom level 70  HatomType: add  HInducImp  F  He tot level: 63  He2 level:   70  ExecTime  1869.5
  ConvrgError(%)  <eden>  0.323  MaxEden  0.982  <H-C>   0.08  Max(H-C)    0.49  <Press>   0.573  MaxPrs er  1.008
   Continuity(%)  chng Te 130.1  elec den  17.7  n(H2)  621.7  n(CO)        0.0
 
@@ -2064,7 +2067,7 @@ PROBLEM CoolNet derivative oscillating in initial solution Te=7.603e+03 dCoolNet
                        * save continuum ".con" units eV                                                  *
                        * iterate to convergence                                                          *
                        * save linelist,  ".lin" "LineList_CG_1.dat" last no hash                         *
-                       * save lines, emissivity "_lines.str"                                             *
+                       * save lines, emissivity "_lines.str" last no hash                                *
                        * o  3 5007                                                                       *
                        * totl 3727                                                                       *
                        * o  1 6300                                                                       *
@@ -2080,8 +2083,9 @@ PROBLEM CoolNet derivative oscillating in initial solution Te=7.603e+03 dCoolNet
                        * s II  6716                                                                      *
                        * s II  6731                                                                      *
                        * end of lines                                                                    *
-                       * save element sulphur "_sulfer.txt"                                              *
-                       * save element nitrogen "_nitrogen.txt"                                           *
+                       * save element oxygen "_oxygen.txt" last no hash                                  *
+                       * save element sulphur "_sulfer.txt" last no hash                                 *
+                       * save element nitrogen "_nitrogen.txt" last no hash                              *
                        * save overview ".ovr" last no hash                                               *
                        * save heating ".het" last no hash                                                *
                        * save cooling ".col" last no hash                                                *
@@ -2720,7 +2724,7 @@ PROBLEM CoolNet derivative oscillating in initial solution Te=7.603e+03 dCoolNet
    <a>:2.57E-08  erdeFe3.4E+28  Tcompt3.56E+08  Tthr1.50E+10  <Tden>: 5.35E+03  <dens>:2.02E-21  <MolWgt>1.12E+00
      Mean Jeans  l(cm)3.01E+19  M(sun)1.33E+05  smallest:     len(cm):1.12E+19  M(sun):6.80E+03  a_ox tran: -1.06
  Rion:1.000E+30  Dist:0.00E+00  Diam:0.000E+00
- Hatom level 70  HatomType: add  HInducImp  F  He tot level: 63  He2 level:   70  ExecTime  2758.1
+ Hatom level 70  HatomType: add  HInducImp  F  He tot level: 63  He2 level:   70  ExecTime  2822.5
  ConvrgError(%)  <eden>  0.302  MaxEden  0.963  <H-C>   0.08  Max(H-C)    0.50  <Press>   0.582  MaxPrs er  0.988
   Continuity(%)  chng Te 121.5  elec den  17.4  n(H2)  283.6  n(CO)        0.0
 
@@ -3026,5 +3030,5 @@ PROBLEM CoolNet derivative oscillating in initial solution Te=7.603e+03 dCoolNet
          1 mean step length searches/chemistry step
 ----------------------------------------------------
 
- Cloudy ends: 237 zones, 3 iterations, 4 cautions.  ExecTime(s) 2758.14
+ Cloudy ends: 237 zones, 3 iterations, 4 cautions.  ExecTime(s) 2822.54
  [Stop in cdMain at maincl.cpp:483, Cloudy exited OK]

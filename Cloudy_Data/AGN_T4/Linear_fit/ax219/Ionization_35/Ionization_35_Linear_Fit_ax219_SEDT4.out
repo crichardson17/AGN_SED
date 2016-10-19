@@ -23,9 +23,10 @@
                        * save continuum ".con" units eV                                                  *
                        * iterate to convergence                                                          *
                        * save linelist,  ".lin" "LineList_CG_1.dat" last no hash                         *
-                       * save lines, emissivity "_lines.str"                                             *
-                       * save element sulphur "_sulfer.txt"                                              *
-                       * save element nitrogen "_nitrogen.txt"                                           *
+                       * save lines, emissivity "_lines.str" last no hash                                *
+                       * save element oxygen "_oxygen.txt" last no hash                                  *
+                       * save element sulphur "_sulfer.txt" last no hash                                 *
+                       * save element nitrogen "_nitrogen.txt" last no hash                              *
                        * save overview ".ovr" last no hash                                               *
                        * save heating ".het" last no hash                                                *
                        * save cooling ".col" last no hash                                                *
@@ -218,7 +219,7 @@
                        * save continuum ".con" units eV                                                  *
                        * iterate to convergence                                                          *
                        * save linelist,  ".lin" "LineList_CG_1.dat" last no hash                         *
-                       * save lines, emissivity "_lines.str"                                             *
+                       * save lines, emissivity "_lines.str" last no hash                                *
                        * o  3 5007                                                                       *
                        * totl 3727                                                                       *
                        * o  1 6300                                                                       *
@@ -234,8 +235,9 @@
                        * s II  6716                                                                      *
                        * s II  6731                                                                      *
                        * end of lines                                                                    *
-                       * save element sulphur "_sulfer.txt"                                              *
-                       * save element nitrogen "_nitrogen.txt"                                           *
+                       * save element oxygen "_oxygen.txt" last no hash                                  *
+                       * save element sulphur "_sulfer.txt" last no hash                                 *
+                       * save element nitrogen "_nitrogen.txt" last no hash                              *
                        * save overview ".ovr" last no hash                                               *
                        * save heating ".het" last no hash                                                *
                        * save cooling ".col" last no hash                                                *
@@ -839,7 +841,7 @@
    <a>:4.37E-08  erdeFe2.3E+28  Tcompt3.26E+08  Tthr2.13E+10  <Tden>: 7.44E+03  <dens>:1.09E-21  <MolWgt>9.39E-01
      Mean Jeans  l(cm)3.86E+19  M(sun)2.37E+05  smallest:     len(cm):1.25E+19  M(sun):8.03E+03  a_ox tran: -1.75
  Rion:1.000E+30  Dist:0.00E+00  Diam:0.000E+00
- Hatom level 70  HatomType: add  HInducImp  F  He tot level: 63  He2 level:   70  ExecTime   425.7
+ Hatom level 70  HatomType: add  HInducImp  F  He tot level: 63  He2 level:   70  ExecTime   381.1
  ConvrgError(%)  <eden>  0.278  MaxEden  0.929  <H-C>   0.09  Max(H-C)    0.46  <Press>   0.548  MaxPrs er  0.985
   Continuity(%)  chng Te  87.4  elec den  14.0  n(H2)    0.0  n(CO)        0.0
 
@@ -1087,7 +1089,7 @@
                        * save continuum ".con" units eV                                                  *
                        * iterate to convergence                                                          *
                        * save linelist,  ".lin" "LineList_CG_1.dat" last no hash                         *
-                       * save lines, emissivity "_lines.str"                                             *
+                       * save lines, emissivity "_lines.str" last no hash                                *
                        * o  3 5007                                                                       *
                        * totl 3727                                                                       *
                        * o  1 6300                                                                       *
@@ -1103,8 +1105,9 @@
                        * s II  6716                                                                      *
                        * s II  6731                                                                      *
                        * end of lines                                                                    *
-                       * save element sulphur "_sulfer.txt"                                              *
-                       * save element nitrogen "_nitrogen.txt"                                           *
+                       * save element oxygen "_oxygen.txt" last no hash                                  *
+                       * save element sulphur "_sulfer.txt" last no hash                                 *
+                       * save element nitrogen "_nitrogen.txt" last no hash                              *
                        * save overview ".ovr" last no hash                                               *
                        * save heating ".het" last no hash                                                *
                        * save cooling ".col" last no hash                                                *
@@ -1700,7 +1703,7 @@
    <a>:4.29E-08  erdeFe2.3E+28  Tcompt3.26E+08  Tthr2.14E+10  <Tden>: 7.44E+03  <dens>:1.10E-21  <MolWgt>9.45E-01
      Mean Jeans  l(cm)3.86E+19  M(sun)2.37E+05  smallest:     len(cm):1.25E+19  M(sun):8.04E+03  a_ox tran: -1.75
  Rion:1.000E+30  Dist:0.00E+00  Diam:0.000E+00
- Hatom level 70  HatomType: add  HInducImp  F  He tot level: 63  He2 level:   70  ExecTime   859.6
+ Hatom level 70  HatomType: add  HInducImp  F  He tot level: 63  He2 level:   70  ExecTime   745.6
  ConvrgError(%)  <eden>  0.269  MaxEden  0.986  <H-C>   0.09  Max(H-C)    0.47  <Press>   0.580  MaxPrs er  0.988
   Continuity(%)  chng Te 102.8  elec den  15.1  n(H2)    0.0  n(CO)        0.0
 
@@ -1947,7 +1950,7 @@
                        * save continuum ".con" units eV                                                  *
                        * iterate to convergence                                                          *
                        * save linelist,  ".lin" "LineList_CG_1.dat" last no hash                         *
-                       * save lines, emissivity "_lines.str"                                             *
+                       * save lines, emissivity "_lines.str" last no hash                                *
                        * o  3 5007                                                                       *
                        * totl 3727                                                                       *
                        * o  1 6300                                                                       *
@@ -1963,8 +1966,9 @@
                        * s II  6716                                                                      *
                        * s II  6731                                                                      *
                        * end of lines                                                                    *
-                       * save element sulphur "_sulfer.txt"                                              *
-                       * save element nitrogen "_nitrogen.txt"                                           *
+                       * save element oxygen "_oxygen.txt" last no hash                                  *
+                       * save element sulphur "_sulfer.txt" last no hash                                 *
+                       * save element nitrogen "_nitrogen.txt" last no hash                              *
                        * save overview ".ovr" last no hash                                               *
                        * save heating ".het" last no hash                                                *
                        * save cooling ".col" last no hash                                                *
@@ -2560,7 +2564,7 @@
    <a>:4.30E-08  erdeFe2.3E+28  Tcompt3.26E+08  Tthr2.14E+10  <Tden>: 7.45E+03  <dens>:1.09E-21  <MolWgt>9.44E-01
      Mean Jeans  l(cm)3.88E+19  M(sun)2.39E+05  smallest:     len(cm):1.26E+19  M(sun):8.21E+03  a_ox tran: -1.75
  Rion:1.000E+30  Dist:0.00E+00  Diam:0.000E+00
- Hatom level 70  HatomType: add  HInducImp  F  He tot level: 63  He2 level:   70  ExecTime  1251.2
+ Hatom level 70  HatomType: add  HInducImp  F  He tot level: 63  He2 level:   70  ExecTime  1112.1
  ConvrgError(%)  <eden>  0.294  MaxEden  0.959  <H-C>   0.09  Max(H-C)    0.49  <Press>   0.601  MaxPrs er  0.989
   Continuity(%)  chng Te  95.7  elec den  14.7  n(H2)    0.0  n(CO)        0.0
 
@@ -2866,5 +2870,5 @@
          1 mean step length searches/chemistry step
 ----------------------------------------------------
 
- Cloudy ends: 185 zones, 3 iterations, 2 cautions.  ExecTime(s) 1251.16
+ Cloudy ends: 185 zones, 3 iterations, 2 cautions.  ExecTime(s) 1112.10
  [Stop in cdMain at maincl.cpp:483, Cloudy exited OK]
