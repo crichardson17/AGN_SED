@@ -6,7 +6,7 @@ import os
 
 
 #import our data
-OxygenT4_ax117_File = '/Users/compastro/greene/AGN_SED/cloudy_data/AGN_T4/Linear_fit/ax117/Ionization_35/Ionization_35_Linear_Fit_ax117_SEDT4_oxygen.txt'
+OxygenT4_ax117_File = r'C:\Users\chris_000\Documents\GitHub\AGN_SED\cloudy_data\AGN_T4\Linear_fit\ax117\Ionization_35\Ionization_35_Linear_Fit_ax117_SEDT4_oxygen.txt'
 OxygenT4_ax219_File = '/Users/compastro/greene/AGN_SED/cloudy_data/AGN_T4/Linear_fit/ax219/Ionization_35/Ionization_35_Linear_Fit_ax219_SEDT4_oxygen.txt' 
 OxygenT4_File = '/Users/compastro/greene/AGN_SED/cloudy_data/AGN_T4/Baseline/Ionization35/Ionization_35_SEDT4_oxygen.txt'
 OxygenT5_File = '/Users/compastro/greene/AGN_SED/cloudy_data/AGN_T5/Baseline/Ionization35/Ionization_35_SEDT5_oxygen.txt'
