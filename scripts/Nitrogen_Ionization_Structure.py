@@ -1,8 +1,7 @@
 #Import required modules
 import matplotlib.pyplot as plt
 import numpy as np
-import pandas as pd
-import os
+from matplotlib.ticker import MaxNLocator
 
 
 #import our data
@@ -58,6 +57,8 @@ oxygenT7_ax219_data = np.genfromtxt(OxygenT7_ax219_File, skip_header=1,dtype=flo
 
 
 fig, ((ax1,ax2,ax3,ax4),(ax5,ax6,ax7,ax8) ,(ax9,ax10,ax11,ax12)) = plt.subplots(3,4,sharex = True)
+plt.gca().xaxis.set_major_locator(MaxNLocator(prune='upper'))
+plt.gca().yaxis.set_major_locator(MaxNLocator(prune='upper'))
 plt.subplots_adjust(hspace=0, wspace = 0)
 
 
@@ -69,6 +70,7 @@ ax1.plot(oxygenT4_data[:,0],oxygenT4_data[:,1], c = 'g', ls = '--', label = 'O I
 ax1.plot(oxygenT4_data[:,0], oxygenT4_data[:,2],c = 'r', ls = '--', label = 'O II')
 ax1.plot(oxygenT4_data[:,0], oxygenT4_data[:,3],c = 'b', ls = '--', label = 'O III')
 ax1.set_ylabel(r'$\alpha$x = 1.42')
+ax1.set_title(r'$T_{bb}=10^4$')
 
 ax2.plot(NitrogenT5_data[:,0],NitrogenT5_data[:,1], c = 'g')
 ax2.plot(NitrogenT5_data[:,0],NitrogenT5_data[:,2], c = 'r')
@@ -77,6 +79,8 @@ ax2.plot(oxygenT5_data[:,0],oxygenT5_data[:,1], c = 'g', ls = '--', label = 'O I
 ax2.plot(oxygenT5_data[:,0], oxygenT5_data[:,2],c = 'r', ls = '--', label = 'O II')
 ax2.plot(oxygenT5_data[:,0], oxygenT5_data[:,3],c = 'b', ls = '--', label = 'O III')
 ax2.set_yticklabels([])
+ax2.set_title(r'$T_{bb}=10^5$')
+
 ax3.plot(nitrogenT6_data[:,0],nitrogenT6_data[:,1], c = 'g')
 ax3.plot(nitrogenT6_data[:,0],nitrogenT6_data[:,2], c = 'r')
 ax3.plot(nitrogenT6_data[:,0],nitrogenT6_data[:,3], c = 'b')
@@ -84,6 +88,7 @@ ax3.plot(oxygenT6_data[:,0],oxygenT6_data[:,1], c = 'g', ls = '--', label = 'O I
 ax3.plot(oxygenT6_data[:,0], oxygenT6_data[:,2],c = 'r', ls = '--', label = 'O II')
 ax3.plot(oxygenT6_data[:,0], oxygenT6_data[:,3],c = 'b', ls = '--', label = 'O III')
 ax3.set_yticklabels([])
+ax3.set_title(r'$T_{bb}=10^6$')
 
 ax4.plot(nitrogenT7_data[:,0],nitrogenT7_data[:,1], c = 'g')
 ax4.plot(nitrogenT7_data[:,0],nitrogenT7_data[:,2], c = 'r')
@@ -92,6 +97,8 @@ ax4.plot(oxygenT7_data[:,0],oxygenT7_data[:,1], c = 'g', ls = '--', label = 'O I
 ax4.plot(oxygenT7_data[:,0], oxygenT7_data[:,2],c = 'r', ls = '--', label = 'O II')
 ax4.plot(oxygenT7_data[:,0], oxygenT7_data[:,3],c = 'b', ls = '--', label = 'O III')
 ax4.set_yticklabels([])
+ax4.set_title(r'$T_{bb}=10^7$')
+
 #Plot ax = 117 Structure for each Temperature
 ax5.plot(nitrogenT4_ax117_data[:,0],nitrogenT4_ax117_data[:,1], c = 'g')
 ax5.plot(nitrogenT4_ax117_data[:,0],nitrogenT4_ax117_data[:,2], c = 'r')
