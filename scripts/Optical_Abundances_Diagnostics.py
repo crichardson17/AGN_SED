@@ -23,37 +23,38 @@ normSource=os.path.normpath(rootdirectory)
 
 dfs=[] #Create an empty array for our Data
 
-d=pd.DataFrame()  
-d=d.reset_index()
+d=pd.DataFrame(dtype = float)  
+
 d2=pd.DataFrame({'Temperature': [10**4,10**5, 10**6, 10**7]},dtype=float) #Create a Dataframe of labels for each file used
 
 for root, dirs, files in os.walk(rootdirectory, topdown=False):
     for name in files:
-        if name.startswith('Linear_Fit_ax219') and name.endswith('.lin'):
+        if name.startswith('Ionization_35_Linear_Fit_ax219') and name.endswith('.lin'):
             print name
             #only read columns from list cols
-            dfs.append(pd.read_csv(os.path.join(root, name), delimiter="\t", usecols=['TOTL  4861A','O  3  5007A', 'NE 5  3426A', 'NE 3  3869A',
+            dfs.append(pd.read_csv(os.path.join(root, name), delimiter="\t", sep='\s*', usecols=['TOTL  4861A','O  3  5007A', 'NE 5  3426A', 'NE 3  3869A',
             'TOTL  4363A', 'O  1  6300A', 'H  1  6563A','N  2  6584A','S  2  6720A' , 'HE 2  4686A','TOTL  3727A', 'S II  6716A', 'S II  6731A',
             'NE 3  3869A','AR 3  7135A','HE 1  5876A','TOTL  4363A','O  3  4959A','O II  3726A', 'O II  3729A','O  4 25.88m','NE 2 12.81m','NE 5 14.32m','NE 5 24.31m','NE 3 15.55m']))
             d = pd.concat(dfs, ignore_index=True)
-        elif name.startswith('Linear_Fit_ax117') and name.endswith('.lin'):
+        elif name.startswith('Ionization_35_Linear_Fit_ax117') and name.endswith('.lin'):
             print name
             #only read columns from list cols
-            dfs.append(pd.read_csv(os.path.join(root, name), delimiter="\t", usecols=['TOTL  4861A','O  3  5007A', 'NE 5  3426A', 'NE 3  3869A',
+            dfs.append(pd.read_csv(os.path.join(root, name), sep='\s*',delimiter="\t", usecols=['TOTL  4861A','O  3  5007A', 'NE 5  3426A', 'NE 3  3869A',
             'TOTL  4363A', 'O  1  6300A', 'H  1  6563A','N  2  6584A','S  2  6720A' , 'HE 2  4686A','TOTL  3727A', 'S II  6716A', 'S II  6731A',
             'NE 3  3869A','AR 3  7135A','HE 1  5876A','TOTL  4363A','O  3  4959A','O II  3726A', 'O II  3729A','O  4 25.88m','NE 2 12.81m','NE 5 14.32m','NE 5 24.31m','NE 3 15.55m']))
             d = pd.concat(dfs, ignore_index=True)
-        elif name.startswith('Hden25') and name.endswith('.lin'):
+        elif name.startswith('Ionization_35_SED') and name.endswith('.lin'):
              print name
             #only read columns from list cols
-             dfs.append(pd.read_csv(os.path.join(root, name), delimiter="\t", usecols=['TOTL  4861A','O  3  5007A', 'NE 5  3426A', 'NE 3  3869A',
+             dfs.append(pd.read_csv(os.path.join(root, name), delimiter="\t", sep='\s*', usecols=['TOTL  4861A','O  3  5007A', 'NE 5  3426A', 'NE 3  3869A',
             'TOTL  4363A', 'O  1  6300A', 'H  1  6563A','N  2  6584A','S  2  6720A' , 'HE 2  4686A','TOTL  3727A', 'S II  6716A', 'S II  6731A',
             'NE 3  3869A','AR 3  7135A','HE 1  5876A','TOTL  4363A','O  3  4959A','O II  3726A', 'O II  3729A','O  4 25.88m','NE 2 12.81m','NE 5 14.32m','NE 5 24.31m','NE 3 15.55m']))
              d = pd.concat(dfs, ignore_index=True)
-            
+    
+print(d.loc[:,'O  3  5007A'])
 d['Temperature']=d2
 
-d['O III / H-Beta']=np.log10(np.divide(d['O  3  5007A'],d['TOTL  4861A']))
+d['O III / H-Beta']=np.log10(np.divide(d.loc[:,'O  3  5007A'],d['TOTL  4861A']))
 
 d['He II / H-Beta'] = np.log10(np.divide(d['HE 2  4686A'],d['TOTL  4861A']))
 
@@ -63,7 +64,7 @@ d['N II / H-Alpha']=np.log10(np.divide(d['N  2  6584A'],d['H  1  6563A']))
 
 d['O III / O II'] = np.log10(np.divide(d['O  3  5007A'],d['TOTL  3727A']))
 
-d['O III / Ar III'] = np.log10(np.divide(d['O  3  5007A'],d['AR 3  7135A']))
+d['O III / Ar III'] = np.log10(np.divide(d.loc[:,'O  3  5007A'],d.loc[:,'AR 3  7135A']))
 
 d['O III / Ne III'] = np.log10(np.divide(d['O  3  5007A'],d['NE 3  3869A']))
 
@@ -131,7 +132,7 @@ O3O2AGN = SDSS_Data_Ratios[(condition4a & condition4b),:]
 color5 = np.where(Shirazi_Data[6] >= np.subtract(np.divide(1,np.add(np.multiply(8.92, Shirazi_Data[7]),1.32)),1.22),1,0)
 
 
-basexvalO3A3 = (d['O III / Ar III'].get_value(0),d['O III / Ar III'].get_value(3),d['O III / Ar III'].get_value(6),d['O III / Ar III'].get_value(9))
+basexvalO3A3 = (d.loc[0,'O III / Ar III'],d.loc[3,'O III / Ar III'],d.loc[6,'O III / Ar III'],d.loc[9,'O III / Ar III'])
 baseyvalueNe3 = (d['Ne III / H-Alpha'].get_value(0),d['Ne III / H-Alpha'].get_value(3),d['Ne III / H-Alpha'].get_value(6),d['Ne III / H-Alpha'].get_value(9))
 linxval03A3 = (d['O III / Ar III'].get_value(1),d['O III / Ar III'].get_value(4),d['O III / Ar III'].get_value(7),d['O III / Ar III'].get_value(10))
 linyvalNe3 = (d['Ne III / H-Alpha'].get_value(1),d['Ne III / H-Alpha'].get_value(4),d['Ne III / H-Alpha'].get_value(7),d['Ne III / H-Alpha'].get_value(10))
