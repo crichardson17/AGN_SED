@@ -1,0 +1,69 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      1423,         59]
+NotebookOptionsPosition[      1046,         40]
+NotebookOutlinePosition[      1389,         55]
+CellTagsIndexPosition[      1346,         52]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Christopher Greene HW 11", "Title",
+ CellChangeTimes->{{3.689602311467687*^9, 3.68960231754805*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Problem 10.15", "Section",
+ CellChangeTimes->{{3.68960232050696*^9, 3.6896023227913337`*^9}}],
+
+Cell["\<\
+Work problem 8.12 by using the method of Lagrange multipliers
+a) Show that the acceleration of the ball is 5/7g
+
+\
+\>", "Text",
+ CellChangeTimes->{{3.689602338410878*^9, 3.6896023868761673`*^9}}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{759, 833},
+WindowMargins->{{Automatic, 572}, {64, Automatic}},
+FrontEndVersion->"11.0 for Microsoft Windows (64-bit) (July 28, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 106, 1, 101, "Title"],
+Cell[CellGroupData[{
+Cell[711, 27, 99, 1, 70, "Section"],
+Cell[813, 30, 205, 6, 87, "Text"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+

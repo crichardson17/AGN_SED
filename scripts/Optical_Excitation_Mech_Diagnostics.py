@@ -11,8 +11,7 @@ def filelist(directory):
             if file.endswith('.lin'):
                 print (file)
                 
-rootdirectory='/Users/compastro/greene/AGN_SED/Cloudy_Data'
-
+rootdirectory=r'C:/Users/chris_000/Documents/GitHub/AGN_SED/Cloudy_Data'
 filelist(rootdirectory)
 
 #Generate a CSV file containing all the relevant data points
@@ -22,8 +21,8 @@ normSource=os.path.normpath(rootdirectory)
 
 dfs=[] #Create an empty array for our Data
 
-d=pd.DataFrame() 
-d=d.reset_index()
+d=pd.DataFrame(dtype = float) 
+#d=d.reset_index()
 d2=pd.DataFrame({'Temperature': [10**4,10**5, 10**6, 10**7]},dtype=float) #Create a Dataframe of labels for each file used
 Output_File=r'C:/Users/compastro/gre/AGN_SED/All_Emissions.csv' #Create the output file
 
@@ -32,24 +31,25 @@ for root, dirs, files in os.walk(rootdirectory, topdown=False):
         if name.startswith('Ionization_35_Linear_Fit_ax219') and name.endswith('.lin'):
             print name
             #only read columns from list cols
-            dfs.append(pd.read_csv(os.path.join(root, name), delimiter="\t", usecols=['TOTL  4861A','O  3  5007A', 'NE 5  3426A', 'NE 3  3869A',
+            dfs.append(pd.read_csv(os.path.join(root, name),  sep='\s*',delimiter="\t",usecols=['TOTL  4861A','O  3  5007A', 'NE 5  3426A', 'NE 3  3869A',
             'TOTL  4363A', 'O  1  6300A', 'H  1  6563A','N  2  6584A','S  2  6720A' , 'HE 2  4686A','TOTL  3727A', 'S II  6716A', 'S II  6731A',
             'NE 3  3869A','AR 3  7135A','HE 1  5876A','TOTL  4363A','O  3  4959A','O II  3726A', 'O II  3729A']))
             d = pd.concat(dfs, ignore_index=True)
         elif name.startswith('Ionization_35_Linear_Fit_ax117') and name.endswith('.lin'):
             print name
             #only read columns from list cols
-            dfs.append(pd.read_csv(os.path.join(root, name), delimiter="\t", usecols=['TOTL  4861A','O  3  5007A', 'NE 5  3426A', 'NE 3  3869A',
+            dfs.append(pd.read_csv(os.path.join(root, name), delimiter="\t", sep='\s*',usecols=['TOTL  4861A','O  3  5007A', 'NE 5  3426A', 'NE 3  3869A',
             'TOTL  4363A', 'O  1  6300A', 'H  1  6563A','N  2  6584A','S  2  6720A' , 'HE 2  4686A','TOTL  3727A', 'S II  6716A', 'S II  6731A',
             'NE 3  3869A','AR 3  7135A','HE 1  5876A','TOTL  4363A','O  3  4959A','O II  3726A', 'O II  3729A']))
-        elif name.startswith('Ionization_35_SEDT') and name.endswith('.lin'):
+            d = pd.concat(dfs, ignore_index=True)
+        elif name.startswith('Ionization_35_SED') and name.endswith('.lin'):
              print name
             #only read columns from list cols
-             dfs.append(pd.read_csv(os.path.join(root, name), delimiter="\t", usecols=['TOTL  4861A','O  3  5007A', 'NE 5  3426A', 'NE 3  3869A',
+             dfs.append(pd.read_csv(os.path.join(root, name), delimiter="\t", sep='\s*',usecols=['TOTL  4861A','O  3  5007A', 'NE 5  3426A', 'NE 3  3869A',
             'TOTL  4363A', 'O  1  6300A', 'H  1  6563A','N  2  6584A','S  2  6720A' , 'HE 2  4686A','TOTL  3727A', 'S II  6716A', 'S II  6731A',
             'NE 3  3869A','AR 3  7135A','HE 1  5876A','TOTL  4363A','O  3  4959A','O II  3726A', 'O II  3729A']))
              d = pd.concat(dfs, ignore_index=True)
-            
+print(d.loc[:,'O  3  5007A'])         
 d['Temperature']=d2
 d['O III / H-Beta']= np.log10(d['O  3  5007A'] / d['TOTL  4861A'])
 
@@ -69,11 +69,11 @@ d['He II / H-Beta'] = np.log10(np.divide(d['HE 2  4686A'],d['TOTL  4861A']))
 
 
 #Plot these data points
-SDSS_File = r'/Users/compastro/greene/AGN_SED/sdss_data/flux_norm.csv'
+SDSS_File = r'c:/Users/chris_000/Documents/GitHub/AGN_SED/sdss_data/flux_norm.csv'
 
-SDSS_Ratios_File = r'/Users/compastro/greene/AGN_SED/flux_norm_AGN.csv'
+SDSS_Ratios_File = r'c:/Users/chris_000/Documents/GitHub/AGN_SED/sdss_data/flux_norm_AGN.csv'
 
-SDSS_HeII_File = r'/Users/compastro/greene/AGN_SED/sdss_data/HeII_sample.csv'
+SDSS_HeII_File = r'c:/Users/chris_000/Documents/GitHub/AGN_SED/sdss_data/HeII_sample.csv'
 
 SDSS_Data=np.genfromtxt(SDSS_File, skip_header=1, delimiter = ',',dtype=float,unpack=True)
 
@@ -203,7 +203,7 @@ ax1.set_ylabel(r'Log$_{10}$([O III] $\lambda 5007$ / H$\beta$)', fontsize = 20)
 ax1.set_xlabel(r'Log$_{10}$([N II] $\lambda 6584$ / H$\alpha$)', fontsize = 20)
 ax1.text(-1,1,'AGN')
 ax1.text(-0.2,-1,'Composite')
-ax1.text(-1.4,-1,'Starburst')
+ax1.text(-1.4,-1,'Star-Forming')
 
 
 x3 = np.arange(-3,-0.7,0.01)
@@ -244,7 +244,7 @@ ax2.set_xlim(np.log10(10**(-3)),np.log10(10**0.5))
 ax2.set_ylabel(r'Log$_{10}$([O III] $\lambda 5007$ / H$\beta$)', fontsize = 20)
 ax2.set_xlabel(r'Log$_{10}$([O I] $\lambda 6300$ / H$\alpha$)', fontsize = 20)
 ax2.text(-2,1, 'Seyfert')
-ax2.text(-2.5,0.5, 'Starburst')
+ax2.text(-2.5,0.5, 'Star-Forming')
 ax2.text(-0.5,-1,'LINER')
 
 
@@ -287,6 +287,7 @@ ax3.set_ylim(np.log10(10**(-1.5)), np.log10(10**(1.5)))
 ax3.set_ylabel(r'Log$1{10}$([O III] $\lambda 5007$ / H$\beta$)', fontsize = 20)
 ax3.set_xlabel(r'Log$_{10}$([S II] $\lambda 6720$ / H$\alpha$)', fontsize = 20)
 ax3.text(-1.3,1,'Seyfert')
+ax3.text(-1.8,-0.5,'Star-Forming')
 ax3.text(0.2,-0.5,'LINER')
 
 
@@ -321,12 +322,12 @@ ax4.plot(basexvalues4,baseyvalues, c = '0')
 ax4.plot(linxvalues4,linearyvalues,ls = '--', c = '0')
 ax4.plot(lin16xvalues4,linear16yvalues, ls = ':', lw = '3', c = '0')
 ax4.set_ylabel(r'Log$_{10}$([O III] $\lambda 5007$ / H$\beta$)', fontsize = 20)
-ax4.set_xlabel(r'Log$_{10}$([O II] $\lambda 3727$ / H$\beta$', fontsize = 20)
+ax4.set_xlabel(r'Log$_{10}$([O II] $\lambda 3727$ / H$\beta$)', fontsize = 20)
 ax4.set_xlim(np.log10(10**(-1.5)),np.log10(10**2))
 ax4.set_ylim(np.log10(10**(-1.5)), np.log10(10**(1.5)))
 ax4.text(-1,0.5,'SF/Sy2')
 ax4.text(-1,1,'Seyfert 2')
-ax4.text(-1,-0.5,'Star-forming')
+ax4.text(-1,-0.5,'Star-Forming')
 ax4.text(1,-1,'LINER')
 
 x = np.arange(-3,-0.2,0.01)
@@ -357,7 +358,7 @@ ax5.set_ylim(-3,2)
 
 ax5.set_xlabel(r'Log$_{10}$([N II] $\lambda 6584$ / H$\alpha$)', fontsize = 20)
 ax5.set_ylabel(r'Log$_{10}$([He II] $\lambda 4686$ / H$\beta$)', fontsize = 20)
-ax5.text(-1,-2.5, 'Starburst')
+ax5.text(-1,-2.5, 'Star-Forming')
 ax5.text(-2,0,'AGN')
 
 x7 = np.arange(-2.5,1.5)
@@ -396,10 +397,10 @@ ax6.text(-1.5,1,'Seyfert')
 ax6.text(-0.1,0,'LINER')
 ax6.text(-2.2,-1.3, 'Starburst')
 #plt.suptitle('AGN Excitation Mechanism Diagnostic Plots: Metallicity = 1.5, Efrac = 0.01, Phi(h) = 10.4771, n(h) = 2.5')
-#ax1.legend(loc = 'upper right', fontsize = 'small')
+ax1.legend(loc = 'upper right', fontsize = 'small')
 
 #Display the figure full screen
 figManager = plt.get_current_fig_manager()
 figManager.window.showMaximized()
-
+plt.savefig(r'C:\Users\chris_000\Documents\GitHub\AGN_SED\Presentations\Optical_excitation.png', format='png', dpi=1000)
 plt.show() 

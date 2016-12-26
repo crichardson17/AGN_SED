@@ -1,0 +1,723 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     20650,        715]
+NotebookOptionsPosition[     17496,        606]
+NotebookOutlinePosition[     17839,        621]
+CellTagsIndexPosition[     17796,        618]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Christopher Greene Assignment 7", "Title",
+ CellChangeTimes->{{3.6865742346919775`*^9, 3.6865742404066105`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Problem 1", "Section",
+ CellChangeTimes->{{3.686574242933655*^9, 3.6865742440678062`*^9}}],
+
+Cell[TextData[{
+ "A system consists of three particles, each of unit mass, with position and \
+velocities as follows:\n\t",
+ StyleBox["r1 ",
+  FontWeight->"Bold"],
+ "= ",
+ StyleBox["i ",
+  FontWeight->"Bold"],
+ "+ ",
+ StyleBox["j    v1",
+  FontWeight->"Bold"],
+ " = 2",
+ StyleBox["i\n\tr2 ",
+  FontWeight->"Bold"],
+ "= ",
+ StyleBox["j ",
+  FontWeight->"Bold"],
+ "+ ",
+ StyleBox["k     v2 ",
+  FontWeight->"Bold"],
+ "= ",
+ StyleBox["j\n\tr3 ",
+  FontWeight->"Bold"],
+ "= ",
+ StyleBox["k      v2",
+  FontWeight->"Bold"],
+ " = ",
+ StyleBox["i ",
+  FontWeight->"Bold"],
+ "+ ",
+ StyleBox["j ",
+  FontWeight->"Bold"],
+ "+ ",
+ StyleBox["k",
+  FontWeight->"Bold"]
+}], "Text",
+ CellChangeTimes->{{3.6865742470783014`*^9, 3.6865742679721603`*^9}, {
+  3.6865743379101744`*^9, 3.6865744424226418`*^9}}],
+
+Cell[TextData[{
+ "Find the position and velocity of the center of mass.  Find also the linear \
+momentum of the system. \n\nCenter of mass is given by:\n",
+ Cell[BoxData[
+  FormBox[
+   StyleBox[
+    SubscriptBox["r", "cm"],
+    FontWeight->"Bold"], TraditionalForm]]],
+ " = \[Sum] (mi ",
+ Cell[BoxData[
+  FormBox["ri", TraditionalForm]]],
+ ")/m"
+}], "Text",
+ CellChangeTimes->{{3.6865744948577385`*^9, 3.6865745155074496`*^9}, {
+  3.686574581384726*^9, 3.686574639195077*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"xcm", " ", "=", " ", 
+   FractionBox["m", 
+    RowBox[{"3", "m"}]]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ycm", " ", "=", " ", 
+   FractionBox[
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"m", "*", "1"}], ")"}], "+", 
+     RowBox[{"(", 
+      RowBox[{"m", "*", "1"}], ")"}]}], 
+    RowBox[{"3", "*", "m"}]]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"zcm", " ", "=", " ", 
+   FractionBox[
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"m", "*", "1"}], ")"}], "+", 
+     RowBox[{"(", 
+      RowBox[{"m", "*", "1"}], ")"}]}], 
+    RowBox[{"3", "*", "m"}]]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"rcm", " ", "=", " ", 
+  RowBox[{"{", 
+   RowBox[{"xcm", ",", "ycm", ",", "zcm"}], "}"}]}]}], "Input",
+ CellChangeTimes->{{3.686574647854141*^9, 3.686574677242352*^9}, {
+  3.686574707267291*^9, 3.6865747450653863`*^9}, {3.686574850933378*^9, 
+  3.68657492700574*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   FractionBox["1", "3"], ",", 
+   FractionBox["2", "3"], ",", 
+   FractionBox["2", "3"]}], "}"}]], "Output",
+ CellChangeTimes->{{3.686574903281962*^9, 3.6865749284322987`*^9}}]
+}, Open  ]],
+
+Cell["velocity is the derivative of rcm,", "Text",
+ CellChangeTimes->{{3.686574938470615*^9, 3.6865749541921835`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"v1", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{"2", ",", "0", ",", "0"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"v2", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "1", ",", "0"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"v3", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "1", ",", "1"}], "}"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.686574999192354*^9, 3.686575021515746*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"vcm", " ", "=", 
+  RowBox[{
+   FractionBox["1", "3"], 
+   RowBox[{"{", 
+    RowBox[{"v1", "+", "v2", "+", "v3"}], "}"}]}]}]], "Input",
+ CellChangeTimes->{{3.6865749609989023`*^9, 3.6865749925504694`*^9}, {
+  3.6865750283765683`*^9, 3.6865750313654137`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"{", 
+   RowBox[{"1", ",", 
+    FractionBox["2", "3"], ",", 
+    FractionBox["1", "3"]}], "}"}], "}"}]], "Output",
+ CellChangeTimes->{3.686575031991849*^9}]
+}, Open  ]],
+
+Cell["Linear momentum is mass*vcm", "Text",
+ CellChangeTimes->{{3.686575043031307*^9, 3.6865750833169737`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"pcm", " ", "=", " ", 
+  RowBox[{"3", "*", "vcm"}]}]], "Input",
+ CellChangeTimes->{{3.6865750964980345`*^9, 3.6865751066705275`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"{", 
+   RowBox[{"3", ",", "2", ",", "1"}], "}"}], "}"}]], "Output",
+ CellChangeTimes->{3.686575107494606*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Problem 7.2", "Section",
+ CellChangeTimes->{{3.686575113602624*^9, 3.6865751165167265`*^9}}],
+
+Cell["a) Find the kinetic energy of the system of problem 7.1 ", "Text",
+ CellChangeTimes->{{3.6865751259099894`*^9, 3.6865751359587517`*^9}}],
+
+Cell["The kinetic energy of the center of mass is:", "Text",
+ CellChangeTimes->{{3.6865752837216377`*^9, 3.686575289839557*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Tcm", " ", "=", " ", 
+  RowBox[{"0.5", " ", "*", 
+   RowBox[{"(", 
+    RowBox[{
+     SuperscriptBox["2", "2"], "+", 
+     SuperscriptBox["1", "2"], "+", 
+     RowBox[{"(", 
+      RowBox[{"1", "+", "1", "+", "1"}], ")"}]}], ")"}]}]}]], "Input",
+ CellChangeTimes->{{3.6865752913015575`*^9, 3.686575301917059*^9}, {
+  3.686575336022374*^9, 3.686575368167286*^9}}],
+
+Cell[BoxData["4.`"], "Output",
+ CellChangeTimes->{3.686575302563856*^9, 3.68657536897124*^9}]
+}, Open  ]],
+
+Cell[TextData[{
+ "b) Find the value of m ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["vcm", "2"], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ "/2 "
+}], "Text",
+ CellChangeTimes->{{3.6865754590777617`*^9, 3.6865755018352613`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  FractionBox["1", "2"], "*", 
+  RowBox[{"(", "3", ")"}], "*", 
+  RowBox[{"(", 
+   SuperscriptBox[
+    RowBox[{"Norm", "[", "vcm", "]"}], "2"], ")"}]}]], "Input",
+ CellChangeTimes->{{3.6865755843343735`*^9, 3.686575642548726*^9}}],
+
+Cell[BoxData[
+ FractionBox["7", "3"]], "Output",
+ CellChangeTimes->{{3.6865756374201765`*^9, 3.6865756430783587`*^9}}]
+}, Open  ]],
+
+Cell["\<\
+c) Find the angular momentum about the origin. 
+From equation 7.2.8\
+\>", "Text",
+ CellChangeTimes->{{3.6865756556593466`*^9, 3.6865756658559055`*^9}, {
+  3.6865756996203604`*^9, 3.6865757053285437`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"r1", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "1", ",", "0"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"r2", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "1", ",", "1"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"r3", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", " ", "1"}], "}"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.686575738866967*^9, 3.6865757680263767`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"L", " ", "=", 
+  RowBox[{
+   RowBox[{"Cross", "[", 
+    RowBox[{"r1", ",", "v1"}], "]"}], "+", 
+   RowBox[{"Cross", "[", 
+    RowBox[{"r2", ",", "v2"}], "]"}], "+", 
+   RowBox[{"Cross", "[", 
+    RowBox[{"r3", ",", "v3"}], "]"}], " "}]}]], "Input",
+ CellChangeTimes->{{3.686575708230775*^9, 3.686575709839932*^9}, {
+  3.686575780569454*^9, 3.686575785774537*^9}, {3.686575872566248*^9, 
+  3.686575886272628*^9}, {3.6865759483422084`*^9, 3.6865759847552795`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"-", "2"}], ",", "1", ",", 
+   RowBox[{"-", "2"}]}], "}"}]], "Output",
+ CellChangeTimes->{{3.6865759601576986`*^9, 3.686575985341718*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Problem 7.5", "Section",
+ CellChangeTimes->{{3.686575990906479*^9, 3.6865759926835203`*^9}}],
+
+Cell["\<\
+An artillery shell is fired at an angle of elevation of 60 degrees with \
+initial speed v0.  At the uppermost part of its trajectory, the shell bursts \
+into equal fragments, one of which moves directly upward, relative to the \
+ground, with initial speed v0/2.  What is the direction and speed of the \
+other fragment immediately after the burst?\
+\>", "Text",
+ CellChangeTimes->{{3.6865759978112288`*^9, 3.6865760460973654`*^9}, {
+  3.6865760805336113`*^9, 3.6865761149974604`*^9}, {3.686576160296597*^9, 
+  3.68657616206901*^9}}],
+
+Cell["At the zenith of the trajectory, our speed is", "Text",
+ CellChangeTimes->{{3.6865761715284953`*^9, 3.6865761787837152`*^9}, {
+  3.686576245668471*^9, 3.6865762481004915`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  OverscriptBox["v", "-"], "==", 
+  RowBox[{
+   OverscriptBox["x", "^"], "*", "v0", "*", 
+   RowBox[{"Cos", "[", "60", "]"}]}], "\[Equal]", 
+  RowBox[{
+   OverscriptBox["x", "^"], "*", 
+   FractionBox["v0", "2"]}]}]], "Input",
+ CellChangeTimes->{{3.6865762491573725`*^9, 3.6865763037704124`*^9}}],
+
+Cell["In order to conserve momentum", "Text",
+ CellChangeTimes->{{3.68657631448374*^9, 3.686576319717591*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   FractionBox["v0", "2"], 
+   OverscriptBox["x", "^"]}], "\[Equal]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"(", 
+     FractionBox["m", "2"], ")"}], 
+    RowBox[{"(", 
+     FractionBox["v0", "2"], ")"}]}], "+", 
+   RowBox[{
+    FractionBox["m", "2"], 
+    OverscriptBox["v2", "\[Rule]"], 
+    OverscriptBox["y", "^"]}]}]}]], "Input",
+ CellChangeTimes->{{3.6865763256321926`*^9, 3.6865763901995134`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  OverscriptBox["v2", "-"], " ", "\[Equal]", 
+  RowBox[{
+   RowBox[{
+    OverscriptBox["x", "^"], "*", "v0"}], "-", 
+   RowBox[{
+    OverscriptBox["y", "^"], "*", 
+    FractionBox["v0", "2"]}]}]}]], "Input",
+ CellChangeTimes->{{3.6865764004062867`*^9, 3.686576441881084*^9}}],
+
+Cell["Our direction is:", "Text",
+ CellChangeTimes->{{3.686576571516326*^9, 3.6865765735416317`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[Theta]", "=", 
+  RowBox[{"ArcTan", "[", 
+   FractionBox[
+    RowBox[{
+     RowBox[{"-", "v0"}], "/", "2"}], "v0"], "]"}]}]], "Input",
+ CellChangeTimes->{{3.686576467535898*^9, 3.686576479973996*^9}}],
+
+Cell[BoxData[
+ RowBox[{"-", 
+  RowBox[{"ArcTan", "[", 
+   FractionBox["1", "2"], "]"}]}]], "Output",
+ CellChangeTimes->{3.686576480271426*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[Theta]", "*", 
+  FractionBox["180", "\[Pi]"]}]], "Input",
+ CellChangeTimes->{{3.6865764979238873`*^9, 3.686576555989196*^9}},
+ NumberMarks->False],
+
+Cell[BoxData[
+ RowBox[{"-", 
+  FractionBox[
+   RowBox[{"180", " ", 
+    RowBox[{"ArcTan", "[", 
+     FractionBox["1", "2"], "]"}]}], "\[Pi]"]}]], "Output",
+ CellChangeTimes->{
+  3.686576483211565*^9, 3.686576516159711*^9, {3.6865765523393955`*^9, 
+   3.6865765565628242`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"N", "[", 
+  RowBox[{"-", 
+   FractionBox[
+    RowBox[{"180", " ", 
+     RowBox[{"ArcTan", "[", 
+      FractionBox["1", "2"], "]"}]}], "\[Pi]"]}], "]"}]], "Input",
+ NumberMarks->False],
+
+Cell[BoxData[
+ RowBox[{"-", "26.56505117707799`"}]], "Output",
+ CellChangeTimes->{3.6865765588582387`*^9}]
+}, Open  ]],
+
+Cell["Our speed is", "Text",
+ CellChangeTimes->{{3.6865765783320713`*^9, 3.6865765800113645`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"v2", " ", "=", " ", 
+  SuperscriptBox[
+   RowBox[{"(", 
+    RowBox[{
+     SuperscriptBox["v0", "2"], "+", 
+     SuperscriptBox[
+      RowBox[{"(", 
+       FractionBox["v0", "2"], ")"}], "2"]}], ")"}], 
+   RowBox[{"1", "/", "2"}]]}]], "Input",
+ CellChangeTimes->{{3.6865765896045604`*^9, 3.686576619186782*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  FractionBox["1", "2"], " ", 
+  SqrtBox["5"], " ", 
+  SqrtBox[
+   SuperscriptBox["v0", "2"]]}]], "Output",
+ CellChangeTimes->{3.686576619644412*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Simplify", "[", "v2", "]"}]], "Input",
+ NumberMarks->False],
+
+Cell[BoxData[
+ RowBox[{
+  FractionBox["1", "2"], " ", 
+  SqrtBox["5"], " ", 
+  SqrtBox[
+   SuperscriptBox["v0", "2"]]}]], "Output",
+ CellChangeTimes->{3.686576627202575*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"N", "[", "%", "]"}]], "Input",
+ CellChangeTimes->{{3.686576645876457*^9, 3.6865766479901447`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"1.118033988749895`", " ", 
+  SqrtBox[
+   SuperscriptBox["v0", "2"]]}]], "Output",
+ CellChangeTimes->{3.686576648377669*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Problem C7.1", "Section",
+ CellChangeTimes->{{3.6865766992776003`*^9, 3.686576701813939*^9}}],
+
+Cell["\<\
+Let two particles (m1=m2=1 kg) repel each other with equal and opposite \
+forces given by \
+\>", "Text",
+ CellChangeTimes->{{3.6865767083552604`*^9, 3.6865767307994647`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  OverscriptBox["F12", "\[Rule]"], "==", 
+  RowBox[{"k", "*", 
+   FractionBox[
+    SuperscriptBox["b", "2"], 
+    SuperscriptBox["r", "2"]], 
+   OverscriptBox["r12", "\[Rule]"]}], "\[Equal]", 
+  RowBox[{"-", 
+   OverscriptBox["F21", "\[Rule]"]}]}]], "Input",
+ CellChangeTimes->{{3.6865767357932777`*^9, 3.686576775478384*^9}, {
+  3.6865769129460096`*^9, 3.6865769169852705`*^9}, {3.68665662650095*^9, 
+  3.6866566378921165`*^9}},
+ EmphasizeSyntaxErrors->True],
+
+Cell[TextData[{
+ "where b = 1 m, and k = 1 N.  Assume that the initial position of m1 and m2 \
+are given by ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox[
+    RowBox[{"(", 
+     RowBox[{"x1", ",", "y1"}], ")"}], "0"], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ "=(-10,0.5) m and ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox[
+    RowBox[{"(", 
+     RowBox[{"x2", ",", "y2"}], ")"}], "0"], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ "=(0,-0.5) m.  Let the initial velocity of m1 be 10 m/s in the +x direction \
+and m2 be at rest.  Numerically integrate the equations of motion for these \
+two particles undergoing this two-dimensional \
+\[OpenCurlyDoubleQuote]collision.\[CloseCurlyDoubleQuote]\na) Plot their \
+trajectories up to a point where their distance of separation is 10 m. "
+}], "Text",
+ CellChangeTimes->{{3.686656653867175*^9, 3.686656763035161*^9}, {
+  3.686657886780081*^9, 3.6866579213188114`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{" ", 
+     RowBox[{"Define", " ", "Constants"}], ")"}], "+"}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"k", " ", "=", " ", "1"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"b", " ", "=", " ", "1"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"x10", " ", "=", " ", 
+     RowBox[{"-", "10"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"y10", " ", "=", " ", 
+     RowBox[{"-", "0.5"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"x20", " ", "=", " ", "0"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"y20", " ", "=", " ", 
+     RowBox[{"-", "0.5"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"v01", " ", "=", " ", "10"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"v02", " ", "=", " ", "0"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"m1", " ", "=", " ", "1"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"m2", " ", "=", " ", "1"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"t0", " ", "=", " ", "0"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"tf", " ", "=", " ", "10"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"dt", " ", "=", " ", "0.01"}], "\[IndentingNewLine]", 
+   RowBox[{"r12", " ", "=", " "}]}]}]], "Input",
+ CellChangeTimes->{{3.686656833662636*^9, 3.6866569211756268`*^9}, {
+  3.686657693738614*^9, 3.6866577102750263`*^9}, {3.6866581584542212`*^9, 
+  3.68665816108486*^9}}],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.6866581543850784`*^9, 3.6866581567006583`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"F12", " ", "=", " ", 
+   RowBox[{"k", "*", 
+    FractionBox[
+     SuperscriptBox["b", "2"], 
+     SuperscriptBox["r", "2"]], "r12"}]}], ";"}]], "Input"],
+
+Cell[BoxData["0.01`"], "Output",
+ CellChangeTimes->{3.6866581109776287`*^9}]
+}, Open  ]],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"dataset1", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{"{", 
+     RowBox[{"ti", ",", "x10", ",", "y10"}], "}"}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"For", "[", 
+  RowBox[{
+   RowBox[{"t", "=", "t0"}], ",", 
+   RowBox[{"t", "<", "tf"}], ",", "dt", ",", "\[IndentingNewLine]", 
+   RowBox[{"a1", " ", "="}]}], " ", "]"}]}], "Input",
+ CellChangeTimes->{{3.6866577234230604`*^9, 3.6866577269751034`*^9}, {
+  3.6866578767987385`*^9, 3.6866578804643145`*^9}, {3.6866580419439373`*^9, 
+  3.686658143552682*^9}}],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.686657701722352*^9, 3.6866577026427426`*^9}}],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.6866576915759363`*^9, 3.6866576920074*^9}}],
+
+Cell[BoxData["t"], "Input",
+ CellChangeTimes->{3.686657689476107*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"F12", " ", "=", " ", 
+   RowBox[{"k", "*", 
+    FractionBox[
+     SuperscriptBox["b", "2"], 
+     SuperscriptBox["r", "2"]], "r12"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.6866575318557577`*^9, 3.6866575570958986`*^9}}],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.6865755605364246`*^9, 3.686575572699707*^9}}],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.6866575677850356`*^9, 3.6866575678000245`*^9}}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{759, 833},
+WindowMargins->{{Automatic, 572}, {64, Automatic}},
+FrontEndVersion->"11.0 for Microsoft Windows (64-bit) (July 28, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 118, 1, 101, "Title"],
+Cell[CellGroupData[{
+Cell[723, 27, 96, 1, 70, "Section"],
+Cell[822, 30, 790, 37, 87, "Text"],
+Cell[1615, 69, 476, 14, 87, "Text"],
+Cell[CellGroupData[{
+Cell[2116, 87, 929, 28, 139, "Input"],
+Cell[3048, 117, 217, 6, 46, "Output"]
+}, Open  ]],
+Cell[3280, 126, 118, 1, 30, "Text"],
+Cell[3401, 129, 481, 13, 69, "Input"],
+Cell[CellGroupData[{
+Cell[3907, 146, 281, 7, 46, "Input"],
+Cell[4191, 155, 195, 6, 46, "Output"]
+}, Open  ]],
+Cell[4401, 164, 111, 1, 30, "Text"],
+Cell[CellGroupData[{
+Cell[4537, 169, 156, 3, 30, "Input"],
+Cell[4696, 174, 149, 4, 30, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4894, 184, 98, 1, 70, "Section"],
+Cell[4995, 187, 142, 1, 30, "Text"],
+Cell[5140, 190, 128, 1, 30, "Text"],
+Cell[CellGroupData[{
+Cell[5293, 195, 384, 10, 33, "Input"],
+Cell[5680, 207, 93, 1, 30, "Output"]
+}, Open  ]],
+Cell[5788, 211, 242, 8, 32, "Text"],
+Cell[CellGroupData[{
+Cell[6055, 223, 254, 7, 46, "Input"],
+Cell[6312, 232, 118, 2, 46, "Output"]
+}, Open  ]],
+Cell[6445, 237, 214, 5, 49, "Text"],
+Cell[6662, 244, 488, 13, 69, "Input"],
+Cell[CellGroupData[{
+Cell[7175, 261, 486, 11, 30, "Input"],
+Cell[7664, 274, 189, 5, 30, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7902, 285, 98, 1, 70, "Section"],
+Cell[8003, 288, 542, 9, 87, "Text"],
+Cell[8548, 299, 182, 2, 30, "Text"],
+Cell[8733, 303, 320, 9, 46, "Input"],
+Cell[9056, 314, 110, 1, 30, "Text"],
+Cell[9169, 317, 436, 15, 46, "Input"],
+Cell[9608, 334, 299, 9, 46, "Input"],
+Cell[9910, 345, 101, 1, 30, "Text"],
+Cell[CellGroupData[{
+Cell[10036, 350, 225, 6, 46, "Input"],
+Cell[10264, 358, 142, 4, 46, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10443, 367, 172, 4, 46, "Input"],
+Cell[10618, 373, 276, 8, 55, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10931, 386, 207, 7, 54, "Input"],
+Cell[11141, 395, 106, 2, 30, "Output"]
+}, Open  ]],
+Cell[11262, 400, 98, 1, 30, "Text"],
+Cell[CellGroupData[{
+Cell[11385, 405, 334, 10, 48, "Input"],
+Cell[11722, 417, 173, 6, 46, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[11932, 428, 83, 2, 30, "Input"],
+Cell[12018, 432, 173, 6, 46, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12228, 443, 122, 2, 30, "Input"],
+Cell[12353, 447, 147, 4, 39, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12549, 457, 99, 1, 70, "Section"],
+Cell[12651, 460, 184, 4, 30, "Text"],
+Cell[12838, 466, 483, 13, 51, "Input"],
+Cell[13324, 481, 932, 23, 110, "Text"],
+Cell[14259, 506, 1527, 39, 297, "Input"],
+Cell[15789, 547, 96, 1, 30, "Input"],
+Cell[CellGroupData[{
+Cell[15910, 552, 187, 6, 51, "Input"],
+Cell[16100, 560, 76, 1, 30, "Output"]
+}, Open  ]],
+Cell[16191, 564, 557, 14, 69, "Input"],
+Cell[16751, 580, 94, 1, 30, "Input"],
+Cell[16848, 583, 92, 1, 30, "Input"],
+Cell[16943, 586, 69, 1, 30, "Input"],
+Cell[17015, 589, 257, 7, 51, "Input"],
+Cell[17275, 598, 94, 1, 30, "Input"],
+Cell[17372, 601, 96, 1, 30, InheritFromParent]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+

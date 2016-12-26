@@ -81,7 +81,7 @@ d['S II 6716/ S II 6731'] = np.log10(np.divide(d['S II  6716A'],d['S II  6731A']
 #Plot these data points
 SDSS_File = r'C:/Users/chris_000/Documents/GitHub/AGN_SED/sdss_data/flux_norm.csv'
 Shirazi_File = r'C:/Users/chris_000/Documents/GitHub/AGN_SED/sdss_data/shirazi12.csv'
-SDSS_Ratios_File = r'C:/Users/chris_000/Documents/GitHub/AGN_SED/flux_norm_AGN.csv'
+SDSS_Ratios_File = r'C:/Users/chris_000/Documents/GitHub/AGN_SED/sdss_data/flux_norm_AGN.csv'
 SDSS_HeII_File = r'C:/Users/chris_000/Documents/GitHub/AGN_SED/sdss_data/HeII_sample.csv'
 SDSS_Data=np.genfromtxt(SDSS_File, skip_header=1, delimiter = ',',dtype=float,unpack=True)
 Shirazi_Data=np.genfromtxt(Shirazi_File, skip_header=3, delimiter = ',',unpack=True)
@@ -100,16 +100,57 @@ condition4a = np.log10(SDSS_Data_Ratios[:,2]) > np.subtract(np.multiply(-1.701,n
 condition4b = np.log10(SDSS_Data_Ratios[:,2]) > np.add(np.log10(SDSS_Data_Ratios[:,5]),0.7)
 
 Hecondition1 = np.log10(np.divide(SDSS_Data_HeII[:,20],SDSS_Data_HeII[:,18])) > np.add(1.19, np.divide(0.61, np.subtract(np.log10(np.divide(SDSS_Data_HeII[:,28],SDSS_Data_HeII[:,27])),.47)))
+
 Hecondition2a = np.log10(np.divide(SDSS_Data_HeII[:,20],SDSS_Data_HeII[:,18])) > np.add(1.3,np.multiply(1.18,np.log10(np.divide(SDSS_Data_HeII[:,24],SDSS_Data_HeII[:,27]))))  #From Kewley et al. 2006
+
 Hecondition2b = np.log10(np.divide(SDSS_Data_HeII[:,20],SDSS_Data_HeII[:,18])) > np.add(1.33, np.divide(0.73, np.add(np.log10(np.divide(SDSS_Data_HeII[:,24],SDSS_Data_HeII[:,27])),.59)))
+
 Hecondition3a = np.log10(np.divide(SDSS_Data_HeII[:,20],SDSS_Data_HeII[:,18])) > np.add(0.76, np.multiply(1.89,np.log10(np.divide(np.add(SDSS_Data_HeII[:,29],SDSS_Data_HeII[:,30]),SDSS_Data_HeII[:,27]))))
+
 Hecondition3b = np.log10(np.divide(SDSS_Data_HeII[:,20],SDSS_Data_HeII[:,18])) > np.add(1.30,np.divide(0.72, np.subtract(np.log10(np.divide(np.add(SDSS_Data_HeII[:,29],SDSS_Data_HeII[:,30]),SDSS_Data_HeII[:,27])),0.32)))
 
+
+SFcondition1 = np.log10(SDSS_Data_Ratios[:,8]) < np.add(1.3, np.divide(0.61, np.subtract(np.log10(SDSS_Data_Ratios[:,7]),.05))) #From Kewley et al. 2001  
+
+SFcondition2 = np.log10(SDSS_Data_Ratios[:,8]) < np.add(1.33, np.divide(0.73, np.add(np.log10(SDSS_Data_Ratios[:,5]),.59)))#From Kewley et al. 2006
+
+SFcondition3 = np.log10(SDSS_Data_Ratios[:,8]) < np.add(1.30,np.divide(0.72, np.subtract(np.log10(SDSS_Data_Ratios[:,18]),0.32))) 
+
+SFcondition4 = np.log10(SDSS_Data_Ratios[:,2]) < np.subtract(np.multiply(-1.701, np.log10(SDSS_Data_Ratios[:,5])),2.163)
+
+
+Compcondition1 = np.log10(SDSS_Data_Ratios[:,8]) > np.add(1.3, np.divide(0.61, np.subtract(np.log10(SDSS_Data_Ratios[:,7]),.05)))
+
+Compcondition2 = np.log10(SDSS_Data_Ratios[:,8]) < np.add(1.19, np.divide(0.61, np.subtract(np.log10(SDSS_Data_Ratios[:,7]),.47)))
+
+Linercondition1 = np.add(1.19, np.divide(0.61, np.subtract(np.log10(SDSS_Data_Ratios[:,7]),.47))) < np.log10(SDSS_Data_Ratios[:,8]) 
+
+Linercondition2 = np.add(1.30,np.divide(0.72, np.subtract(np.log10(SDSS_Data_Ratios[:,18]),0.32))) > np.log10(SDSS_Data_Ratios[:,8])   
+
+Linercondition4 = np.log10(SDSS_Data_Ratios[:,8]) < np.add(0.76, np.multiply(1.89,np.log10(SDSS_Data_Ratios[:,18])))
+
+Linercondition3 = np.log10(SDSS_Data_Ratios[:,8]) > np.add(1.33, np.divide(0.73, np.add(np.log10(SDSS_Data_Ratios[:,5]),.59)))
+
+Linercondition5 = np.log10(SDSS_Data_Ratios[:,8]) < np.add(1.3,np.multiply(1.18,np.log10(SDSS_Data_Ratios[:,5]))) 
+
+Linercondition6 = np.add(1.30,np.divide(0.72, np.subtract(np.log10(SDSS_Data_Ratios[:,18]),0.32))) < np.log10(SDSS_Data_Ratios[:,8])
+
+Linercondition7 = np.log10(SDSS_Data_Ratios[:,2]) > np.subtract(np.multiply(-1.701, np.log10(SDSS_Data_Ratios[:,5])),2.163)
+
+Linercondition8 = np.log10(SDSS_Data_Ratios[:,2]) < np.add(np.multiply(1.0, np.log10(SDSS_Data_Ratios[:,5])),0.7)
 mask = (condition1 & (condition2a & condition2b) & (condition3a & condition3b))
+SFmask = (SFcondition1 & SFcondition2 & SFcondition3)
+compmask = (Compcondition1 & Compcondition2)
+linermask = (Linercondition1 & Linercondition2 & Linercondition3 & Linercondition4)
 mask2 = (Hecondition1 & Hecondition2a & Hecondition2b & (Hecondition3a & Hecondition3b))
 
 AGN_Array= SDSS_Data_Ratios[mask,:]
+SF_Array = SDSS_Data_Ratios[SFmask,:] 
+Comp_Array = SDSS_Data_Ratios[compmask,:]
+Liner_Array = SDSS_Data_Ratios[linermask,:]
 AGN_Array2 = SDSS_Data_HeII[mask2,:]
+
+
 
 ax1 = plt.subplot(231, adjustable = 'box-forced', autoscale_on = False)
 ax2 = plt.subplot(232, adjustable = 'box-forced', autoscale_on = False)
@@ -138,8 +179,10 @@ linxval03A3 = (d['O III / Ar III'].get_value(1),d['O III / Ar III'].get_value(4)
 linyvalNe3 = (d['Ne III / H-Alpha'].get_value(1),d['Ne III / H-Alpha'].get_value(4),d['Ne III / H-Alpha'].get_value(7),d['Ne III / H-Alpha'].get_value(10))
 lin16xval03A3 = (d['O III / Ar III'].get_value(2),d['O III / Ar III'].get_value(5),d['O III / Ar III'].get_value(8),d['O III / Ar III'].get_value(11))
 lin16yvalNe3 = (d['Ne III / H-Alpha'].get_value(2),d['Ne III / H-Alpha'].get_value(5),d['Ne III / H-Alpha'].get_value(8),d['Ne III / H-Alpha'].get_value(11))
-ax1.scatter(np.log10(SDSS_Data_Ratios[:,9]),np.log10(SDSS_Data_Ratios[:,11]) , c = '#000080', edgecolor = '', s = 5)
+#ax1.scatter(np.log10(SDSS_Data_Ratios[:,9]),np.log10(SDSS_Data_Ratios[:,11]) , c = '#000080', edgecolor = '', s = 5)
 ax1.scatter(np.log10(AGN_Array[:,9]),np.log10(AGN_Array[:,11]) , c = '#800000',edgecolor = '', s = 5)
+ax1.scatter(np.log10(SF_Array[:,9]),np.log10(SF_Array[:,11]) , c = '#453785',edgecolor = '', s = 5)
+ax1.scatter(np.log10(SDSS_Data_Ratios[(Linercondition1 & Linercondition2),9]),np.log10(SDSS_Data_Ratios[(Linercondition1 & Linercondition2),11]),edgecolor = '', s = 5, c = 'g')
 ax1.scatter(d['O III / Ar III'].get_value(0),d['Ne III / H-Alpha'].get_value(0), marker = "s",c='#FF5D5D', s = 50, label = "10^4")
 ax1.scatter(d['O III / Ar III'].get_value(3),d['Ne III / H-Alpha'].get_value(3), marker = "s",c='#FF0000', s = 50, label = "10^5")
 ax1.scatter(d['O III / Ar III'].get_value(6),d['Ne III / H-Alpha'].get_value(6), marker = "s",c='#C60000', s = 50, label = "10^6")
@@ -168,8 +211,9 @@ linyvalS2 = (d['S II 6716/ S II 6731'].get_value(1),d['S II 6716/ S II 6731'].ge
 linxvalO2N2 =  (d['O II / N II'].get_value(1),d['O II / N II'].get_value(4),d['O II / N II'].get_value(7),d['O II / N II'].get_value(10))
 lin16yvalS2 = (d['S II 6716/ S II 6731'].get_value(2),d['S II 6716/ S II 6731'].get_value(5),d['S II 6716/ S II 6731'].get_value(8),d['S II 6716/ S II 6731'].get_value(11))
 lin16xvalO2N2 =  (d['O II / N II'].get_value(2),d['O II / N II'].get_value(5),d['O II / N II'].get_value(8),d['O II / N II'].get_value(11))
-ax2.scatter(np.log10(SDSS_Data_Ratios[:,3]),np.log10(SDSS_Data_Ratios[:,14]),edgecolor = '', c = '#000080',s = 5)
+ax2.scatter(np.log10(SF_Array[:,3]),np.log10(SF_Array[:,14]) , c = '#453785',edgecolor = '', s = 5)
 ax2.scatter(np.log10(AGN_Array[:,3]),np.log10(AGN_Array[:,14]),edgecolor = '', s = 5, c = '#800000')
+ax2.scatter(np.log10(SDSS_Data_Ratios[(Linercondition3 & Linercondition5),3]),np.log10(SDSS_Data_Ratios[(Linercondition3 & Linercondition5),14]),edgecolor = '', s = 5, c = 'g')
 ax2.scatter(d['O II / N II'].get_value(0),d['S II 6716/ S II 6731'].get_value(0), marker = "s",c='#FF5D5D', s = 50, label = "10^4")
 ax2.scatter(d['O II / N II'].get_value(3),d['S II 6716/ S II 6731'].get_value(2), marker = "s",c='#FF0000', s = 50, label = "10^5")
 ax2.scatter(d['O II / N II'].get_value(6),d['S II 6716/ S II 6731'].get_value(4), marker = "s",c='#C60000', s = 50, label = "10^6")
@@ -201,6 +245,8 @@ lin16xvalR23 = (d['O II + O III / H-Beta'].get_value(2),d['O II + O III / H-Beta
 lin16yvalO3 = (d['O III / H-Beta'].get_value(2),d['O III / H-Beta'].get_value(5),d['O III / H-Beta'].get_value(8),d['O III / H-Beta'].get_value(11))
 ax3.scatter(np.log10(SDSS_Data_Ratios[:,17]),np.log10(SDSS_Data_Ratios[:,3]), edgecolor = '', c = '#000080',s=5.0)
 ax3.scatter(np.log10(AGN_Array[:,17]),np.log10(AGN_Array[:,3]),edgecolor = '', c = '#800000', s = 5)
+ax3.scatter(np.log10(SDSS_Data_Ratios[(Linercondition3 & Linercondition5),17]),np.log10(SDSS_Data_Ratios[(Linercondition3 & Linercondition5),3]),edgecolor = '', s = 5, c = 'g')
+
 ax3.scatter(d['O II + O III / H-Beta'].get_value(0),d['O II / N II'].get_value(0), marker = "s",c='#FF5D5D', s = 50, label = "10^4")
 ax3.scatter(d['O II + O III / H-Beta'].get_value(3),d['O II / N II'].get_value(3), marker = "s",c='#FF0000', s = 50, label = "10^5")
 ax3.scatter(d['O II + O III / H-Beta'].get_value(6),d['O II / N II'].get_value(6), marker = "s",c='#C60000', s = 50, label = "10^6")
@@ -222,8 +268,10 @@ ax3.set_ylabel(r'Log$_{10}$([N II] $\lambda 6584$ / H$\alpha$)', fontsize = 20)
 ax3.set_xlabel(r'Log$_{10}$([O III] $\lambda 4363$ + [O III] $\lambda 4959$ + [O III] $\lambda 5007$/ H$\beta$)', fontsize = 20)
 
 
-ax4.scatter(np.log10(SDSS_Data_Ratios[:,3]),np.log10(SDSS_Data_Ratios[:,8]),edgecolor = '', c = '#000080',s = 5)
+ax4.scatter(np.log10(SF_Array[:,3]),np.log10(SF_Array[:,8]) , c = '#453785',edgecolor = '', s = 5)
+ax4.scatter(np.log10(Comp_Array[:,3]),np.log10(Comp_Array[:,8]),edgecolor = '', s = 5)
 ax4.scatter(np.log10(AGN_Array[:,3]),np.log10(AGN_Array[:,8]),edgecolor = '', s = 5, c = '#800000')
+ax4.scatter(np.log10(SDSS_Data_Ratios[(Linercondition1 & Linercondition2),3]),np.log10(SDSS_Data_Ratios[(Linercondition1 & Linercondition2),8]),edgecolor = '', s = 5, c = 'g')
 ax4.scatter(d['O II / N II'].get_value(0),d['O III / H-Beta'].get_value(0), marker = "s",c='#FF5D5D', s = 50, label = "10^4")
 ax4.scatter(d['O II / N II'].get_value(3),d['O III / H-Beta'].get_value(3), marker = "s",c='#FF0000', s = 50, label = "10^5")
 ax4.scatter(d['O II / N II'].get_value(6),d['O III / H-Beta'].get_value(6), marker = "s",c='#C60000', s = 50, label = "10^6")
@@ -303,7 +351,7 @@ ax6.set_xlabel(r'Log$_{10}$([He I] $\lambda 5876$ / H$\beta$)', fontsize = 20)
 ax6.set_ylabel(r'Log$_{10}$([O III] $\lambda 5007$ / H$\beta$)', fontsize = 20)
 
 
-#plt.suptitle('AGN Metallicity Diagnostic Plots: Metallicity = 1.5, Efrac = 0.01, Phi(h) = 10.4771, n(h) = 2.5')
+plt.suptitle('AGN Metallicity Diagnostic Plots: Metallicity = 1.5, Efrac = 0.01, Phi(h) = 10.4771, n(h) = 2.5',fontsize = 20)
 ax1.legend(loc = 'upper left', bbox_to_anchor= [-0.5,1], fontsize = 'small')
 
 #Display the figure full screen
@@ -311,4 +359,4 @@ figManager = plt.get_current_fig_manager()
 figManager.window.showMaximized()
 
 plt.show() 
-plt.savefig('C:\Users\chris_000\Documents\GitHub\AGN_SED\Diagnostic_Plots\Optical\Separated_By_Diagnostic\With_Linear_Fit\Linear_Variations_Fixed\With_Weak_Lines\Abundances.png',dpi = 600)
+plt.savefig('C:\Users\chris_000\Documents\GitHub\AGN_SED\Presentations\Abundances.png',dpi = 1000)

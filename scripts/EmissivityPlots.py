@@ -8,7 +8,7 @@ Created on Tue Nov 01 12:39:07 2016
 #Import required modules
 import matplotlib.pyplot as plt
 import numpy as np
-
+from matplotlib.ticker import MaxNLocator
 
 
 #import our data
@@ -46,79 +46,79 @@ plt.subplots_adjust(wspace = 0, hspace = 0)
 #Plot Baseline structure for each Temperature
 ax5.plot(NitrogenT4_data[:,0],np.divide(10**NitrogenT4_data[:,1],10**np.amax(NitrogenT4_data[:,1])), c = 'b', ls = '--', label = 'O III 5007')
 ax5.plot(NitrogenT4_data[:,0],np.divide(10**NitrogenT4_data[:,4],10**np.amax(NitrogenT4_data[:,4])), c = 'r',  label = 'N II 6584')
-ax5.plot(NitrogenT4_data[:,0],np.divide(10**NitrogenT4_data[:,9],10**np.amax(NitrogenT4_data[:,9])), c = 'r', ls = '-.', label = 'S II 6720')
+ax5.plot(NitrogenT4_data[:,0],np.divide(10**NitrogenT4_data[:,9],10**np.amax(NitrogenT4_data[:,9])), c = 'r', ls = 'dotted', label = 'S II 6720')
 ax5.plot(NitrogenT4_data[:,0],np.divide(10**NitrogenT4_data[:,2],10**np.amax(NitrogenT4_data[:,2])), c = 'r', ls = '--',label = 'O II 3727')
 ax5.plot(NitrogenT4_data[:,0],np.divide(10**NitrogenT4_data[:,3],10**np.amax(NitrogenT4_data[:,3])), c = 'g',ls = '--', label = 'O I 6300')
 ax5.plot(NitrogenT4_data[:,0], np.divide(10**NitrogenT4_data[:,8],10**np.amax(NitrogenT4_data[:,8])),c = 'g', label = 'N I 5200')
-ax5.set_ylabel(r'$\alpha$x = 1.42')
-ax1.set_title(r'$T_{bb}=10^4$')
+ax5.set_ylabel(r'$\alpha_x$ = 1.42',fontsize = 18)
+ax1.set_title(r'$T_{bb}=10^4$',fontsize = 18)
 
 ax6.plot(NitrogenT5_data[:,0],10**NitrogenT5_data[:,1]/10**np.amax(NitrogenT5_data[:,1]), c = 'b',ls = '--')
 ax6.plot(NitrogenT5_data[:,0],10**NitrogenT5_data[:,4]/10**np.amax(NitrogenT5_data[:,4]), c = 'r')
-ax6.plot(NitrogenT5_data[:,0],10**NitrogenT5_data[:,9]/10**np.amax(NitrogenT5_data[:,9]), c = 'r',ls = '-.')
+ax6.plot(NitrogenT5_data[:,0],10**NitrogenT5_data[:,9]/10**np.amax(NitrogenT5_data[:,9]), c = 'r',ls = 'dotted')
 ax6.plot(NitrogenT5_data[:,0],10**NitrogenT5_data[:,2]/10**np.amax(NitrogenT5_data[:,2]), c = 'r',ls = '--')
 ax6.plot(NitrogenT5_data[:,0],10**NitrogenT5_data[:,3]/10**np.amax(NitrogenT5_data[:,3]), c = 'g',ls = '--')
 ax6.plot(NitrogenT5_data[:,0], 10**NitrogenT5_data[:,8]/10**np.amax(NitrogenT5_data[:,8]),c = 'g', label = 'N I 5200')
-ax2.set_title(r'$T_{bb}=10^5$')
+ax2.set_title(r'$T_{bb}=10^5$',fontsize = 18)
 
 ax7.plot(nitrogenT6_data[:,0],10**nitrogenT6_data[:,2]/10**np.amax(nitrogenT6_data[:,2]), c = 'b',ls = '--')
 ax7.plot(nitrogenT6_data[:,0],10**nitrogenT6_data[:,5]/10**np.amax(nitrogenT6_data[:,5]), c = 'r')
-ax7.plot(nitrogenT6_data[:,0],10**nitrogenT6_data[:,10]/10**np.amax(nitrogenT6_data[:,10]), c = 'r',ls = '-.')
+ax7.plot(nitrogenT6_data[:,0],10**nitrogenT6_data[:,10]/10**np.amax(nitrogenT6_data[:,10]), c = 'r',ls = 'dotted')
 ax7.plot(nitrogenT6_data[:,0],10**nitrogenT6_data[:,3]/10**np.amax(nitrogenT6_data[:,3]), c = 'r',ls = '--')
 ax7.plot(nitrogenT6_data[:,0],np.divide(10**nitrogenT6_data[:,4],10**np.amax(nitrogenT6_data[:,4])), c = 'g',ls = '--')
 ax7.plot(nitrogenT6_data[:,0],10**nitrogenT6_data[:,9]/10**np.amax(nitrogenT6_data[:,9]),c = 'g', label = 'N I 5200')
-ax3.set_title(r'$T_{bb}=10^6$')
+ax3.set_title(r'$T_{bb}=10^6$',fontsize = 18)
 
 ax8.plot(nitrogenT7_data[:,0],10**nitrogenT7_data[:,1]/10**np.amax(nitrogenT7_data[:,1]), c = 'b',ls = '--')
 ax8.plot(nitrogenT7_data[:,0],10**nitrogenT7_data[:,4]/10**np.amax(nitrogenT7_data[:,4]), c = 'r')
-ax8.plot(nitrogenT7_data[:,0],10**nitrogenT7_data[:,9]/10**np.amax(nitrogenT7_data[:,9]), c = 'r',ls = '-.')
+ax8.plot(nitrogenT7_data[:,0],10**nitrogenT7_data[:,9]/10**np.amax(nitrogenT7_data[:,9]), c = 'r',ls = 'dotted')
 ax8.plot(nitrogenT7_data[:,0],10**nitrogenT7_data[:,2]/10**np.amax(nitrogenT7_data[:,2]), c = 'r',ls = '--')
 ax8.plot(nitrogenT7_data[:,0],10**nitrogenT7_data[:,3]/10**np.amax(nitrogenT7_data[:,3]), c = 'g',ls = '--')
 ax8.plot(nitrogenT7_data[:,0], 10**nitrogenT7_data[:,8]/10**np.amax(nitrogenT7_data[:,4]),c = 'g', label = 'N I 5200')
-ax4.set_title(r'$T_{bb}=10^7$')
-#Plot ax = 117 Structure for each Temperature
+ax4.set_title(r'$T_{bb}=10^7$',fontsize = 18)
+##Plot ax = 117 Structure for each Temperature
 ax1.plot(nitrogenT4_ax117_data[:,0],10**nitrogenT4_ax117_data[:,1]/10**np.amax(nitrogenT4_ax117_data[:,1]), c = 'b',ls = '--',label = 'O III 5007')
 ax1.plot(nitrogenT4_ax117_data[:,0],10**nitrogenT4_ax117_data[:,4]/10**np.amax(nitrogenT4_ax117_data[:,4]), c = 'r', label ='N2 6584')
-ax1.plot(nitrogenT4_ax117_data[:,0],10**nitrogenT4_ax117_data[:,9]/10**np.amax(nitrogenT4_ax117_data[:,9]), c = 'r',ls = '-.', label = 'S II 6720' )
+ax1.plot(nitrogenT4_ax117_data[:,0],10**nitrogenT4_ax117_data[:,9]/10**np.amax(nitrogenT4_ax117_data[:,9]), c = 'r',ls = 'dotted', label = 'S II 6720' )
 ax1.plot(nitrogenT4_ax117_data[:,0],10**nitrogenT4_ax117_data[:,2]/10**np.amax(nitrogenT4_ax117_data[:,2]), c = 'r',ls = '--',label = 'O II 3727')
 ax1.plot(nitrogenT4_ax117_data[:,0],10**nitrogenT4_ax117_data[:,3]/10**np.amax(nitrogenT4_ax117_data[:,3]), c = 'g',ls = '--', label = 'O I 6200')
 ax1.plot(nitrogenT4_ax117_data[:,0],10**nitrogenT4_ax117_data[:,8]/10**np.amax(nitrogenT4_ax117_data[:,8]), c = 'g',label = 'N I 5200')
-ax1.set_ylabel(r'$\alpha$x = 1.17')
+ax1.set_ylabel(r'$\alpha_x$ = 1.17',fontsize = 18)
 
 ax2.plot(nitrogenT5_ax117_data[:,0],10**nitrogenT5_ax117_data[:,1]/10**np.amax(nitrogenT5_ax117_data[:,1]), c = 'b',ls = '--')
 ax2.plot(nitrogenT5_ax117_data[:,0],10**nitrogenT5_ax117_data[:,4]/10**np.amax(nitrogenT5_ax117_data[:,4]), c = 'r')
-ax2.plot(nitrogenT5_ax117_data[:,0],10**nitrogenT5_ax117_data[:,9]/10**np.amax(nitrogenT5_ax117_data[:,9]), c = 'r', ls = '-.')
+ax2.plot(nitrogenT5_ax117_data[:,0],10**nitrogenT5_ax117_data[:,9]/10**np.amax(nitrogenT5_ax117_data[:,9]), c = 'r', ls = 'dotted')
 ax2.plot(nitrogenT5_ax117_data[:,0],10**nitrogenT5_ax117_data[:,2]/10**np.amax(nitrogenT5_ax117_data[:,2]), c = 'r',ls = '--')
 ax2.plot(nitrogenT5_ax117_data[:,0],10**nitrogenT5_ax117_data[:,3]/10**np.amax(nitrogenT5_ax117_data[:,3]), c = 'g',ls = '--')
 ax2.plot(nitrogenT5_ax117_data[:,0],10**nitrogenT5_ax117_data[:,8]/10**np.amax(nitrogenT5_ax117_data[:,8]), c = 'g')
 
 ax3.plot(nitrogenT6_ax117_data[:,0],10**nitrogenT6_ax117_data[:,1]/10**np.amax(nitrogenT6_ax117_data[:,1]), c = 'b',ls = '--')
 ax3.plot(nitrogenT6_ax117_data[:,0],10**nitrogenT6_ax117_data[:,4]/10**np.amax(nitrogenT6_ax117_data[:,4]), c = 'r')
-ax3.plot(nitrogenT6_ax117_data[:,0],10**nitrogenT6_ax117_data[:,9]/10**np.amax(nitrogenT6_ax117_data[:,9]), c = 'r', ls = '-.')
+ax3.plot(nitrogenT6_ax117_data[:,0],10**nitrogenT6_ax117_data[:,9]/10**np.amax(nitrogenT6_ax117_data[:,9]), c = 'r', ls = 'dotted')
 ax3.plot(nitrogenT6_ax117_data[:,0],10**nitrogenT6_ax117_data[:,2]/10**np.amax(nitrogenT6_ax117_data[:,2]), c = 'r',ls = '--')
 ax3.plot(nitrogenT6_ax117_data[:,0],10**nitrogenT6_ax117_data[:,3]/10**np.amax(nitrogenT6_ax117_data[:,3]), c = 'g',ls = '--')
 ax3.plot(nitrogenT6_ax117_data[:,0],10**nitrogenT6_ax117_data[:,8]/10**np.amax(nitrogenT6_ax117_data[:,8]), c = 'g')
 
 ax4.plot(nitrogenT7_ax117_data[:,0],10**nitrogenT7_ax117_data[:,1]/10**np.amax(nitrogenT7_ax117_data[:,1]), c = 'b',ls = '--')
 ax4.plot(nitrogenT7_ax117_data[:,0],10**nitrogenT7_ax117_data[:,4]/10**np.amax(nitrogenT7_ax117_data[:,4]), c = 'r')
-ax4.plot(nitrogenT7_ax117_data[:,0],10**nitrogenT7_ax117_data[:,9]/10**np.amax(nitrogenT7_ax117_data[:,9]), c = 'r', ls = '-.')
+ax4.plot(nitrogenT7_ax117_data[:,0],10**nitrogenT7_ax117_data[:,9]/10**np.amax(nitrogenT7_ax117_data[:,9]), c = 'r', ls = 'dotted')
 ax4.plot(nitrogenT7_ax117_data[:,0],10**nitrogenT7_ax117_data[:,2]/10**np.amax(nitrogenT7_ax117_data[:,2]), c = 'r',ls = '--')
 ax4.plot(nitrogenT7_ax117_data[:,0],10**nitrogenT7_ax117_data[:,3]/10**np.amax(nitrogenT7_ax117_data[:,3]), c = 'g',ls = '--')
 ax4.plot(nitrogenT7_ax117_data[:,0],10**nitrogenT7_ax117_data[:,8]/10**np.amax(nitrogenT7_ax117_data[:,8]), c = 'g')
 #Plot ax = 219 structure for each temperature 
 ax9.plot(nitrogenT4_ax219_data[:,0],10**nitrogenT4_ax219_data[:,1]/10**np.amax(nitrogenT4_ax219_data[:,1]), c = 'b',ls = '--')
 ax9.plot(nitrogenT4_ax219_data[:,0],10**nitrogenT4_ax219_data[:,4]/10**np.amax(nitrogenT4_ax219_data[:,4]), c = 'r')
-ax9.plot(nitrogenT4_ax219_data[:,0],10**nitrogenT4_ax219_data[:,9]/10**np.amax(nitrogenT4_ax219_data[:,9]), c = 'r',ls = '-.')
+ax9.plot(nitrogenT4_ax219_data[:,0],10**nitrogenT4_ax219_data[:,9]/10**np.amax(nitrogenT4_ax219_data[:,9]), c = 'r',ls = 'dotted')
 ax9.plot(nitrogenT4_ax219_data[:,0],10**nitrogenT4_ax219_data[:,2]/10**np.amax(nitrogenT4_ax219_data[:,2]), c = 'r',ls = '--')
 ax9.plot(nitrogenT4_ax219_data[:,0],10**nitrogenT4_ax219_data[:,3]/10**np.amax(nitrogenT4_ax219_data[:,3]), c = 'g',ls = '--')
 ax9.plot(nitrogenT4_ax219_data[:,0],10**nitrogenT4_ax219_data[:,8]/10**np.amax(nitrogenT4_ax219_data[:,8]), c = 'g')
 
-ax9.set_ylabel(r'$\alpha$x = 2.19')
+ax9.set_ylabel(r'$\alpha_x$ = 2.19',fontsize = 18)
 #ax9.set_xlabel(r'$T_{bb} = 10^4$')
 
 ax10.plot(nitrogenT5_ax219_data[:,0],10**nitrogenT5_ax219_data[:,1]/10**np.amax(nitrogenT5_ax219_data[:,1]), c = 'b',ls = '--')
 ax10.plot(nitrogenT5_ax219_data[:,0],10**nitrogenT5_ax219_data[:,4]/10**np.amax(nitrogenT5_ax219_data[:,4]), c = 'r')
-ax10.plot(nitrogenT5_ax219_data[:,0],10**nitrogenT5_ax219_data[:,9]/10**np.amax(nitrogenT5_ax219_data[:,9]), c = 'r',ls = '-.')
+ax10.plot(nitrogenT5_ax219_data[:,0],10**nitrogenT5_ax219_data[:,9]/10**np.amax(nitrogenT5_ax219_data[:,9]), c = 'r',ls = 'dotted')
 ax10.plot(nitrogenT5_ax219_data[:,0],10**nitrogenT5_ax219_data[:,2]/10**np.amax(nitrogenT5_ax219_data[:,2]), c = 'r',ls = '--')
 ax10.plot(nitrogenT5_ax219_data[:,0],10**nitrogenT5_ax219_data[:,3]/10**np.amax(nitrogenT5_ax219_data[:,3]), c = 'g',ls = '--')
 ax10.plot(nitrogenT5_ax219_data[:,0],10**nitrogenT5_ax219_data[:,8]/10**np.amax(nitrogenT5_ax219_data[:,8]), c = 'g')
@@ -127,7 +127,7 @@ ax10.plot(nitrogenT5_ax219_data[:,0],10**nitrogenT5_ax219_data[:,8]/10**np.amax(
 
 ax11.plot(nitrogenT6_ax219_data[:,0],10**nitrogenT6_ax219_data[:,1]/10**np.amax(nitrogenT6_ax219_data[:,1]), c = 'b',ls = '--')
 ax11.plot(nitrogenT6_ax219_data[:,0],10**nitrogenT6_ax219_data[:,4]/10**np.amax(nitrogenT6_ax219_data[:,4]), c = 'r')
-ax11.plot(nitrogenT6_ax219_data[:,0],10**nitrogenT6_ax219_data[:,9]/10**np.amax(nitrogenT6_ax219_data[:,9]), c = 'r', ls = '-.')
+ax11.plot(nitrogenT6_ax219_data[:,0],10**nitrogenT6_ax219_data[:,9]/10**np.amax(nitrogenT6_ax219_data[:,9]), c = 'r', ls = 'dotted')
 ax11.plot(nitrogenT6_ax219_data[:,0],10**nitrogenT6_ax219_data[:,2]/10**np.amax(nitrogenT6_ax219_data[:,2]), c = 'r',ls = '--')
 ax11.plot(nitrogenT6_ax219_data[:,0],10**nitrogenT6_ax219_data[:,3]/10**np.amax(nitrogenT6_ax219_data[:,3]), c = 'g',ls = '--')
 ax11.plot(nitrogenT6_ax219_data[:,0],10**nitrogenT6_ax219_data[:,8]/10**np.amax(nitrogenT6_ax219_data[:,8]), c = 'g')
@@ -136,7 +136,7 @@ ax11.plot(nitrogenT6_ax219_data[:,0],10**nitrogenT6_ax219_data[:,8]/10**np.amax(
 
 ax12.plot(nitrogenT7_ax219_data[:,0],10**nitrogenT7_ax219_data[:,1]/10**np.amax(nitrogenT7_ax219_data[:,1]), c = 'b',ls = '--')
 ax12.plot(nitrogenT7_ax219_data[:,0],10**nitrogenT7_ax219_data[:,4]/10**np.amax(nitrogenT7_ax219_data[:,4]), c = 'r')
-ax12.plot(nitrogenT7_ax219_data[:,0],10**nitrogenT7_ax219_data[:,9]/10**np.amax(nitrogenT7_ax219_data[:,9]), c = 'r', ls = '-.')
+ax12.plot(nitrogenT7_ax219_data[:,0],10**nitrogenT7_ax219_data[:,9]/10**np.amax(nitrogenT7_ax219_data[:,9]), c = 'r', ls = 'dotted')
 ax12.plot(nitrogenT7_ax219_data[:,0],10**nitrogenT7_ax219_data[:,2]/10**np.amax(nitrogenT7_ax219_data[:,2]), c = 'r',ls = '--')
 ax12.plot(nitrogenT7_ax219_data[:,0],10**nitrogenT7_ax219_data[:,3]/10**np.amax(nitrogenT7_ax219_data[:,3]), c = 'g',ls = '--')
 ax12.plot(nitrogenT7_ax219_data[:,0],10**nitrogenT7_ax219_data[:,8]/10**np.amax(nitrogenT7_ax219_data[:,8]), c = 'g')
@@ -145,12 +145,13 @@ ax12.plot(nitrogenT7_ax219_data[:,0],10**nitrogenT7_ax219_data[:,8]/10**np.amax(
 
 figManager = plt.get_current_fig_manager()
 figManager.window.showMaximized()
+plt.gca().xaxis.set_major_locator(MaxNLocator(prune='upper'))
+plt.gca().yaxis.set_major_locator(MaxNLocator(prune='upper'))
+fig.text(0.5,0.04, 'Depth (cm)',fontsize = 18)
+fig.text(0.06,0.5, 'Emissivity', ha = 'center', va = 'center', rotation = 'vertical',fontsize = 18)
 
-fig.text(0.5,0.04, 'Depth (cm)')
-fig.text(0.06,0.5, 'Emissivity', ha = 'center', va = 'center', rotation = 'vertical')
-
-plt.suptitle('Emissivities of Standard Diagnostic Elements')
+plt.suptitle('Emissivities of Standard Diagnostic Elements', fontsize = 20)
 ax1.legend()
 plt.show()
-
+plt.savefig(r'C:\Users\chris_000\Documents\GitHub\AGN_SED\Presentations\Emissivities.png', format='png', dpi=1000)
 
