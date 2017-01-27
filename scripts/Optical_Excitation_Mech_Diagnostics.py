@@ -11,7 +11,7 @@ def filelist(directory):
             if file.endswith('.lin'):
                 print (file)
                 
-rootdirectory=r'C:/Users/chris_000/Documents/GitHub/AGN_SED/Cloudy_Data'
+rootdirectory=r'C:/Users/chris/Documents/GitHub/AGN_SED/Cloudy_Data'
 filelist(rootdirectory)
 
 #Generate a CSV file containing all the relevant data points
@@ -24,26 +24,26 @@ dfs=[] #Create an empty array for our Data
 d=pd.DataFrame(dtype = float) 
 #d=d.reset_index()
 d2=pd.DataFrame({'Temperature': [10**4,10**5, 10**6, 10**7]},dtype=float) #Create a Dataframe of labels for each file used
-Output_File=r'C:/Users/compastro/gre/AGN_SED/All_Emissions.csv' #Create the output file
+#Output_File=r'C:/Users/compastro/gre/AGN_SED/All_Emissions.csv' #Create the output file
 
 for root, dirs, files in os.walk(rootdirectory, topdown=False):
     for name in files:
-        if name.startswith('Ionization_35_Linear_Fit_ax219') and name.endswith('.lin'):
-            print name
+        if name.startswith('Linear_Fit_ax219_SED') and name.endswith('.lin'):
+            #print name
             #only read columns from list cols
             dfs.append(pd.read_csv(os.path.join(root, name),  sep='\s*',delimiter="\t",usecols=['TOTL  4861A','O  3  5007A', 'NE 5  3426A', 'NE 3  3869A',
             'TOTL  4363A', 'O  1  6300A', 'H  1  6563A','N  2  6584A','S  2  6720A' , 'HE 2  4686A','TOTL  3727A', 'S II  6716A', 'S II  6731A',
             'NE 3  3869A','AR 3  7135A','HE 1  5876A','TOTL  4363A','O  3  4959A','O II  3726A', 'O II  3729A']))
             d = pd.concat(dfs, ignore_index=True)
-        elif name.startswith('Ionization_35_Linear_Fit_ax117') and name.endswith('.lin'):
-            print name
+        elif name.startswith('Linear_Fit_ax117_SED') and name.endswith('.lin'):
+            #print name
             #only read columns from list cols
             dfs.append(pd.read_csv(os.path.join(root, name), delimiter="\t", sep='\s*',usecols=['TOTL  4861A','O  3  5007A', 'NE 5  3426A', 'NE 3  3869A',
             'TOTL  4363A', 'O  1  6300A', 'H  1  6563A','N  2  6584A','S  2  6720A' , 'HE 2  4686A','TOTL  3727A', 'S II  6716A', 'S II  6731A',
             'NE 3  3869A','AR 3  7135A','HE 1  5876A','TOTL  4363A','O  3  4959A','O II  3726A', 'O II  3729A']))
             d = pd.concat(dfs, ignore_index=True)
-        elif name.startswith('Ionization_35_SED') and name.endswith('.lin'):
-             print name
+        elif name.startswith('Hden25_SED') and name.endswith('.lin'):
+             #print name
             #only read columns from list cols
              dfs.append(pd.read_csv(os.path.join(root, name), delimiter="\t", sep='\s*',usecols=['TOTL  4861A','O  3  5007A', 'NE 5  3426A', 'NE 3  3869A',
             'TOTL  4363A', 'O  1  6300A', 'H  1  6563A','N  2  6584A','S  2  6720A' , 'HE 2  4686A','TOTL  3727A', 'S II  6716A', 'S II  6731A',
@@ -69,11 +69,11 @@ d['He II / H-Beta'] = np.log10(np.divide(d['HE 2  4686A'],d['TOTL  4861A']))
 
 
 #Plot these data points
-SDSS_File = r'c:/Users/chris_000/Documents/GitHub/AGN_SED/sdss_data/flux_norm.csv'
+SDSS_File = r'c:/Users/chris/Documents/GitHub/AGN_SED/sdss_data/flux_norm.csv'
 
-SDSS_Ratios_File = r'c:/Users/chris_000/Documents/GitHub/AGN_SED/sdss_data/flux_norm_AGN.csv'
+SDSS_Ratios_File = r'c:/Users/chris/Documents/GitHub/AGN_SED/sdss_data/flux_norm_AGN.csv'
 
-SDSS_HeII_File = r'c:/Users/chris_000/Documents/GitHub/AGN_SED/sdss_data/HeII_sample.csv'
+SDSS_HeII_File = r'c:/Users/chris/Documents/GitHub/AGN_SED/sdss_data/HeII_sample.csv'
 
 SDSS_Data=np.genfromtxt(SDSS_File, skip_header=1, delimiter = ',',dtype=float,unpack=True)
 
@@ -103,16 +103,16 @@ condition5a = np.log10(SDSS_Data_Ratios[:,2]) > np.add(np.multiply(-1.701, np.lo
 
 condition5b = np.log10(SDSS_Data_Ratios[:,2]) > np.add(np.multiply(1.0, np.log10(SDSS_Data_Ratios[:,5])),0.7)
 
-Hecondition1 = np.log10(np.divide(SDSS_Data_HeII[:,20],SDSS_Data_HeII[:,18])) > np.add(1.19, np.divide(0.61, np.subtract(np.log10(np.divide(SDSS_Data_HeII[:,28],SDSS_Data_HeII[:,27])),.47)))
-
-Hecondition2a = np.log10(np.divide(SDSS_Data_HeII[:,20],SDSS_Data_HeII[:,18])) > np.add(1.3,np.multiply(1.18,np.log10(np.divide(SDSS_Data_HeII[:,24],SDSS_Data_HeII[:,27]))))  #From Kewley et al. 2006
-
-Hecondition2b = np.log10(np.divide(SDSS_Data_HeII[:,20],SDSS_Data_HeII[:,18])) > np.add(1.33, np.divide(0.73, np.add(np.log10(np.divide(SDSS_Data_HeII[:,24],SDSS_Data_HeII[:,27])),.59)))
-
-Hecondition3a = np.log10(np.divide(SDSS_Data_HeII[:,20],SDSS_Data_HeII[:,18])) > np.add(0.76, np.multiply(1.89,np.log10(np.divide(np.add(SDSS_Data_HeII[:,29],SDSS_Data_HeII[:,30]),SDSS_Data_HeII[:,27]))))
-
-Hecondition3b = np.log10(np.divide(SDSS_Data_HeII[:,20],SDSS_Data_HeII[:,18])) > np.add(1.30,np.divide(0.72, np.subtract(np.log10(np.divide(np.add(SDSS_Data_HeII[:,29],SDSS_Data_HeII[:,30]),SDSS_Data_HeII[:,27])),0.32)))
-
+#Hecondition1 = np.log10(np.divide(SDSS_Data_HeII[:,20],SDSS_Data_HeII[:,18])) > np.add(1.19, np.divide(0.61, np.subtract(np.log10(np.divide(SDSS_Data_HeII[:,28],SDSS_Data_HeII[:,27])),.47)))
+#
+#Hecondition2a = np.log10(np.divide(SDSS_Data_HeII[:,20],SDSS_Data_HeII[:,18])) > np.add(1.3,np.multiply(1.18,np.log10(np.divide(SDSS_Data_HeII[:,24],SDSS_Data_HeII[:,27]))))  #From Kewley et al. 2006
+#
+#Hecondition2b = np.log10(np.divide(SDSS_Data_HeII[:,20],SDSS_Data_HeII[:,18])) > np.add(1.33, np.divide(0.73, np.add(np.log10(np.divide(SDSS_Data_HeII[:,24],SDSS_Data_HeII[:,27])),.59)))
+#
+#Hecondition3a = np.log10(np.divide(SDSS_Data_HeII[:,20],SDSS_Data_HeII[:,18])) > np.add(0.76, np.multiply(1.89,np.log10(np.divide(np.add(SDSS_Data_HeII[:,29],SDSS_Data_HeII[:,30]),SDSS_Data_HeII[:,27]))))
+#
+#Hecondition3b = np.log10(np.divide(SDSS_Data_HeII[:,20],SDSS_Data_HeII[:,18])) > np.add(1.30,np.divide(0.72, np.subtract(np.log10(np.divide(np.add(SDSS_Data_HeII[:,29],SDSS_Data_HeII[:,30]),SDSS_Data_HeII[:,27])),0.32)))
+#
 
 SFcondition1 = np.log10(SDSS_Data_Ratios[:,8]) < np.add(1.3, np.divide(0.61, np.subtract(np.log10(SDSS_Data_Ratios[:,7]),.05))) #From Kewley et al. 2001  
 
@@ -146,22 +146,22 @@ mask = (condition1 & (condition2a & condition2b) & (condition3a & condition3b))
 SFmask = (SFcondition1 & SFcondition2 & SFcondition3)
 compmask = (Compcondition1 & Compcondition2)
 linermask = (Linercondition1 & Linercondition2 & Linercondition3 & Linercondition4)
-mask2 = (Hecondition1 & Hecondition2a & Hecondition2b & (Hecondition3a & Hecondition3b))
+#mask2 = (Hecondition1 & Hecondition2a & Hecondition2b & (Hecondition3a & Hecondition3b))
 
 AGN_Array= SDSS_Data_Ratios[mask,:]
 SF_Array = SDSS_Data_Ratios[SFmask,:] 
 Comp_Array = SDSS_Data_Ratios[compmask,:]
 Liner_Array = SDSS_Data_Ratios[linermask,:]
-AGN_Array2 = SDSS_Data_HeII[mask2,:]
+#AGN_Array2 = SDSS_Data_HeII[mask2,:]
 
 O3O2AGN = SDSS_Data_Ratios[(condition4a & condition4b),:]
-
+plt.figure(figsize=(25,15))
 ax1 = plt.subplot(231, adjustable = 'box-forced', autoscale_on = False)
 ax2 = plt.subplot(232, adjustable = 'box-forced', autoscale_on = False)
 ax3 = plt.subplot(233, adjustable = 'box-forced', autoscale_on = False)
 ax4 = plt.subplot(234, adjustable = 'box-forced', autoscale_on = False)
-ax5 = plt.subplot(235, adjustable = 'box-forced', autoscale_on = False)
-ax6 = plt.subplot(236, adjustable = 'box-forced', autoscale_on = False)
+#ax5 = plt.subplot(235, adjustable = 'box-forced', autoscale_on = False)
+ax6 = plt.subplot(235, adjustable = 'box-forced', autoscale_on = False)
 z = [10^4,10^5, 10^6, 10^7]
 x1=np.arange(-2,0.3,0.01)
 y1=1.19+np.divide(0.61,x1-0.47)
@@ -330,36 +330,36 @@ ax4.text(-1,1,'Seyfert 2')
 ax4.text(-1,-0.5,'Star-Forming')
 ax4.text(1,-1,'LINER')
 
-x = np.arange(-3,-0.2,0.01)
-y = -1.22 + np.divide(1,8.92*x+1.32)
-baseyvalues5 = (d['He II / H-Beta'].get_value(0),d['He II / H-Beta'].get_value(3),d['He II / H-Beta'].get_value(6),d['He II / H-Beta'].get_value(9))
-linyvalues5 = (d['He II / H-Beta'].get_value(1),d['He II / H-Beta'].get_value(4),d['He II / H-Beta'].get_value(7),d['He II / H-Beta'].get_value(10))
-lin16yvalues5 = (d['He II / H-Beta'].get_value(2),d['He II / H-Beta'].get_value(5),d['He II / H-Beta'].get_value(8),d['He II / H-Beta'].get_value(11))
-ax5.scatter(np.log10(np.divide(SDSS_Data_HeII[:,28],SDSS_Data_HeII[:,27])),np.log10(np.divide(SDSS_Data_HeII[:,15],SDSS_Data_HeII[:,18])), c ='#000080' ,edgecolor = '', s = 15)
-ax5.scatter(np.log10(np.divide(AGN_Array2[:,28],AGN_Array2[:,27])),np.log10(np.divide(AGN_Array2[:,15],AGN_Array2[:,18])), c = '#800000',edgecolor = '', s = 15)
-ax5.scatter(d['N II / H-Alpha'].get_value(0),d['He II / H-Beta'].get_value(0), marker = "s",c='#FF5D5D', s = 50, label = "10^4")
-ax5.scatter(d['N II / H-Alpha'].get_value(3),d['He II / H-Beta'].get_value(3), marker = "s",c='#FF0000', s = 50, label = "10^5")
-ax5.scatter(d['N II / H-Alpha'].get_value(6),d['He II / H-Beta'].get_value(6), marker = "s",c='#C60000', s = 50, label = "10^6")
-ax5.scatter(d['N II / H-Alpha'].get_value(9),d['He II / H-Beta'].get_value(9), marker = "s",c='#9B0000', s = 50, label = "10^7")
-ax5.scatter(d['N II / H-Alpha'].get_value(1),d['He II / H-Beta'].get_value(1), marker = "s",c='#7056C5', s = 50, label = "10^4")
-ax5.scatter(d['N II / H-Alpha'].get_value(4),d['He II / H-Beta'].get_value(4), marker = "s",c='#3914AF', s = 50, label = "10^5")
-ax5.scatter(d['N II / H-Alpha'].get_value(7),d['He II / H-Beta'].get_value(7), marker = "s",c='#2B0E87', s = 50, label = "10^6")
-ax5.scatter(d['N II / H-Alpha'].get_value(10),d['He II / H-Beta'].get_value(10), marker = "s",c='#200969', s = 50, label = "10^7")
-ax5.scatter(d['N II / H-Alpha'].get_value(2),d['He II / H-Beta'].get_value(2), marker = "s",c='#50DA50', s = 50, label = "10^4")
-ax5.scatter(d['N II / H-Alpha'].get_value(5),d['He II / H-Beta'].get_value(5), marker = "s",c='#00CC00', s = 50, label = "10^5")
-ax5.scatter(d['N II / H-Alpha'].get_value(8),d['He II / H-Beta'].get_value(8), marker = "s",c='#009D00', s = 50, label = "10^6")
-ax5.scatter(d['N II / H-Alpha'].get_value(11),d['He II / H-Beta'].get_value(11), marker = "s",c='#007A00', s = 50, label = "10^7")
-ax5.plot(x,y, c = '0', ls = '-', lw = 2.0)
-ax5.plot(basexvalues,baseyvalues5, c ='0')
-ax5.plot(linearxvalues, linyvalues5, ls = '--', c = '0')
-ax5.plot(linear16xvalues,lin16yvalues5, ls = ':', lw = 3, c = '0')
-ax5.set_xlim(-3,0.5)
-ax5.set_ylim(-3,2)
+#x = np.arange(-3,-0.2,0.01)
+#y = -1.22 + np.divide(1,8.92*x+1.32)
+#baseyvalues5 = (d['He II / H-Beta'].get_value(0),d['He II / H-Beta'].get_value(3),d['He II / H-Beta'].get_value(6),d['He II / H-Beta'].get_value(9))
+#linyvalues5 = (d['He II / H-Beta'].get_value(1),d['He II / H-Beta'].get_value(4),d['He II / H-Beta'].get_value(7),d['He II / H-Beta'].get_value(10))
+#lin16yvalues5 = (d['He II / H-Beta'].get_value(2),d['He II / H-Beta'].get_value(5),d['He II / H-Beta'].get_value(8),d['He II / H-Beta'].get_value(11))
+#ax5.scatter(np.log10(np.divide(SDSS_Data_HeII[:,28],SDSS_Data_HeII[:,27])),np.log10(np.divide(SDSS_Data_HeII[:,15],SDSS_Data_HeII[:,18])), c ='#000080' ,edgecolor = '', s = 15)
+#ax5.scatter(np.log10(np.divide(AGN_Array2[:,28],AGN_Array2[:,27])),np.log10(np.divide(AGN_Array2[:,15],AGN_Array2[:,18])), c = '#800000',edgecolor = '', s = 15)
+#ax5.scatter(d['N II / H-Alpha'].get_value(0),d['He II / H-Beta'].get_value(0), marker = "s",c='#FF5D5D', s = 50, label = "10^4")
+#ax5.scatter(d['N II / H-Alpha'].get_value(3),d['He II / H-Beta'].get_value(3), marker = "s",c='#FF0000', s = 50, label = "10^5")
+#ax5.scatter(d['N II / H-Alpha'].get_value(6),d['He II / H-Beta'].get_value(6), marker = "s",c='#C60000', s = 50, label = "10^6")
+#ax5.scatter(d['N II / H-Alpha'].get_value(9),d['He II / H-Beta'].get_value(9), marker = "s",c='#9B0000', s = 50, label = "10^7")
+#ax5.scatter(d['N II / H-Alpha'].get_value(1),d['He II / H-Beta'].get_value(1), marker = "s",c='#7056C5', s = 50, label = "10^4")
+#ax5.scatter(d['N II / H-Alpha'].get_value(4),d['He II / H-Beta'].get_value(4), marker = "s",c='#3914AF', s = 50, label = "10^5")
+#ax5.scatter(d['N II / H-Alpha'].get_value(7),d['He II / H-Beta'].get_value(7), marker = "s",c='#2B0E87', s = 50, label = "10^6")
+#ax5.scatter(d['N II / H-Alpha'].get_value(10),d['He II / H-Beta'].get_value(10), marker = "s",c='#200969', s = 50, label = "10^7")
+#ax5.scatter(d['N II / H-Alpha'].get_value(2),d['He II / H-Beta'].get_value(2), marker = "s",c='#50DA50', s = 50, label = "10^4")
+#ax5.scatter(d['N II / H-Alpha'].get_value(5),d['He II / H-Beta'].get_value(5), marker = "s",c='#00CC00', s = 50, label = "10^5")
+#ax5.scatter(d['N II / H-Alpha'].get_value(8),d['He II / H-Beta'].get_value(8), marker = "s",c='#009D00', s = 50, label = "10^6")
+#ax5.scatter(d['N II / H-Alpha'].get_value(11),d['He II / H-Beta'].get_value(11), marker = "s",c='#007A00', s = 50, label = "10^7")
+#ax5.plot(x,y, c = '0', ls = '-', lw = 2.0)
+#ax5.plot(basexvalues,baseyvalues5, c ='0')
+#ax5.plot(linearxvalues, linyvalues5, ls = '--', c = '0')
+#ax5.plot(linear16xvalues,lin16yvalues5, ls = ':', lw = 3, c = '0')
+#ax5.set_xlim(-3,0.5)
+#ax5.set_ylim(-3,2)
 
-ax5.set_xlabel(r'Log$_{10}$([N II] $\lambda 6584$ / H$\alpha$)', fontsize = 20)
-ax5.set_ylabel(r'Log$_{10}$([He II] $\lambda 4686$ / H$\beta$)', fontsize = 20)
-ax5.text(-1,-2.5, 'Star-Forming')
-ax5.text(-2,0,'AGN')
+#ax5.set_xlabel(r'Log$_{10}$([N II] $\lambda 6584$ / H$\alpha$)', fontsize = 20)
+#ax5.set_ylabel(r'Log$_{10}$([He II] $\lambda 4686$ / H$\beta$)', fontsize = 20)
+#ax5.text(-1,-2.5, 'Star-Forming')
+#ax5.text(-2,0,'AGN')
 
 x7 = np.arange(-2.5,1.5)
 y7 = -1.701*x7-2.163
@@ -394,13 +394,16 @@ ax6.set_ylim(-1.5,1.5)
 ax6.set_xlabel(r'Log$_{10}$([O I] $\lambda 6300$ / H$\alpha$)', fontsize = 20)
 ax6.set_ylabel(r'Log$_{10}$([O III] $\lambda 5007$) / [O II] $\lambda 3727$)', fontsize = 20)
 ax6.text(-1.5,1,'Seyfert')
-ax6.text(-0.1,0,'LINER')
-ax6.text(-2.2,-1.3, 'Starburst')
-#plt.suptitle('AGN Excitation Mechanism Diagnostic Plots: Metallicity = 1.5, Efrac = 0.01, Phi(h) = 10.4771, n(h) = 2.5')
-ax1.legend(loc = 'upper right', fontsize = 'small')
+ax6.text(-0.1,0,'LINER')    
+ax6.text(-2.2,-1.3, 'Star-Forming')
+plt.suptitle('AGN Excitation Mechanism Diagnostic Plots: Metallicity = 1.5, Efrac = 0.01, Phi(h) = 10.4771, n(h) = 2.5',fontsize = 20)
+ax1.legend(loc = 'best', fontsize = 'small')
 
 #Display the figure full screen
 figManager = plt.get_current_fig_manager()
 figManager.window.showMaximized()
-plt.savefig(r'C:\Users\chris_000\Documents\GitHub\AGN_SED\Presentations\Optical_excitation.png', format='png', dpi=1000)
+#figManager.frame.Maximize(True)
+
+
 plt.show() 
+plt.savefig(r'C:\Users\chris\Documents\GitHub\AGN_SED\Presentations\Optical_excitation_Seyferts.png', dpi=1000)
